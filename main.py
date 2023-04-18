@@ -9,7 +9,7 @@ SITE = StackAPI('stackoverflow')
 SITE.max_pages = 1
 
 # Search for questions
-questions = SITE.fetch('questions', tagged='java;interface', min=100, sort='votes', filter='withbody')
+questions = SITE.fetch('questions', tagged='java;junit', min=100, sort='votes', filter='withbody')
 
 selected_question = questions['items'][0]
 accepted_answer = []
