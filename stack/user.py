@@ -3,7 +3,6 @@ class User:
     def __init__(self, user):
         try:
             self.id = user['user_id']
-            self.id = user['user_id']
             self.reputation = user['reputation']
             self.profile_link = user['link']
             try:

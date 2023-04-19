@@ -4,21 +4,17 @@ from stack.user import User
 
 class Question:
 
-    def __init__(self, question, answers):
+    def __init__(self, question, user_id):
         self.id = question['question_id']
         self.title = question['title']
         self.body = question['body']
         self.is_answered = question['is_answered']
         self.score = question['score']
-        self.answers_number = ['answer_count']
-        self.tags = []
-        self.split_tags(question['tags'], self.id)
+        self.answers_number = question['answer_count']
         self.creation_date = question['creation_date']
         self.activity = question['last_edit_date']
         self.link = question['link']
-        self.owner = User(question['owner'])
-        self.answers = []
-        self.compute_answers(answers)
+        self.owner = user_id
 
     def split_tags(self, tags, question_id):
         for tag in tags:
