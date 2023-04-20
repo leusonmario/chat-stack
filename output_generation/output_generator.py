@@ -1,5 +1,6 @@
 import os
 import csv
+import datetime
 
 class OutputGenerator:
 
@@ -31,7 +32,8 @@ class OutputGenerator:
             with open(self.report_path+date+"/questions.csv", 'a') as file:
                 csvreader = csv.writer(file)
                 csvreader.writerow([question.id, question.link, question.title, question.body, question.is_answered, question.score,
-                                    question.answers_number, question.creation_date, question.activity, question.owner])
+                                    question.answers_number, datetime.datetime.fromtimestamp(question.creation_date),
+                                    datetime.datetime.fromtimestamp(question.activity), question.owner])
 
     def create_answer_output_file(self,date):
         if not os.path.exists(self.report_path+date+"/answers.csv"):
@@ -46,7 +48,8 @@ class OutputGenerator:
             with open(self.report_path+date+"/answers.csv", 'a') as file:
                 csvreader = csv.writer(file)
                 csvreader.writerow([answer.id, answer.body, answer.is_accepted, answer.score,
-                                    answer.question_id, answer.creation_date, answer.activity, answer.owner])
+                                    answer.question_id, datetime.datetime.fromtimestamp(answer.creation_date),
+                                    datetime.datetime.fromtimestamp(answer.activity), answer.owner])
 
     def create_user_output_file(self,date):
         if not os.path.exists(self.report_path+date+"/users.csv"):

@@ -12,7 +12,10 @@ class Question:
         self.score = question['score']
         self.answers_number = question['answer_count']
         self.creation_date = question['creation_date']
-        self.activity = question['last_edit_date']
+        try:
+            self.activity = question['last_edit_date']
+        except:
+            self.activity = question['last_activity_date']
         self.link = question['link']
         self.owner = user_id
 

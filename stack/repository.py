@@ -31,5 +31,11 @@ class Repository:
             self.tags.append(Tag(tag, question_id))
 
     def compute_users(self, user):
-        if not user in self.users:
+        user_unique = True
+        for user_ in self.users:
+            if user.id == user_.id:
+                user_unique = False
+                break
+
+        if user_unique and user.id is not None:
             self.users.append(user)
