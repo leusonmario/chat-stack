@@ -27,8 +27,7 @@ def main():
         output_generation = OutputGenerator()
 
         for question in questions['items']:
-            #answers = request.run_query_answers(endpoint='questions/{ids}/answers', ids=[question['question_id']], filter='withbody')
-            answers = []
+            answers = request.run_query_answers(endpoint='questions/{ids}/answers', ids=[question['question_id']], filter='withbody')
             repository.save_question(question, answers)
             if (last_date < datetime.datetime.fromtimestamp(question['creation_date'])):
                 last_date = datetime.datetime.fromtimestamp(question['creation_date']) + datetime.timedelta(seconds=1)
