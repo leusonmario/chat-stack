@@ -14,17 +14,14 @@ def main():
     until_date = datetime.datetime(2022, 11, 14)
     date_handler = DateHandler(from_date, until_date)
     last_date = date_handler.current_starting_date
-    questions = ['items']
 
-    while(check_current_state(last_date, date_handler.current_finishing_date, questions) or date_handler.is_there_valid_pair_of_days()):
+    while(check_current_state(last_date, date_handler.current_finishing_date) or date_handler.is_there_valid_pair_of_days()):
         request = StackRequest('stackoverflow', config('KEY-STACK'), 1)
-        questions = request.run_query_question(endpoint='questions', min='100', sort='creation', filter='withbody',
-                                               from_date=last_date, until_date=date_handler.current_finishing_date)
+        questions = request_question(request, last_date, date_handler.current_finishing_date)
+
         if (len(questions['items']) < 1):
             date_handler.is_there_valid_pair_of_days()
-            last_date = date_handler.current_starting_date
-            questions = request.run_query_question(endpoint='questions', min='100', sort='creation', filter='withbody',
-                                                   from_date=last_date, until_date=date_handler.current_finishing_date)
+            questions = request_question(request, date_handler.current_starting_date, date_handler.current_finishing_date)
 
         repository = Repository()
         output_generation = OutputGenerator()
@@ -48,11 +45,16 @@ def main():
         for tag in repository.tags:
             output_generation.save_tag(tag, date_handler.current_starting_date.strftime("%b-%d-%Y"))
 
-def check_current_state(last_date, current_finishing_date, questions):
-    if (last_date < current_finishing_date and len(questions) > 0):
+def check_current_state(last_date, current_finishing_date):
+    if (last_date < current_finishing_date):
         return True
     else:
         return False
+
+def request_question(request, current_last_date, current_finishing_date):
+
+    return request.run_query_question(endpoint='questions', min='100', sort='creation', filter='withbody',
+                                           from_date=current_last_date, until_date=current_finishing_date)
 
 if __name__ == '__main__':
     main()
