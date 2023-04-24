@@ -10,20 +10,31 @@ from stack.repository import Repository
 from stack.stack_request import StackRequest
 
 def main():
-    from_date = datetime.datetime(2022, 12, 12)
-    until_date = datetime.datetime(2022, 12, 15)
+    from_date = datetime.datetime(2022, 11, 12)
+    until_date = datetime.datetime(2022, 11, 14)
     date_handler = DateHandler(from_date, until_date)
+    last_date = date_handler.current_starting_date
+    questions = ['items']
 
-    while(date_handler.is_there_valid_pair_of_days()):
+    while(check_current_state(last_date, date_handler.current_finishing_date, questions) or date_handler.is_there_valid_pair_of_days()):
         request = StackRequest('stackoverflow', config('KEY-STACK'), 1)
-        questions = request.run_query_question(endpoint='questions', min='100', sort='votes', filter='withbody',
-                                               from_date=date_handler.current_starting_date, until_date=date_handler.current_finishing_date)
+        questions = request.run_query_question(endpoint='questions', min='100', sort='creation', filter='withbody',
+                                               from_date=last_date, until_date=date_handler.current_finishing_date)
+        if (len(questions['items']) < 1):
+            date_handler.is_there_valid_pair_of_days()
+            last_date = date_handler.current_starting_date
+            questions = request.run_query_question(endpoint='questions', min='100', sort='creation', filter='withbody',
+                                                   from_date=last_date, until_date=date_handler.current_finishing_date)
+
         repository = Repository()
         output_generation = OutputGenerator()
 
         for question in questions['items']:
-            answers = request.run_query_answers(endpoint='questions/{ids}/answers', ids=[question['question_id']], filter='withbody')
+            #answers = request.run_query_answers(endpoint='questions/{ids}/answers', ids=[question['question_id']], filter='withbody')
+            answers = []
             repository.save_question(question, answers)
+            if (last_date < datetime.datetime.fromtimestamp(question['creation_date'])):
+                last_date = datetime.datetime.fromtimestamp(question['creation_date']) + datetime.timedelta(seconds=1)
 
         for question in repository.questions:
             output_generation.save_question(question, date_handler.current_starting_date.strftime("%b-%d-%Y"))
@@ -36,6 +47,12 @@ def main():
 
         for tag in repository.tags:
             output_generation.save_tag(tag, date_handler.current_starting_date.strftime("%b-%d-%Y"))
+
+def check_current_state(last_date, current_finishing_date, questions):
+    if (last_date < current_finishing_date and len(questions) > 0):
+        return True
+    else:
+        return False
 
 if __name__ == '__main__':
     main()
