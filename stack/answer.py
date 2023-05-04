@@ -3,13 +3,12 @@ from stack.user import User
 
 class Answer:
 
-    def __init__(self, answer, owner_id):
-        self.id = answer['answer_id']
-        self.body = answer['body']
-        self.is_accepted = answer['is_accepted']
-        self.score = answer['score']
-        self.question_id = answer['question_id']
-        self.owner = owner_id
-        self.creation_date = answer['creation_date']
-        self.activity = answer['last_activity_date']
+    def __init__(self, answer):
+        self.id = answer[0]
+        self.body = answer[8]
+        self.score = answer[6]
+        self.question_id = answer[3]
+        self.owner = answer[9]
+        self.creation_date = answer[4]
+        self.activity = answer[14]
 
