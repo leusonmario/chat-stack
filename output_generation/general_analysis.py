@@ -17,43 +17,50 @@ class GeneralAnalysis:
             os.mkdir(self.target_directory+"/general")
 
     def create_question_output_file(self):
-        if not os.path.exists(self.target_directory + "/general_analysis.csv"):
-            with open(self.target_directory + "/general_analysis.csv", 'w') as file:
+        if not os.path.exists(self.target_directory + "/general/general_analysis.csv"):
+            with open(self.target_directory + "/general/general_analysis.csv", 'w') as file:
                 csvreader = csv.writer(file)
                 csvreader.writerow(
                     ['metric', 'value'])
 
     def add_new_metric_value(self, metric, value):
         self.create_question_output_file()
-        if os.path.exists(self.target_directory + "/general_analysis.csv"):
-            with open(self.target_directory + "/general_analysis.csv", 'a') as file:
+        if os.path.exists(self.target_directory + "/general/general_analysis.csv"):
+            with open(self.target_directory + "/general/general_analysis.csv", 'a') as file:
                 csvreader = csv.writer(file)
                 csvreader.writerow([metric, value])
 
 
-    def generate_bar_chart_user_questions(self, question_users):
+    def generate_line_chart_posts_over_time(self, dates, values, type):
         matplotlib.pyplot.clf()
-        sorted_data = sorted(question_users.items(), key=lambda x: x[1], reverse=True)[:10]
+        for i in range(2):
+            plt.plot(dates[i], values[i])
 
-        labels = [item[0] for item in sorted_data]
-        values = [item[1] for item in sorted_data]
-
-        plt.bar(labels, values)
-        plt.xticks(rotation=30, horizontalalignment="center")
-        for i, v in enumerate(values):
-            plt.text(i, v + 0.5, str(v), ha='center', fontsize=10)
-
-        plt.savefig(self.target_directory+"/general/bar-chat-question-users.png")
-
-    def generate_line_chart_questions_over_time(self, questions_by_date):
-        matplotlib.pyplot.clf()
-        dates = sorted([datetime.strptime(date, '%Y-%m-%d').date() for date in questions_by_date.keys()])
-        values = [questions_by_date[date.strftime('%Y-%m-%d')] for date in dates]
-
-        plt.plot(dates, values)
-
+        plt.axvline(x=datetime.strptime('2022-11-30', '%Y-%m-%d').date(), color='r')
         plt.xlabel("Date")
         plt.ylabel("Value")
         plt.title("Values by Date")
 
-        plt.savefig(self.target_directory+"/general/line-chart-questions-by-date.png")
+        plt.savefig(self.target_directory+"general/line-chart-"+type+"-by-date.png")
+
+
+    def generate_tag_usage_frequency(self, tags_dates, tags_values):
+        matplotlib.pyplot.clf()
+        colors = ['red', 'orange', 'blue', 'green', 'pink']
+        legend_values = [0] * 5
+
+        for i in range(2):
+            j = 0
+            for value in tags_values[i]:
+                aux = tags_dates[i]
+                plt.plot(tags_dates[i], tags_values[i][value], color=colors[j], label="" + value)
+                legend_values[j] = value
+                j += 1
+
+        plt.axvline(x=datetime.strptime('2022-11-30', '%Y-%m-%d').date(), color='r')
+        plt.xlabel("Date")
+        plt.ylabel("Value")
+        plt.title("Values by Date")
+        plt.legend(legend_values)
+
+        plt.savefig(self.target_directory+"general/tag-line-chart-all.png")

@@ -110,5 +110,7 @@ class TagAnalysis:
         # Show the plot
         plt.savefig(self.target_directory+"/figures/tag-line-chart-all.png")
 
+        return dates, values
+
     def get_number_tags(self):
         return len(self.tags)

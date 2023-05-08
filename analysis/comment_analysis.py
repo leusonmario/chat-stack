@@ -26,14 +26,14 @@ class CommentAnalysis:
             else:
                 self.comment_by_date[comment.creation.split(" ")[0]] = 1
 
-            if comment.user_id != "-1":
+            if comment.user_id != "-1" and comment.user_id != "" and comment.user_id != None:
                 if comment.user_id in self.comment_users:
                     value = self.comment_users[comment.user_id] + 1
                     self.comment_users.update({comment.user_id: value})
                 else:
                     self.comment_users[comment.user_id] = 1
 
-    def generate_bar_chart_user_answers(self):
+    def generate_bar_chart_user_comments(self):
         matplotlib.pyplot.clf()
         sorted_data = sorted(self.comment_users.items(), key=lambda x: x[1], reverse=True)[:10]
 
@@ -48,7 +48,7 @@ class CommentAnalysis:
         plt.savefig(self.target_directory+"/figures/bar-chat-comment-users.png")
 
 
-    def generate_line_chart_answers_over_time(self):
+    def generate_line_chart_comments_over_time(self):
         matplotlib.pyplot.clf()
         dates = sorted([datetime.strptime(date, '%Y-%m-%d').date() for date in self.comment_by_date.keys()])
 
@@ -61,3 +61,5 @@ class CommentAnalysis:
         plt.title("Values by Date")
 
         plt.savefig(self.target_directory+"/figures/line-chart-comments-by-date.png")
+
+        return dates, values

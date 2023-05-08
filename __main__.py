@@ -13,71 +13,84 @@ from stack.question import Question
 
 def main():
 
-    questions = [[],[]]
-    questions_ids = [[],[]]
-    answers = [[],[]]
-    answers_ids = [[],[]]
-    comments = [[],[]]
+    questions_analysis = [[],[]]
+    answers_analysis = [[],[]]
+    comments_analysis = [[],[]]
+    tags_analysis = [[], []]
     analysis_req = ["before","after"]
+
+    questions_dates = [[],[]]
+    questions_values = [[], []]
+    tags_dates = [[], []]
+    tags_values = [[], []]
+    answers_dates = [[], []]
+    answers_values = [[], []]
+    comments_dates = [[], []]
+    comments_values = [[], []]
 
     target_directory = ["/home/leuson/Downloads/teste/data/data-before/", "/home/leuson/Downloads/teste/data/data-after/"]
     report_directory = "/home/leuson/Downloads/teste/output/"
 
     output_generation = OutputGenerator(report_directory)
     index = 0
-    general_analysis = [None,None]
+    general_analysis = GeneralAnalysis(report_directory)
 
     for target_directory_entry in target_directory:
-        general_analysis[index] = GeneralAnalysis(report_directory)
         target_directory_posts = target_directory_entry+"posts/"
         target_directory_comments = target_directory_entry + "comments/"
 
-        questions[index], questions_ids[index] = get_questions(target_directory_posts)
-        save_questions(output_generation, questions[index], analysis_req[index])
-        general_analysis[index].add_new_metric_value("Questions - "+analysis_req[index], len(questions[index]))
+        questions, questions_ids = get_questions(target_directory_posts)
+        save_questions(output_generation, questions, analysis_req[index])
+        general_analysis.add_new_metric_value("Questions - "+analysis_req[index], len(questions))
 
-        question_analysis = QuestionAnalysis(questions[index], report_directory+analysis_req[index])
-        question_analysis.general_data_analysis()
-        general_analysis[index].add_new_metric_value("Answered Questions - " + analysis_req[index],
-                                              len(question_analysis.answered_questions))
-        general_analysis[index].add_new_metric_value("Accepted Answered Questions - " + analysis_req[index],
-                                              len(question_analysis.accepted_answers_for_questions))
-        general_analysis[index].add_new_metric_value("Unanswered Questions - " + analysis_req[index],
-                                              len(question_analysis.unanswered_questions))
-        general_analysis[index].add_new_metric_value("Unique Users (Questioners) - " + analysis_req[index],
-                                              len(question_analysis.question_users))
-        question_analysis.generate_bar_chart_user_questions()
-        question_analysis.generate_line_chart_questions_over_time()
+        questions_analysis[index] = QuestionAnalysis(questions, report_directory+analysis_req[index])
+        questions_analysis[index].general_data_analysis()
+        general_analysis.add_new_metric_value("Answered Questions - " + analysis_req[index],
+                                              len(questions_analysis[index].answered_questions))
+        general_analysis.add_new_metric_value("Accepted Answered Questions - " + analysis_req[index],
+                                              len(questions_analysis[index].accepted_answers_for_questions))
+        general_analysis.add_new_metric_value("Unanswered Questions - " + analysis_req[index],
+                                              len(questions_analysis[index].unanswered_questions))
+        general_analysis.add_new_metric_value("Unique Users (Questioners) - " + analysis_req[index],
+                                              len(questions_analysis[index].question_users))
+        questions_analysis[index].generate_bar_chart_user_questions()
+        questions_dates[index], questions_values[index] = questions_analysis[index].generate_line_chart_questions_over_time()
 
-        tag_analysis = TagAnalysis(questions[index], report_directory+analysis_req[index])
-        tag_analysis.generate_word_cloud()
-        tag_analysis.generate_bar_chart_tags()
-        tag_analysis.generate_tag_usage_frequency()
-        general_analysis[index].add_new_metric_value("Unique Tags - "+analysis_req[index], len(tag_analysis.tags))
 
-        answers[index], answers_ids[index] = get_answers(questions_ids[index], target_directory_posts)
-        save_answers(answers[index], output_generation, analysis_req[index])
+        tags_analysis[index] = TagAnalysis(questions, report_directory+analysis_req[index])
+        tags_analysis[index].generate_word_cloud()
+        tags_analysis[index].generate_bar_chart_tags()
+        tags_dates[index], tags_values[index] = tags_analysis[index].generate_tag_usage_frequency()
+        general_analysis.add_new_metric_value("Unique Tags - "+analysis_req[index], len(tags_analysis[index].tags))
 
-        answer_analysis = AnswerAnalysis(answers[index], report_directory+analysis_req[index])
-        answer_analysis.general_data_analysis()
-        general_analysis[index].add_new_metric_value("Answers - " + analysis_req[index], len(answer_analysis.answers))
-        general_analysis[index].add_new_metric_value("Unique Users (Respondents) - " + analysis_req[index], len(answer_analysis.answer_users))
-        answer_analysis.generate_bar_chart_user_answers()
-        answer_analysis.generate_line_chart_answers_over_time()
+        answers, answers_ids = get_answers(questions_ids, target_directory_posts)
+        save_answers(answers, output_generation, analysis_req[index])
 
-        comments[index] = get_comments(answers_ids[index], questions_ids[index], target_directory_comments)
-        save_comments(comments[index], output_generation, analysis_req[index])
+        answers_analysis[index] = AnswerAnalysis(answers, report_directory+analysis_req[index])
+        answers_analysis[index].general_data_analysis()
+        general_analysis.add_new_metric_value("Answers - " + analysis_req[index], len(answers_analysis[index].answers))
+        general_analysis.add_new_metric_value("Unique Users (Respondents) - " + analysis_req[index], len(answers_analysis[index].answer_users))
+        answers_analysis[index].generate_bar_chart_user_answers()
+        answers_dates[index], answers_values[index] = answers_analysis[index].generate_line_chart_answers_over_time()
 
-        comment_analysis = CommentAnalysis(comments[index], report_directory+analysis_req[index])
-        comment_analysis.general_data_analysis()
-        general_analysis[index].add_new_metric_value("Comments - " + analysis_req[index], len(comment_analysis.comments))
-        general_analysis[index].add_new_metric_value("Unique Users (Commentors) - " + analysis_req[index],
-                                                     len(answer_analysis.answer_users))
-        comment_analysis.generate_bar_chart_user_answers()
-        comment_analysis.generate_line_chart_answers_over_time()
+
+        comments = get_comments(answers_ids, questions_ids, target_directory_comments)
+        save_comments(comments, output_generation, analysis_req[index])
+
+        comments_analysis[index] = CommentAnalysis(comments, report_directory+analysis_req[index])
+        comments_analysis[index].general_data_analysis()
+        general_analysis.add_new_metric_value("Comments - " + analysis_req[index], len(comments_analysis[index].comments))
+        general_analysis.add_new_metric_value("Unique Users (Commentors) - " + analysis_req[index],
+                                                     len(comments_analysis[index].comment_users))
+        comments_analysis[index].generate_bar_chart_user_comments()
+        comments_dates[index], comments_values[index] = comments_analysis[index].generate_line_chart_comments_over_time()
 
         index += 1
 
+    general_analysis.generate_line_chart_posts_over_time(questions_dates, questions_values, "questions")
+    general_analysis.generate_tag_usage_frequency(tags_dates, tags_values)
+    general_analysis.generate_line_chart_posts_over_time(answers_dates, answers_values, "answers")
+    general_analysis.generate_line_chart_posts_over_time(comments_dates, comments_values, "comments")
 
 def save_comments(comments, output_generation, type):
     for comment in comments:

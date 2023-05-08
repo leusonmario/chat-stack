@@ -69,6 +69,8 @@ class QuestionAnalysis:
 
         plt.savefig(self.target_directory+"/figures/line-chart-questions-by-date.png")
 
+        return dates, values
+
     def get_number_questions(self):
         return len(self.questions)
 
