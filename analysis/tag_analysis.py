@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import matplotlib
@@ -13,6 +14,11 @@ class TagAnalysis:
         self.questions_by_date = {}
         self._get_tags_from_questions(questions)
         self.target_directory = target_directory
+        self.create_output_directory()
+
+    def create_output_directory(self):
+        if not os.path.exists(self.target_directory+"/figures"):
+            os.mkdir(self.target_directory+"/figures")
 
     def _get_tags_from_questions(self, questions):
         for question in questions:
@@ -37,7 +43,7 @@ class TagAnalysis:
         plt.figure(figsize=(15, 8))
         plt.imshow(wc)
         # plt.show()
-        plt.savefig(self.target_directory+"/output/figures/word-cloud-tags.png")
+        plt.savefig(self.target_directory+"/figures/word-cloud-tags.png")
 
     def generate_bar_chart_tags(self):
         matplotlib.pyplot.clf()
@@ -51,7 +57,7 @@ class TagAnalysis:
         for i, v in enumerate(values):
             plt.text(i, v + 0.5, str(v), ha='center', fontsize=10)
 
-        plt.savefig(self.target_directory+"/output/figures/bar-chat.png")
+        plt.savefig(self.target_directory+"/figures/bar-chat.png")
 
     def generate_tag_usage_frequency(self):
         matplotlib.pyplot.clf()
@@ -102,7 +108,7 @@ class TagAnalysis:
         plt.title("Values by Date")
         plt.legend()
         # Show the plot
-        plt.savefig(self.target_directory+"/output/figures/tag-line-chart-all.png")
+        plt.savefig(self.target_directory+"/figures/tag-line-chart-all.png")
 
     def get_number_tags(self):
         return len(self.tags)

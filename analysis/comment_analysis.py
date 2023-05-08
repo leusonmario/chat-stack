@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import matplotlib
@@ -11,6 +12,11 @@ class CommentAnalysis:
         self.target_directory = target_directory
         self.comment_users = {}
         self.comment_by_date = {}
+        self.create_output_directory()
+
+    def create_output_directory(self):
+        if not os.path.exists(self.target_directory + "/figures"):
+            os.mkdir(self.target_directory + "/figures")
 
     def general_data_analysis(self):
         for comment in self.comments:
@@ -39,7 +45,7 @@ class CommentAnalysis:
         for i, v in enumerate(values):
             plt.text(i, v + 0.5, str(v), ha='center', fontsize=10)
 
-        plt.savefig(self.target_directory+"/output/figures/bar-chat-comment-users.png")
+        plt.savefig(self.target_directory+"/figures/bar-chat-comment-users.png")
 
 
     def generate_line_chart_answers_over_time(self):
@@ -54,4 +60,4 @@ class CommentAnalysis:
         plt.ylabel("Value")
         plt.title("Values by Date")
 
-        plt.savefig(self.target_directory+"/output/figures/line-chart-comments-by-date.png")
+        plt.savefig(self.target_directory+"/figures/line-chart-comments-by-date.png")

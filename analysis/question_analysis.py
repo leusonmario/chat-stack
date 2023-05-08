@@ -1,3 +1,5 @@
+import os
+
 import matplotlib
 from matplotlib import pyplot as plt
 from datetime import datetime
@@ -12,6 +14,11 @@ class QuestionAnalysis:
         self.accepted_answers_for_questions = []
         self.questions_by_date = {}
         self.target_directory = target_directory
+        self.create_output_directory()
+
+    def create_output_directory(self):
+        if not os.path.exists(self.target_directory+"/figures"):
+            os.mkdir(self.target_directory+"/figures")
 
     def general_data_analysis(self):
         for question in self.questions:
@@ -47,7 +54,7 @@ class QuestionAnalysis:
         for i, v in enumerate(values):
             plt.text(i, v + 0.5, str(v), ha='center', fontsize=10)
 
-        plt.savefig(self.target_directory+"/output/figures/bar-chat-question-users.png")
+        plt.savefig(self.target_directory+"/figures/bar-chat-question-users.png")
 
     def generate_line_chart_questions_over_time(self):
         matplotlib.pyplot.clf()
@@ -60,7 +67,7 @@ class QuestionAnalysis:
         plt.ylabel("Value")
         plt.title("Values by Date")
 
-        plt.savefig(self.target_directory+"/output/figures/line-chart-questions-by-date.png")
+        plt.savefig(self.target_directory+"/figures/line-chart-questions-by-date.png")
 
     def get_number_questions(self):
         return len(self.questions)
