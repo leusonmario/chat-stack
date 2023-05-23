@@ -24,7 +24,7 @@ class QuestionAnalysis:
         for question in self.questions:
             if question.owner != "":
                 if question.owner in self.question_users:
-                    value = self.question_users[question.owner] + 1
+                    value = self.question_users.get(question.owner) + 1
                     self.question_users.update({question.owner: value})
                 else:
                     self.question_users[question.owner] = 1

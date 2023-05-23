@@ -26,6 +26,7 @@ class CommentAnalysis:
             else:
                 self.comment_by_date[comment.creation.split(" ")[0]] = 1
 
+            #User with -1 as ID is a bot from StackOverflow (community)
             if comment.user_id != "-1" and comment.user_id != "" and comment.user_id != None:
                 if comment.user_id in self.comment_users:
                     value = self.comment_users[comment.user_id] + 1
