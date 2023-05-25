@@ -8,7 +8,9 @@ class Request:
         openai.api_key = config("openai-key")
 
     def generate_prompt(self, question, body):
-        return f""" Please, explain how to fix the problem below. {question}
+        return f""" Please, explain how to fix the problem below. 
+        {question}
+        
         Below, you can find more details 
         {body}"""
 

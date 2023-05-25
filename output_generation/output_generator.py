@@ -11,6 +11,7 @@ class OutputGenerator:
     def create_main_directory(self):
         if not os.path.exists(self.report_path):
             os.mkdir(self.report_path)
+
     def create_directory(self, date):
         if not os.path.exists(self.report_path+date+"/"):
             os.mkdir(self.report_path+date+"/")
@@ -67,6 +68,20 @@ class OutputGenerator:
                 csvreader.writerow([answer.id, answer.body, answer.score, answer.question_id, answer.owner, answer.creation_date,
                                     answer.activity])
 
+    def create_generated_answer_output_file(self, type):
+        self.create_directory_by_category(type)
+        if not os.path.exists(self.report_path+"/"+type+"/generated_answers.csv"):
+            with open(self.report_path+"/"+type+"/generated_answers.csv", 'w') as file:
+                csvreader = csv.writer(file)
+                csvreader.writerow(['question_id','original_answer','generated_answer','cosine_metric'])
+
+    def add_new_generated_answer_output_file(self, question_id, original_answer, generated_answer, cosine_metric, type):
+        self.create_generated_answer_output_file(type)
+        if os.path.exists(self.report_path+"/"+type+"/generated_answers.csv"):
+            with open(self.report_path+"/"+type+"/generated_answers.csv", 'a') as file:
+                csvreader = csv.writer(file)
+                csvreader.writerow([question_id, original_answer, generated_answer, cosine_metric])
+
     def create_user_output_file(self,date):
         if not os.path.exists(self.report_path+date+"/users.csv"):
             with open(self.report_path+date+"/users.csv", 'w') as file:
@@ -109,3 +124,6 @@ class OutputGenerator:
 
     def save_comment(self, comment, type):
         self.add_new_comment_output_file(comment, type)
+
+    def save_generated_answer(self, question_id, original_answer, generated_answer, cosine_metric, type):
+        self.add_new_generated_answer_output_file(question_id, original_answer, generated_answer, cosine_metric, type)
