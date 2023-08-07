@@ -28,8 +28,8 @@ def main():
     comments_dates = [[], []]
     comments_values = [[], []]
 
-    target_directory = ["/home/leuson/Downloads/teste/data/data-before/", "/home/leuson/Downloads/teste/data/data-after/"]
-    report_directory = "/home/leuson/Downloads/teste/output/"
+    target_directory = ["/home/leuson/Downloads/attemptOne/before/", "/home/leuson/Downloads/attemptOne/after/"]
+    report_directory = "/home/leuson/Downloads/attemptOne/results/"
 
     output_generation = OutputGenerator(report_directory)
     index = 0

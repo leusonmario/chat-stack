@@ -88,6 +88,6 @@ plt.ylabel("Value")
 plt.title("Values by Date")
 plt.legend()
     # Show the plot
-plt.savefig("output/figures/tag-line-chart-all.png")
+plt.savefig("output/figures/tag-line-chart-all2.png")
 plt.show()
 

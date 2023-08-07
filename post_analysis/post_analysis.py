@@ -1,10 +1,14 @@
 import csv
 import os
 from datetime import datetime
+from random import random
 from time import sleep
+from decouple import config
 
 import matplotlib
 import matplotlib.pyplot as pyplot
+from stackapi import StackAPI
+
 
 def distribution_answer_by_day(files, analysis_file):
     week_day = {0:'Sunday', 1:'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday'}
@@ -62,6 +66,7 @@ def distribution_comments_by_day(files, analysis_file):
         dates = {}
         with open(one_file + analysis_file + ".csv", 'r') as file:
             reader = csv.reader(file)
+            next(reader)
             for i, row in enumerate(reader):
                 if (row[4].split(" ")[0] in dates):
                     aux = dates[row[4].split(" ")[0]]
@@ -80,7 +85,37 @@ def distribution_comments_by_day(files, analysis_file):
                 csvreader = csv.writer(file)
                 csvreader.writerow([value, dates[value], week_day[datetime.strptime(value, "%Y-%m-%d").weekday()]])
 
-def users_analysis(paths):
+def get_tags_frequency(tags_file, analysis_file):
+    tags = {}
+
+    with open(tags_file + analysis_file + ".csv", 'r') as file:
+        csvreader = csv.reader(file)
+        next(csvreader)
+        for row in csvreader:
+            if row[0] in tags:
+                value = tags[row[0]] + 1
+                tags.update({row[0]: value})
+            else:
+                tags[row[0]] = 1
+
+    with open(tags_file+"tags_analysis.csv", 'w+') as file:
+        csvreader = csv.writer(file)
+        for key in tags:
+            csvreader.writerow([key, tags[key]])
+
+    return tags
+def distribution_tags(files, analysis_file, main_directory):
+    tags_before = get_tags_frequency(files[0], analysis_file)
+    tags_after = get_tags_frequency(files[1], analysis_file)
+
+    analysis = main_directory + analysis_file + "-analysis.csv"
+    with open(analysis, 'w+') as file:
+        csvreader = csv.writer(file)
+        for key in tags_before:
+            if (tags_after.get(key) is not None):
+                csvreader.writerow([key, tags_before[key], tags_after[key]])
+
+def users_analysis(paths, analysis_file):
 
     for path in paths:
         unique_users = []
@@ -120,7 +155,8 @@ def users_analysis(paths):
         users_without_questions_answers = 0
         print("Unique Users : " + str(len(unique_users)))
 
-        """for user in unique_users:
+        report_file = path + analysis_file + "_analysis.csv"
+        for user in unique_users:
             if questions_users.get(user) != None:
                 if answers_users.get(user) != None:
                     add_value_result_file(report_file, user, questions_users.get(user), answers_users.get(user), questions_users.get(user) / answers_users.get(user))
@@ -132,7 +168,7 @@ def users_analysis(paths):
                  users_without_questions += 1
             else:
                 add_value_result_file(report_file, user, "NoQuestions", "NoAnswers", "-")
-                users_without_questions_answers += 1"""
+                users_without_questions_answers += 1
 
         print("Users without questions - "+str(users_without_questions))
         print("Users without answers - " + str(users_without_answers))
@@ -150,12 +186,12 @@ def create_file(directory, file_name, values):
             csvreader.writerow([value])
 
 def create_file_with_different_fields(directory, file_name, values):
-    if not os.path.exists(directory+file_name+".csv"):
-        with open(directory+file_name+".csv", 'w') as f:
+    if not os.path.exists(directory+file_name+"-general-questions.csv"):
+        with open(directory+file_name+"-general-questions.csv", 'w') as f:
             csvreader = csv.writer(f)
             csvreader.writerow(["user", "number_questions", "number_answers","account_before_chatgpt"])
 
-    with open(directory+file_name+".csv", 'a') as f:
+    with open(directory+file_name+"-general-questions.csv", 'a') as f:
         csvreader = csv.writer(f)
         for value in values:
             csvreader.writerow([value[0], value[1], value[2], value[3]])
@@ -324,7 +360,7 @@ def distribution_commentors(files, directory):
         len(set(users_comments[0]).intersection(set(users_comments[1])))))
     create_file(directory, "new-commentors", set(users_comments[1]).difference(set(users_comments[0])))
 
-def check_difference_numbers_new_old_users(analysis_file, all_active_users, directory):
+def check_difference_numbers_new_old_users(analysis_file, directory, file_name, general_directory):
     users = {}
     with open(analysis_file, 'r') as file:
         reader = csv.reader(file)
@@ -341,7 +377,7 @@ def check_difference_numbers_new_old_users(analysis_file, all_active_users, dire
             users[row[0]] = [questions, answers]
 
     report = []
-    with open(all_active_users, 'r') as file:
+    with open(directory + file_name + ".csv", 'r') as file:
         reader = csv.reader(file)
         next(reader)
         for i, row in enumerate(reader):
@@ -349,22 +385,89 @@ def check_difference_numbers_new_old_users(analysis_file, all_active_users, dire
                 values = users[row[0]]
                 report.append([row[0], values[0], values[1], row[3]])
 
-    create_file_with_different_fields(directory, "new-respondents-general-questions", report)
+    create_file_with_different_fields(general_directory, file_name, report)
+
+def create_report_file(directory, file):
+    if not os.path.exists(directory+file+".csv"):
+        with open(directory+file+".csv", 'w') as f:
+            csvreader = csv.writer(f)
+            csvreader.writerow(["user_id", "reputation", "creation_date", "profile_before_chatgpt", "last_access",
+                                "bronze_badge", "silver_badge", "gold_badge"])
+
+def save_user(directory,file,user):
+    create_report_file(directory, file)
+    if os.path.exists(directory+file+".csv"):
+        with open(directory+file+".csv", 'a') as f:
+            csvreader = csv.writer(f)
+            csvreader.writerow([user[0], user[1], user[2], user[3], user[4], user[5]])
+
+def read_users(file):
+    users = []
+    if os.path.exists(file):
+        with open(file, 'r') as f:
+            csvreader = csv.reader(f)
+            next(csvreader)
+            for i, row in enumerate(csvreader):
+                users.append(row[0])
+
+    return users
+
+def random_selection_users(all_users, number_elements):
+    random_users = []
+    if (number_elements <= len(all_users)):
+        random_users = random.sample(all_users, number_elements)
+    return random_users
+
+def run_analysis(target_directory, file):
+    SITE = StackAPI('stackoverflow', key=config('KEY-STACK-TWO'))
+    chatgpt_release_date = datetime(2022, 11, 30)
+    selected_users = read_users(target_directory + file + ".csv")
+
+    split_users = [selected_users[i:i+100] for i in range(0, len(selected_users), 100)]
+
+    before_chatgpt = 0
+    after_chatgpt = 0
+
+    for selected_user in split_users:
+        users = SITE.fetch(endpoint='users', ids = selected_user)
+
+        for user in users['items']:
+            before_release = datetime.fromtimestamp(user['creation_date']) < chatgpt_release_date
+            if (before_release):
+                before_chatgpt += 1
+            else:
+                after_chatgpt += 1
+
+            user = [user['user_id'], user['reputation'], datetime.fromtimestamp(user['creation_date']), before_release,
+                    datetime.fromtimestamp(user['last_access_date']), user['badge_counts']['bronze'],
+                    user['badge_counts']['silver'], user['badge_counts']['gold']]
+            save_user(target_directory, file+"-analysis", user)
+
+    print("Before - " + str(before_chatgpt))
+    print("After - " + str(after_chatgpt))
 
 if __name__ == '__main__':
-    directory = "/home/leuson/Downloads/finalOutput/general/"
+    directory = "/home/leuson/Downloads/attemptOne/results/general/"
     files = [
-        "/home/leuson/Downloads/finalOutput/before/", "/home/leuson/Downloads/finalOutput/after/"]
+        "/home/leuson/Downloads/attemptOne/results/before/", "/home/leuson/Downloads/attemptOne/results/after/"]
     analysis_question_file = "questions"
     analysis_answer_file = "answers"
     analysis_comments_file = "comments"
-    distribution_answer_by_day(files, analysis_answer_file)
-    distribution_question_by_day(files, analysis_question_file)
-    distribution_comments_by_day(files, analysis_comments_file)
+    analysis_user_file = "user"
+    analysis_tag_file = "tags"
+    #distribution_answer_by_day(files, analysis_answer_file)
+    #distribution_question_by_day(files, analysis_question_file)
+    #distribution_comments_by_day(files, analysis_comments_file)
+    #distribution_tags(files, analysis_tag_file, directory)
 
 
-    users_analysis(files)
-    distribution_questions_answers_by_user(files, directory)
-    distribution_commentors(files, directory)
-    check_difference_numbers_new_old_users("/home/leuson/Downloads/finalOutput/after/user_analysis.csv", "/home/leuson/Downloads/finalOutput/general/new-respondents-analysis.csv", directory)
-    understand_missing_users("/home/leuson/PycharmProjects/chat-stack/user-investigation.py", "/home/leuson/Downloads/finalOutput/general/new-askers-analysis.csv")
+    users_analysis(files, analysis_user_file)
+    #distribution_questions_answers_by_user(files, directory)
+    #distribution_commentors(files, directory)
+    #run_analysis(directory, "new-respondents")
+    #run_analysis(directory, "new-askers")
+    #run_analysis(directory, "new-commentors")
+    run_analysis(directory, "new-users")
+    check_difference_numbers_new_old_users(files[1] + "/user_analysis.csv", directory, "new-respondents-analysis", directory)
+    check_difference_numbers_new_old_users(files[1] + "/user_analysis.csv", directory, "new-askers-analysis", directory)
+    #understand_missing_users("/home/leuson/PycharmProjects/chat-stack/user-investigation.py", "/home/leuson/Downloads/finalOutput/general/new-askers-analysis.csv")

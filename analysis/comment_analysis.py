@@ -1,3 +1,4 @@
+import csv
 import os
 from datetime import datetime
 
@@ -63,4 +64,13 @@ class CommentAnalysis:
 
         plt.savefig(self.target_directory+"/figures/line-chart-comments-by-date.png")
 
+        #self.create_output_file(dates, values)
+
         return dates, values
+
+    def create_output_file(self, dates, number_comments_per_day):
+        with open(self.target_directory+"/comments-analysis.csv", 'w+') as file:
+            csvreader = csv.writer(file)
+            csvreader.writerow(["Date", "Number of Comments"])
+            for i in range(len(dates)):
+                csvreader.writerow([dates[i], number_comments_per_day[i]])

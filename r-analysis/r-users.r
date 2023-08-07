@@ -1,6 +1,6 @@
 library(nortest)
-#data <- read.csv("/home/leuson/Downloads/finalOutput/general/new-askers-analysis.csv")
-data <- read.csv("/home/leuson/Downloads/finalOutput/general/new-commentors-analysis.csv")
+#data <- read.csv("/home/leuson/Downloads/attemptOne/results/general/new-askers-analysis.csv")
+data <- read.csv("/home/leuson/Downloads/attemptOne/results/general/new-commentors-analysis.csv")
 subset_data_before <- data[data$profile_before_chatgpt == "True", ]
 subset_data_after <- data[data$profile_before_chatgpt == "False", ]
 

@@ -36,29 +36,30 @@ def random_selection_users(all_users, number_elements):
         random_users = random.sample(all_users, number_elements)
     return random_users
 
-SITE = StackAPI('stackoverflow', key=config('KEY-STACK-TWO'))
-chatgpt_release_date = datetime.datetime(2022, 11, 30)
-selected_users = read_users("/home/leuson/Downloads/finalOutput/general/new-commentors.csv")
+def run_analysis(target_directory, file):
+    SITE = StackAPI('stackoverflow', key=config('KEY-STACK-TWO'))
+    chatgpt_release_date = datetime.datetime(2022, 11, 30)
+    selected_users = read_users(target_directory + file + ".csv")
 
-split_users = [selected_users[i:i+100] for i in range(0, len(selected_users), 100)]
+    split_users = [selected_users[i:i+100] for i in range(0, len(selected_users), 100)]
 
-before_chatgpt = 0
-after_chatgpt = 0
+    before_chatgpt = 0
+    after_chatgpt = 0
 
-for selected_user in split_users:
-    users = SITE.fetch(endpoint='users', ids = selected_user)
+    for selected_user in split_users:
+        users = SITE.fetch(endpoint='users', ids = selected_user)
 
-    for user in users['items']:
-        before_release = datetime.datetime.fromtimestamp(user['creation_date']) < chatgpt_release_date
-        if (before_release):
-            before_chatgpt += 1
-        else:
-            after_chatgpt += 1
+        for user in users['items']:
+            before_release = datetime.datetime.fromtimestamp(user['creation_date']) < chatgpt_release_date
+            if (before_release):
+                before_chatgpt += 1
+            else:
+                after_chatgpt += 1
 
-        user = [user['user_id'], user['reputation'], datetime.datetime.fromtimestamp(user['creation_date']), before_release,
-                datetime.datetime.fromtimestamp(user['last_access_date']), user['badge_counts']['bronze'],
-                user['badge_counts']['silver'], user['badge_counts']['gold']]
-        save_user("/home/leuson/Downloads/finalOutput/general/", "new-commentors-analysis", user)
+            user = [user['user_id'], user['reputation'], datetime.datetime.fromtimestamp(user['creation_date']), before_release,
+                    datetime.datetime.fromtimestamp(user['last_access_date']), user['badge_counts']['bronze'],
+                    user['badge_counts']['silver'], user['badge_counts']['gold']]
+            save_user(target_directory, file+"-analysis", user)
 
-print("Before - " + str(before_chatgpt))
-print("After - " + str(after_chatgpt))
+    print("Before - " + str(before_chatgpt))
+    print("After - " + str(after_chatgpt))

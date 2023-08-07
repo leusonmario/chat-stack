@@ -46,7 +46,7 @@ class GeneralAnalysis:
 
     def generate_tag_usage_frequency(self, tags_dates, tags_values):
         matplotlib.pyplot.clf()
-        colors = ['red', 'orange', 'blue', 'green', 'pink']
+        colors = ['black', 'orange', 'blue', 'green', 'pink']
         legend_values = [0] * 5
 
         for i in range(2):

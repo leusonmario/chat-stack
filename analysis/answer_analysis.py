@@ -1,3 +1,4 @@
+import csv
 import os
 from datetime import datetime
 
@@ -61,6 +62,8 @@ class AnswerAnalysis:
 
         plt.savefig(self.target_directory+"/figures/line-chart-answers-by-date.png")
 
+        #self.create_output_file(dates, values)
+
         return dates, values
 
     def get_number_questions(self):
@@ -68,3 +71,10 @@ class AnswerAnalysis:
 
     def get_number_users(self):
         return len(self.answer_users)
+
+    def create_output_file(self, dates, number_answers_per_day):
+        with open(self.target_directory+"/answers-analysis.csv", 'w+') as file:
+            csvreader = csv.writer(file)
+            csvreader.writerow(["Date", "Number of Answers"])
+            for i in range(len(dates)):
+                csvreader.writerow([dates[i], number_answers_per_day[i]])

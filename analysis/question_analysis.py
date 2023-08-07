@@ -1,3 +1,4 @@
+import csv
 import os
 
 import matplotlib
@@ -69,6 +70,7 @@ class QuestionAnalysis:
 
         plt.savefig(self.target_directory+"/figures/line-chart-questions-by-date.png")
 
+        #self.create_output_file(dates, values)
         return dates, values
 
     def get_number_questions(self):
@@ -85,3 +87,10 @@ class QuestionAnalysis:
 
     def get_number_users(self):
         return len(self.question_users)
+
+    def create_output_file(self, dates, number_questions_per_day):
+        with open(self.target_directory+"/questions-analysis.csv", 'w+') as file:
+            csvreader = csv.writer(file)
+            csvreader.writerow(["Date", "Number of Questions"])
+            for i in range(len(dates)):
+                csvreader.writerow([dates[i], number_questions_per_day[i]])

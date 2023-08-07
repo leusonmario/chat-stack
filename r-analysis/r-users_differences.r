@@ -1,6 +1,6 @@
 library(nortest)
-#data <- read.csv("/home/leuson/Downloads/finalOutput/general/new-askers-analysis.csv")
-data <- read.csv("/home/leuson/Downloads/finalOutput/general/new-users-general-questions.csv")
+#data <- read.csv("/home/leuson/Downloads/attemptOne/results/general/new-askers-analysis.csv")
+data <- read.csv("/home/leuson/Downloads/attemptOne/results/general/new-users-general-questions.csv")
 subset_data_before <- data[data$account_before_chatgpt == "True", ]
 subset_data_after <- data[data$account_before_chatgpt == "False", ]
 print(mean(subset_data_before$number_questions))
@@ -13,7 +13,7 @@ wilcox_test <- wilcox.test(subset_data_before$number_questions, subset_data_afte
 print(wilcox_test)
 
 
-data <- read.csv("/home/leuson/Downloads/finalOutput/general/new-respondents-general-questions.csv")
+data <- read.csv("/home/leuson/Downloads/attemptOne/results/general/new-respondents-general-questions.csv")
 subset_data_before <- data[data$account_before_chatgpt == "True", ]
 subset_data_after <- data[data$account_before_chatgpt == "False", ]
 
