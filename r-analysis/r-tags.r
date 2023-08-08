@@ -1,4 +1,4 @@
-files <- list("/home/leuson/Downloads/finalOutput/before/", "/home/leuson/Downloads/finalOutput/after/")
+files <- list("/home/leuson/Downloads/attemptOne/results/before/", "/home/leuson/Downloads/attemptOne/results/after/")
 tags <- list("python", "javascript", "reactjs", "java", "c#")
 
 for (x in 1:5){

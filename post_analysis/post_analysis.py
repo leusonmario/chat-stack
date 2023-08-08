@@ -11,7 +11,7 @@ from stackapi import StackAPI
 
 
 def distribution_answer_by_day(files, analysis_file):
-    week_day = {0:'Sunday', 1:'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday'}
+    week_day = {0:'Monday', 1:'Tuesday', 2:'Wednesday', 3:'Thursday', 4:'Friday', 5:'Saturday', 6:'Sunday'}
     for one_file in files:
         dates = {}
         with open(one_file + analysis_file + ".csv", 'r') as file:
@@ -36,7 +36,7 @@ def distribution_answer_by_day(files, analysis_file):
                 csvreader.writerow([value, dates[value], week_day[datetime.strptime(value, "%Y-%m-%d").weekday()]])
 
 def distribution_question_by_day(files, analysis_file):
-    week_day = {0:'Sunday', 1:'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday'}
+    week_day = {0:'Monday', 1:'Tuesday', 2:'Wednesday', 3:'Thursday', 4:'Friday', 5:'Saturday', 6:'Sunday'}
     for one_file in files:
         dates = {}
         with open(one_file + analysis_file + ".csv", 'r') as file:
@@ -61,7 +61,7 @@ def distribution_question_by_day(files, analysis_file):
                 csvreader.writerow([value, dates[value], week_day[datetime.strptime(value, "%Y-%m-%d").weekday()]])
 
 def distribution_comments_by_day(files, analysis_file):
-    week_day = {0:'Sunday', 1:'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday'}
+    week_day = {0:'Monday', 1:'Tuesday', 2:'Wednesday', 3:'Thursday', 4:'Friday', 5:'Saturday', 6:'Sunday'}
     for one_file in files:
         dates = {}
         with open(one_file + analysis_file + ".csv", 'r') as file:
@@ -153,6 +153,8 @@ def users_analysis(paths, analysis_file):
         users_without_questions = 0
         users_without_answers = 0
         users_without_questions_answers = 0
+        users_with_questions_answers = 0
+        print("Time: "+str(path.split("/")[-1]))
         print("Unique Users : " + str(len(unique_users)))
 
         report_file = path + analysis_file + "_analysis.csv"
@@ -160,6 +162,7 @@ def users_analysis(paths, analysis_file):
             if questions_users.get(user) != None:
                 if answers_users.get(user) != None:
                     add_value_result_file(report_file, user, questions_users.get(user), answers_users.get(user), questions_users.get(user) / answers_users.get(user))
+                    users_with_questions_answers += 1
                 else:
                     add_value_result_file(report_file, user, questions_users.get(user), "NoAnswers", "-")
                     users_without_answers += 1
@@ -173,6 +176,7 @@ def users_analysis(paths, analysis_file):
         print("Users without questions - "+str(users_without_questions))
         print("Users without answers - " + str(users_without_answers))
         print("Users without questions/answers - " + str(users_without_questions_answers))
+        print("Users with questions/answers - " + str(users_with_questions_answers))
 
 def create_file(directory, file_name, values):
     if not os.path.exists(directory+file_name+".csv"):
@@ -276,8 +280,8 @@ def distribution_questions_answers_by_user(files, directory):
     print(len(users[0]))
     print(len(users[1]))
     print("Difference between users before and after - "+str(len(set(users[0]) - set(users[1]))))
-    print("Difference between users before and before - " + str(len(set(users[0]).intersection(set(users[1])))))
-    print("Difference between users after and before - " + str(len(set(users[1]).intersection(set(users[0])))))
+    print("Intersection between users before and after - " + str(len(set(users[0]).intersection(set(users[1])))))
+    print("Intersection between users before and after - " + str(len(set(users[1]).intersection(set(users[0])))))
 
     print("Users No Answers: before - "+str(len(users_no_answers[0]))+" # after - "+str(len(users_no_answers[1])))
     print("Inactive Users with No Answers (before/after) - " + str(
@@ -399,7 +403,7 @@ def save_user(directory,file,user):
     if os.path.exists(directory+file+".csv"):
         with open(directory+file+".csv", 'a') as f:
             csvreader = csv.writer(f)
-            csvreader.writerow([user[0], user[1], user[2], user[3], user[4], user[5]])
+            csvreader.writerow([user[0], user[1], user[2], user[3], user[4], user[5], user[6], user[7]])
 
 def read_users(file):
     users = []
@@ -446,28 +450,28 @@ def run_analysis(target_directory, file):
     print("Before - " + str(before_chatgpt))
     print("After - " + str(after_chatgpt))
 
-if __name__ == '__main__':
-    directory = "/home/leuson/Downloads/attemptOne/results/general/"
-    files = [
-        "/home/leuson/Downloads/attemptOne/results/before/", "/home/leuson/Downloads/attemptOne/results/after/"]
+def main(directory):
+    files = [directory + "before/", directory + "after/"]
+    directory = directory + "general/"
+
     analysis_question_file = "questions"
     analysis_answer_file = "answers"
     analysis_comments_file = "comments"
     analysis_user_file = "user"
     analysis_tag_file = "tags"
-    #distribution_answer_by_day(files, analysis_answer_file)
-    #distribution_question_by_day(files, analysis_question_file)
-    #distribution_comments_by_day(files, analysis_comments_file)
-    #distribution_tags(files, analysis_tag_file, directory)
+    distribution_answer_by_day(files, analysis_answer_file)
+    distribution_question_by_day(files, analysis_question_file)
+    distribution_comments_by_day(files, analysis_comments_file)
+    distribution_tags(files, analysis_tag_file, directory)
 
 
     users_analysis(files, analysis_user_file)
-    #distribution_questions_answers_by_user(files, directory)
-    #distribution_commentors(files, directory)
-    #run_analysis(directory, "new-respondents")
-    #run_analysis(directory, "new-askers")
-    #run_analysis(directory, "new-commentors")
+    distribution_questions_answers_by_user(files, directory)
+    distribution_commentors(files, directory)
+    run_analysis(directory, "new-respondents")
+    run_analysis(directory, "new-askers")
+    run_analysis(directory, "new-commentors")
     run_analysis(directory, "new-users")
-    check_difference_numbers_new_old_users(files[1] + "/user_analysis.csv", directory, "new-respondents-analysis", directory)
-    check_difference_numbers_new_old_users(files[1] + "/user_analysis.csv", directory, "new-askers-analysis", directory)
+    check_difference_numbers_new_old_users(files[1] + "user_analysis.csv", directory, "new-respondents-analysis", directory)
+    #check_difference_numbers_new_old_users(files[1] + "user_analysis.csv", directory, "new-askers-analysis", directory)
     #understand_missing_users("/home/leuson/PycharmProjects/chat-stack/user-investigation.py", "/home/leuson/Downloads/finalOutput/general/new-askers-analysis.csv")

@@ -1,6 +1,7 @@
 import csv
 import os
 
+import post_analysis.post_analysis
 from analysis.answer_analysis import AnswerAnalysis
 from analysis.comment_analysis import CommentAnalysis
 from output_generation.general_analysis import GeneralAnalysis
@@ -11,7 +12,7 @@ from stack.answer import Answer
 from stack.comment import Comment
 from stack.question import Question
 
-def main():
+def main(report_directory, target_directory):
 
     questions_analysis = [[],[]]
     answers_analysis = [[],[]]
@@ -27,9 +28,6 @@ def main():
     answers_values = [[], []]
     comments_dates = [[], []]
     comments_values = [[], []]
-
-    target_directory = ["/home/leuson/Downloads/attemptOne/before/", "/home/leuson/Downloads/attemptOne/after/"]
-    report_directory = "/home/leuson/Downloads/attemptOne/results/"
 
     output_generation = OutputGenerator(report_directory)
     index = 0
@@ -156,4 +154,7 @@ def get_questions(target_directory_posts):
     return questions, questions_ids
 
 if __name__ == '__main__':
-    main()
+    target_directory = ["/home/leuson/Downloads/attemptOne/before/", "/home/leuson/Downloads/attemptOne/after/"]
+    report_directory = "/home/leuson/Downloads/attemptOne/results/"
+    #main(report_directory, target_directory)
+    post_analysis.post_analysis.main(report_directory)

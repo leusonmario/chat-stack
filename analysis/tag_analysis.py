@@ -1,3 +1,4 @@
+import csv
 import os
 from datetime import datetime
 
@@ -101,6 +102,7 @@ class TagAnalysis:
             # Create a line chart of the data
         for value in values:
             plt.plot(dates, values[value], label="" + value)
+            self.save_associated_tag_occurrence(value, dates, values.get(value))
 
             # Add labels and title
         plt.xlabel("Date")
@@ -111,6 +113,24 @@ class TagAnalysis:
         plt.savefig(self.target_directory+"/figures/tag-line-chart-all.png")
 
         return dates, values
+
+    def save_associated_tag_occurrence(self, tag, dates, values):
+        for i in range(len(dates)):
+            self.save_tag_occurrence(tag, dates[i], values[i])
+
+    def create_report_file(self, tag):
+        if not os.path.exists(self.target_directory + "/" + tag + "-tag.csv"):
+            with open(self.target_directory + "/" + tag + "-tag.csv", 'w') as f:
+                csvreader = csv.writer(f)
+                csvreader.writerow(
+                    ["date", "value"])
+
+    def save_tag_occurrence(self, tag, date, value):
+        self.create_report_file(tag)
+        if os.path.exists(self.target_directory + "/" + tag + "-tag.csv"):
+            with open(self.target_directory + "/" + tag + "-tag.csv", 'a') as f:
+                csvreader = csv.writer(f)
+                csvreader.writerow([date, value])
 
     def get_number_tags(self):
         return len(self.tags)
