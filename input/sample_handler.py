@@ -1,12 +1,6 @@
 import csv
+import random
 import re
-
-import torch
-
-from analysis.llm_answer_analysis import GeneratedAnswerAnalysis
-from llm.request import Request
-from output_generation.output_generator import OutputGenerator
-
 
 class SampleHandler:
 
@@ -36,7 +30,8 @@ class SampleHandler:
                questions.append([row[0],row[1],self._remove_tags(row[2]),row[3],row[4],row[5],row[6],row[7],row[8],row[9]])
                accepted_answers.append(row[9])
 
-      selected_questions = sorted(questions, key=lambda x: x[requirement], reverse=True)[:number_elements]
+      #selected_questions = sorted(questions, key=lambda x: x[requirement], reverse=True)[:number_elements]
+      selected_questions = random.sample(sorted(questions, key=lambda x: x[requirement], reverse=True), number_elements)
       accepted_answers_ids = [sublist[9] for sublist in selected_questions]
 
       self.compute_anwers(answers_file, accepted_answers_ids)
