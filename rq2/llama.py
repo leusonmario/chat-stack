@@ -10,26 +10,38 @@ class Llama(LLModel):
 
     def __init__(self, model_name):
         self.model_name = model_name
+        self.model = None
+        self.tokenizer = None
+        self.max_new_tokens = None
+        self.do_sample = None
+        self.top_p = None
+        self.temperature = None
+        self.use_cache = None
+        self.top_k = None
+        self.repetition_penalty = None
+        self.length_penalty = None
+        self.kwargs = None
         fire.Fire(self.run(model_name=model_name))
 
     def ask_for_explanation(self, question, description, tags):
-        chats = self.format_tokens(super().get_base_message(question, description, tags))
+        chats = self.format_tokens(self.get_base_message(question, description, tags))
+        print(chats)
 
         with torch.no_grad():
             for idx, chat in enumerate(chats):
                 tokens = torch.tensor(chat).long()
                 tokens = tokens.unsqueeze(0)
                 tokens = tokens.to("cuda:0")
-                outputs = self.model.generate(
-                    tokens,
-                    max_new_tokens=self.max_new_tokens,
-                    do_sample=self.do_sample,
-                    top_p=self.top_p,
-                    temperature=self.temperature,
-                    use_cache=self.use_cache,
-                    top_k=self.top_k,
-                    repetition_penalty=self.repetition_penalty,
-                    length_penalty=self.length_penalty
+                outputs = self.model_llm.generate(
+                    input_ids=tokens,
+                    max_new_tokens=1024,
+                    do_sample=True,
+                    use_cache=True,
+                    top_p=1.0,
+                    temperature=1.0,
+                    top_k=50,
+                    repetition_penalty=1.0,
+                    length_penalty=1,
                 )
 
                 return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -83,6 +95,7 @@ class Llama(LLModel):
                 f"{B_INST} {(dialog[-1]['content']).strip()} {E_INST}",
             )
             prompt_tokens.append(dialog_tokens)
+
         return prompt_tokens
 
 
@@ -120,8 +133,8 @@ class Llama(LLModel):
         self.kwargs = kwargs
 
         configuration = LlamaConfig()
-        model = LlamaModel(configuration)
-        configuration = model.config
+        self.model_llm = LlamaModel(configuration)
+        configuration = self.model_llm.config
 
         # Set the seeds for reproducibility
         torch.cuda.empty_cache()
