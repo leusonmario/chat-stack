@@ -8,8 +8,9 @@ from transformers import LlamaConfig, LlamaTokenizer, LlamaForCausalLM, LlamaMod
 
 class Llama(LLModel):
 
-    def __init__(self, model_name):
-        self.model_name = model_name
+    def __init__(self, model_name, llm_name):
+        self._model_name = model_name
+        self._llm_version = llm_name
         self.model = None
         self.tokenizer = None
         self.max_new_tokens = None
@@ -22,6 +23,22 @@ class Llama(LLModel):
         self.length_penalty = None
         self.kwargs = None
         fire.Fire(self.run(model_name=model_name))
+
+    @property
+    def model_name(self):
+        return self._model_name
+
+    @model_name.setter
+    def model_name_setter(self, new_model_name):
+        self._model_name = new_model_name
+
+    @property
+    def llm_version(self):
+        return self._llm_version
+
+    @llm_version.setter
+    def llm_version_setter(self, new_llm_version):
+        self._llm_version = new_llm_version
 
     def ask_for_explanation(self, question, description, tags):
         chats = self.format_tokens(self.get_base_message(question, description, tags))

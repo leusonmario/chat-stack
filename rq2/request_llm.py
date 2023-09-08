@@ -10,8 +10,7 @@ class Request_LLM():
     def ll_model(self):
         return self._ll_model
 
-    @ll_model.setter
-    def ll_model(self, ll_model: LLModel):
+    def ll_model_set(self, ll_model: LLModel):
         self._ll_model = ll_model
 
     def ask_for_explanation(self, question, description, tags):
