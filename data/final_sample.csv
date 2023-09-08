@@ -1,0 +1,1554 @@
+question_id,question_title,question_description,tags,score,answer_id,accepted_answer
+74893346,Set search pattern by setting a constraint on how a substring should not start and another on how a substring should not end,"import re, datetime
+
+input_text = &quot;Por las mañanas de verano voy a la playa, y en la manana del 22-12-22 16:22 pm o quizas mañana en la mañana hay que estar alli y no 2022-12-22 a la manana&quot;
+
+today = datetime.date.today()
+tomorrow = str(today + datetime.timedelta(days = 1))
+
+input_text = re.sub(r&quot;\b(?:las|la)\b[\s|]*(?:mañana|manana)\bs\s*\b&quot;, tomorrow, input_text)
+
+print(repr(input_text))  # --&gt; output
+
+Why does the restriction that I place fail?
+The objective is that there cannot be any of these options (?:las|la) , the objective is that there cannot be any of these options in front of the pattern  (?:mañana|manana) , and that there cannot be behind it either a letter 's' followed by one or more spaces s\s*
+This is the correct output that you should get after making the replacements in the cases where it is appropriate
+&quot;Por las mañanas de verano voy a la playa, y en la manana del 22-12-22 16:22 pm o quizas 22-12-23 en la mañana hay que estar alli y no 2022-12-22 a la manana&quot;
+
+","python, python-3.x, regex, replace, regex-group",1,74897677,"You can use
+re.sub(r&quot;\b(las?\s+)?ma[ñn]ana(?!s\b)&quot;, lambda x: x.group() if x.group(1) else tomorrow, input_text)
+
+The regex matches
+
+\b - a word boundary
+(las?\s+)? - an optional la or las followed with one or more whitespaces
+ma[ñn]ana - mañana or manana
+(?!s\b) - a negative lookahead that fails the match if there is an s letter immediately at the end of the word.
+
+If Group 1 matches, the replacement does not occur, if it does not match, the replacement is tomorrow.
+"
+75568710,Why is this selection on a ForEach in SwiftUI not working?,"Can someone please tell me why this selection isn't working?
+If I click one of the rows of the ForEach nothing happens :/
+@FetchRequest(fetchRequest: ContentView.manufacturerByName)
+var manufacturers:FetchedResults&lt;Manufacturer&gt;
+
+@State private var selection: Manufacturer?
+
+Section(&quot;Manufacturer&quot;) {
+    List(selection: $selection) {
+        ForEach(manufacturers, id:\.self) { manufacturer in
+            Text(manufacturer.name ?? &quot;--&quot;)
+        }
+        .onDelete { rows in
+            for row in rows {
+                let manufacturer = manufacturers[row]
+                storageProvider.deleteManufacturer(manufacturer)
+            }
+        }
+    }
+}
+
+The .onDelete method works fine.
+what I want to achieve is that when a manufacturer-row is clicked,
+
+that there is a check mark in the row
+and the variable &quot;selection&quot; should be set to the manufacturer
+
+
+I know that apps for the use of tobacco are not allowed in the AppStore. This is just an app to learn.
+MyApp.swift
+@main
+struct MyApp: App {
+    let storageProvider = StorageProvider.standard
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView(storageProvider: storageProvider)
+                .environment(\.managedObjectContext, storageProvider.persistentContainer.viewContext)
+        }
+    }
+}
+
+ContentView.swift
+import SwiftUI
+import CodeScanner
+
+struct ContentView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    let storageProvider: StorageProvider
+    
+    // Tobacco
+    @State var tobaccoName: String = &quot;&quot;
+    @State var tobaccoNr: String? = nil
+    @State var ean: String? = nil
+    
+    // EAN
+    @State private var isPresentingScanner = false
+    @State private var scannedCode: String?
+    
+    // Manufacturers
+    @FetchRequest(fetchRequest: ContentView.manufacturerByName)
+    var manufacturers: FetchedResults&lt;Manufacturer&gt;
+    
+    @StateObject var searchText = SearchText()
+    @State private var selection: Manufacturer?
+    
+    var body: some View {
+        Form {
+            Section(&quot;Tobacco Details&quot;) {
+                TextField(&quot;Name&quot;, text: $tobaccoName)
+                TextField(&quot;Number (e.g. #017)&quot;, text: $tobaccoNr ?? &quot;&quot;)
+                    .keyboardType(.decimalPad)
+                HStack {
+                    TextField(&quot;ean&quot;, text: $ean ?? &quot;&quot;)
+                        .keyboardType(.numberPad)
+                    Button {
+                        isPresentingScanner.toggle()
+                    } label: {
+                        Image(systemName: &quot;camera&quot;)
+                    }
+                }
+            }
+            Text(selection?.name ?? &quot;no selection&quot;) // &lt;-- here
+            Button {
+                storageProvider.saveManufacturer(named: &quot;Test&quot;)
+            } label: {
+                Text(&quot;create manufacturer&quot;)
+            }
+            Section(&quot;Manufacturer&quot;) {
+                List(selection: $selection) {
+                    ForEach(manufacturers, id:\.self) { manufacturer in
+                        // -- here, use a Label
+                        Label(manufacturer.name ?? &quot;--&quot;,
+                              systemImage: selection == manufacturer ? &quot;checkmark&quot; : &quot;circle&quot;)
+                    }
+                    .onDelete { rows in
+                        for row in rows {
+                            let manufacturer = manufacturers[row]
+                            //  storageProvider.deleteManufacturer(manufacturer)
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle(&quot;add Tobacco&quot;)
+        .navigationBarTitleDisplayMode(.inline)
+        
+        // MARK: - EAN-Scan Sheet
+        .sheet(isPresented: $isPresentingScanner) {
+            CodeScannerView(codeTypes: [.ean13], showViewfinder: true) { response in
+                switch response {
+                case .success(let result): do {
+                    ean = result.string
+                    isPresentingScanner = false
+                }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .presentationDetents([.medium])
+        }
+        
+        // MARK: - Bottom Button
+        .safeAreaInset(edge: .bottom) {
+            VStack {
+                Button {
+                    if selection == nil {
+                        print(&quot;no manufacturer&quot;)
+                    } else {
+                        storageProvider.saveTabacco(
+                            named: tobaccoName,
+                            number: tobaccoNr,
+                            ean: ean,
+                            manufacturer: selection
+                        )
+                        dismiss()
+                    }
+                } label: {
+                    Text(&quot;save Tobacco&quot;)
+                        .font(.callout)
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .buttonStyle(.borderedProminent)
+                .contentTransition(.identity)
+            }
+            .frame(maxWidth: .infinity)
+            .padding([.horizontal, .top])
+            .background(.ultraThinMaterial)
+        }
+        
+        // MARK: - Manufacturer Search-Filter
+        .onReceive(searchText.$debounced) { query in
+            /// don't filter when searchbar is empty
+            guard !query.isEmpty else {
+                manufacturers.nsPredicate = nil
+                return
+            }
+            /// set filter when someone searches
+            manufacturers.nsPredicate = NSPredicate(format: &quot;%K CONTAINS[cd] %@&quot;, argumentArray: [#keyPath(Manufacturer.name), query])
+        }
+    }
+}
+
+func ??&lt;T&gt;(lhs: Binding&lt;Optional&lt;T&gt;&gt;, rhs: T) -&gt; Binding&lt;T&gt; {
+    Binding(
+        get: { lhs.wrappedValue ?? rhs },
+        set: { lhs.wrappedValue = $0 }
+    )
+}
+
+StorageProvider.swift
+public class StorageProvider {
+    
+    public static var standard = StorageProvider()
+    public let persistentContainer: NSPersistentContainer
+    
+    public init() {
+        persistentContainer = NSPersistentContainer(name: &quot;DataModel&quot;)
+        
+        persistentContainer.loadPersistentStores(completionHandler: { description, error in
+            if let error = error {
+                fatalError(&quot;Core Data store failed to load with error: \(error)&quot;)
+            }
+        })
+    }
+}
+
+
+
+// MARK: - Functions to call from the Views
+public extension StorageProvider {
+    func saveTabacco(named name: String, number: String?, ean: String?, manufacturer: Manufacturer?) {
+        let tabacco = Tabacco(context: persistentContainer.viewContext)
+        tabacco.name = name
+        tabacco.number = number
+        tabacco.ean = ean
+        tabacco.manufacturer = manufacturer
+        tabacco.creationDate = Date.now
+        
+        do {
+            try persistentContainer.viewContext.save()
+            print(&quot;Tabacco saved succesfully&quot;)
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print(&quot;Failed to save Tabacco: \(error)&quot;)
+        }
+    }
+
+    func saveManufacturer(named name: String) {
+        let manufacturer = Manufacturer(context: persistentContainer.viewContext)
+        manufacturer.name = name
+        
+        do {
+            try persistentContainer.viewContext.save()
+            print(&quot;Manufacturer saved succesfully&quot;)
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print(&quot;Failed to save Manufacturer: \(error)&quot;)
+        }
+    }
+
+    func getAllTabaccos() -&gt; [Tabacco] {
+    let fetchRequest: NSFetchRequest&lt;Tabacco&gt; = Tabacco.fetchRequest()
+
+    do {
+      return try persistentContainer.viewContext.fetch(fetchRequest)
+    } catch {
+      print(&quot;Failed to fetch tabacco: \(error)&quot;)
+      return []
+    }
+  }
+
+
+
+  func deleteTabacco(_ tabacco: Tabacco) {
+      persistentContainer.viewContext.delete(tabacco)
+      
+      do {
+          try persistentContainer.viewContext.save()
+      } catch {
+          persistentContainer.viewContext.rollback()
+          print(&quot;Failed to save context: \(error)&quot;)
+      }
+  }
+    
+    func deleteManufacturer(_ manufacturer: Manufacturer) {
+        persistentContainer.viewContext.delete(manufacturer)
+        
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print(&quot;Failed to save context: \(error)&quot;)
+        }
+    }
+    
+    func updateTabacco(_ tabacco: Tabacco) {
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print(&quot;Failed to save context: \(error)&quot;)
+        }
+    }
+}
+
+// MARK: - FetchRequest
+
+extension ContentView {
+    static var tabaccosByName: NSFetchRequest&lt;Tabacco&gt; {
+        /// create Request
+        let request: NSFetchRequest&lt;Tabacco&gt; = Tabacco.fetchRequest()
+        
+        /// sortDescriptor
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Tabacco.name, ascending: true)]
+        return request
+    }
+    
+    static var manufacturerByName: NSFetchRequest&lt;Manufacturer&gt; {
+        /// create Request
+        let request: NSFetchRequest&lt;Manufacturer&gt; = Manufacturer.fetchRequest()
+        
+        /// sortDescriptor
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Manufacturer.name, ascending: true)]
+        return request
+    }
+}
+
+
+Workaround
+Section(&quot;Manufacturer&quot;) {
+    List() {
+        TextField(&quot;search for manufacturer&quot;, text: $searchText.text)
+        
+        if manufacturers.isEmpty {
+            if searchText.debounced != &quot;&quot; {
+                NavigationLink(destination: CreateManuView(storageProvider: storageProvider, manuName: searchText.text)) {
+                    Label(&quot;add **\(searchText.text)**&quot;, systemImage: &quot;plus&quot;)
+                        .tint(.accentColor)
+                }
+            } else {
+                Text(&quot;search for a manufacturer to add&quot;)
+                    .foregroundColor(.gray)
+            }
+        }
+        
+        ForEach(manufacturers) { manufacturer in
+            Button(action: {
+                selection = manufacturer
+            }, label: {
+                HStack {
+                    Text(manufacturer.name ?? &quot;--&quot;)
+                        .tint(.primary)
+                    Spacer()
+                    if manufacturer == selection {
+                        Image(systemName: &quot;checkmark&quot;)
+                    }
+                }
+            })
+        }
+        .onDelete { rows in
+            for row in rows {
+                let manufacturer = manufacturers[row]
+                storageProvider.deleteManufacturer(manufacturer)
+            }
+        }
+    }
+}
+
+","swift, swiftui",2,75569094,"Here is an example code that shows a checkmark when a row of the list is selected, and
+shows that the selection variable contains the List(selection: $selection).
+struct ContentView: View {
+    // for testing
+    // @State var manufacturers = [Manufacturer(name: &quot;one&quot;), Manufacturer(name: &quot;two&quot;), Manufacturer(name: &quot;three&quot;)]
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Manufacturer.name, ascending: true)],
+        animation: .default)
+     private var manufacturers: FetchedResults&lt;Manufacturer&gt;
+    
+    @State private var selection: Manufacturer?
+    
+    var body: some View{
+        Text(selection?.name ?? &quot;no selection&quot;) // &lt;-- here
+        Section(&quot;Manufacturer&quot;) {
+            List(selection: $selection) {
+                ForEach(manufacturers) { manufacturer in
+                    // -- here, use a Label
+                    Label(manufacturer.name ?? &quot;--&quot;,
+                          systemImage: selection == manufacturer ? &quot;checkmark&quot; : &quot;circle&quot;)
+                }
+                .onDelete { rows in
+                    for row in rows {
+                        let manufacturer = manufacturers[row]
+                        //  storageProvider.deleteManufacturer(manufacturer)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+"
+75523780,Snowflake Query history Execution_Status issue,"I'm trying to find the list of query id's that are running for more than an hour in snowflake.
+Based on the snowflake history, I'm trying to get all the query id's that have EXECUTION_STATUS = 'RUNNING'
+select * from table(INFORMATION_SCHEMA.QUERY_HISTORY_BY_SESSION()) where lower(EXECUTION_STATUS) = 'running';
+
+To test the above query, I kept running an infinite loop query to see if this will be captured by the above query
+with rec as (
+    select  1 as n
+    union all
+    select  n + 1 from    rec
+)
+select n from rec
+
+When I run this select * from table(INFORMATION_SCHEMA.QUERY_HISTORY_BY_SESSION()) where lower(EXECUTION_STATUS) = 'running'; it is only showing this query execution status as 'RUNNING' and the infinite query is not being shown as RUNNING. I don't understand what I'm missing
+","sql, snowflake-cloud-data-platform",1,75524046,"Most likely the check query is run using different sessions(it is true for multiple worksheets in Snowsight UI), therefore using QUERY_HISTORY_BY_USER or by explicitly providing session_id would be more appropriate:
+select * 
+from table(INFORMATION_SCHEMA.QUERY_HISTORY_BY_SESSION()) 
+where EXECUTION_STATUS ILIKE 'running';
+
+=&gt;
+
+select * 
+from table(INFORMATION_SCHEMA.QUERY_HISTORY_BY_USER()) 
+where EXECUTION_STATUS ILIKE 'running';
+
+-- xyz value copied from original query session
+select * 
+from table(INFORMATION_SCHEMA.QUERY_HISTORY_BY_SESSION(SESSION_ID=&gt;xyz)) 
+where EXECUTION_STATUS ILIKE 'running';
+
+Session Id could be checked by running SELECT CURRENT_SESSION()
+"
+75022344,ajax response: unexpected non-whitespace character after JSON data,"I send an ajax request with jquery like this:
+ $.post(&quot;ajax/myFile.php&quot;, {
+    myValue: &quot;test&quot;
+    }, function(response) {
+      console.log($.parseJSON(response))
+    })
+
+content of myFile.php
+myFunctionA();
+myFunctionB();
+
+function myFunctionA() {
+   echo json_encode(array('error' =&gt; 0, 'message' =&gt; &quot;Hello World&quot;));
+}
+
+
+function myFunctionB() {
+    echo json_encode(array('error' =&gt; 0, 'message' =&gt; &quot;Hello again&quot;));
+}
+
+my console.log result:
+Uncaught SyntaxError: JSON.parse: unexpected non-whitespace character after JSON data at line 1 column 44 of the JSON data
+
+how can I handle this? :/
+","php, jquery, json, ajax",0,75022402,"You can't return multiple JSON values from your script. You need to combine them into a single value.
+echo json_encode([myFunctionA(), myFunctionB()]);
+
+function myFunctionA() {
+   return array('error' =&gt; 0, 'message' =&gt; &quot;Hello World&quot;);
+}
+
+
+function myFunctionB() {
+    return array('error' =&gt; 0, 'message' =&gt; &quot;Hello again&quot;);
+}
+
+This will return both results as elements of an array in JavaScript.
+"
+74751948,"How i can make number from the list is less than 18, then the number is not printed?","#Code
+x = [17, 15, 18, 21, 5, 6]
+   for y in x:
+        if y &lt; 18:
+            y = x.copy()
+            print (y)
+
+In answer python:[17, 15, 18, 21, 5, 6], [17, 15, 18, 21, 5, 6], [17, 15, 18, 21, 5, 6], [17, 15, 18, 21, 5, 6], [17, 15, 18, 21, 5, 6]
+",python,-4,74751956,"Iterate over the values, if the value is valid (&gt;=18) keep it in an other list, at the end print them
+x = [17, 15, 18, 21, 5, 6]
+valid_values = []
+for y in x:
+    if y &gt;= 18:
+        valid_values.append(y)
+print(valid_values)  # [18, 21]
+
+With list-comprehension
+valid_values = [y for y in x if y &gt;= 18]
+
+"
+75096234,Powershell: Applying filters to records returned from Resolve-DnsName,"After reading the docs, I thought that I could use the type parameter to filter the records that should be returned from the cmdlet. So, I expected that asking for the MX record type from a name associated only with the A record should return nothing. However, that is not what's happening here. For instance, both these cmdlets return the same thing:
+&gt; Resolve-DnsName subdomain.domain.com
+Name                           Type   TTL   Section    NameHost
+----                           ----   ---   -------    --------
+subdomain.domain.com           CNAME  161   Answer     other.domain.com
+
+&gt; Resolve-DnsName subdomain.domain.com -Type MX
+
+Name                           Type   TTL   Section    NameHost
+----                           ----   ---   -------    --------
+subdomain.domain.com           CNAME  161   Answer     other.domain.com
+
+Is this behaviour correct? I mean, if there are no MX records associated with the name subdomain.domain.com, then shouldn't the cmdlet return nothing?
+Thanks.
+",powershell,-1,75457818,"After some digging and poking/asking around, it seems like this is the correct behavior for CNAME records requests:
+"
+74849869,"Intellisense not working for Playwright, REST","I write autotests on the Codeceptjs framework in TypeScript. After adding additional modules to the project, as well as after updating the repository with the command:
+npx codeceptjs def
+
+Intellisense is starting to work for me and I'm starting to see methods that I can use. For example, I see methods of such modules as: JSONResponse, DbHelper, ChaiWrapper.
+image
+I also installed Playwright and REST. But for these modules, intelisense does not work.
+codecept.conf.ts
+import { setHeadlessWhen, setCommonPlugins } from '@codeceptjs/configure';
+// turn on headless mode when running with HEADLESS=true environment variable
+// export HEADLESS=true &amp;&amp; npx codeceptjs run
+setHeadlessWhen(process.env.HEADLESS);
+const env = require('dotenv').config({
+path: '.env.test'
+})
+
+if (env.error &amp;&amp; env.error.code === 'ENOENT') {
+throw new Error('Please, recreate env.test file')
+}
+
+const base_url = process.env.URL
+const currentBrowser = process.env.profile ?? 'chromium'; // 'firefox', 'webkit'
+
+// enable all common plugins https://github.com/codeceptjs/configure#setcommonplugins
+setCommonPlugins();
+
+export const config: CodeceptJS.MainConfig = {
+tests: './tests/\*\_test.ts',
+output: './output',
+helpers: {
+ChaiWrapper: {
+require: &quot;codeceptjs-chai&quot;
+},
+Playwright: {
+url: base_url,
+show: true,
+browser: currentBrowser
+},
+REST: {
+endpoint: base_url,
+},
+JSONResponse: {},
+DbHelper: {
+&quot;require&quot;: &quot;codeceptjs-dbhelper&quot;
+}
+},
+include: {
+&quot;I&quot;: &quot;./common/custom_steps&quot;,
+},
+plugins: {
+tryTo: {
+enabled: true
+}
+},
+name: 'test',
+fullPromiseBased: false
+}
+
+package.json
+{
+&quot;name&quot;: &quot;codeceptjs-tests&quot;,
+&quot;version&quot;: &quot;0.1.0&quot;,
+&quot;private&quot;: true,
+&quot;scripts&quot;: {
+&quot;codeceptjs&quot;: &quot;codeceptjs run --steps&quot;,
+&quot;codeceptjs:headless&quot;: &quot;HEADLESS=true codeceptjs run --steps&quot;,
+&quot;codeceptjs:ui&quot;: &quot;codecept-ui --app&quot;,
+&quot;codeceptjs:demo&quot;: &quot;codeceptjs run --steps -c node_modules/@codeceptjs/examples&quot;,
+&quot;codeceptjs:demo:headless&quot;: &quot;HEADLESS=true codeceptjs run --steps -c node_modules/@codeceptjs/examples&quot;,
+&quot;codeceptjs:demo:ui&quot;: &quot;codecept-ui --app  -c node_modules/@codeceptjs/examples&quot;
+},
+&quot;devDependencies&quot;: {
+&quot;@codeceptjs/configure&quot;: &quot;^0.10.0&quot;,
+&quot;@codeceptjs/examples&quot;: &quot;^1.2.1&quot;,
+&quot;@codeceptjs/ui&quot;: &quot;^0.4.7&quot;,
+&quot;@types/node&quot;: &quot;^18.11.12&quot;,
+&quot;codeceptjs&quot;: &quot;^3.3.7&quot;,
+&quot;playwright&quot;: &quot;^1.28.1&quot;,
+&quot;ts-node&quot;: &quot;^10.9.1&quot;,
+&quot;typescript&quot;: &quot;^4.9.4&quot;
+},
+&quot;dependencies&quot;: {
+&quot;codeceptjs-chai&quot;: &quot;^2.3.3&quot;,
+&quot;codeceptjs-dbhelper&quot;: &quot;^1.2.2&quot;,
+&quot;database-js-mssql&quot;: &quot;^0.3.0&quot;,
+&quot;database-js-mysql&quot;: &quot;^1.1.3&quot;,
+&quot;dateformat&quot;: &quot;^5.0.3&quot;,
+&quot;dotenv&quot;: &quot;^16.0.3&quot;,
+&quot;faker&quot;: &quot;^6.6.6&quot;,
+&quot;object-hash&quot;: &quot;^3.0.0&quot;,
+&quot;randexp&quot;: &quot;^0.5.3&quot;,
+&quot;random-date-generator&quot;: &quot;^1.0.2&quot;,
+&quot;random-mobile-numbers&quot;: &quot;^1.0.1&quot;,
+&quot;underscore&quot;: &quot;^1.13.6&quot;,
+&quot;unique-names-generator&quot;: &quot;^4.7.1&quot;
+}
+}
+
+Reinstalling modules doesn't help.
+","typescript, automated-tests, playwright, codeceptjs",0,75136441,"I found the solution. In steps.d.ts you need to add the transfer of Methods to WithTranslation
+Instead of
+interface I extends ReturnType&lt;steps_file&gt;, WithTranslation&lt;ChaiWrapper&gt;, WithTranslation&lt;JSONResponse&gt;, WithTranslation&lt;DbHelper&gt; {}
+We are adding
+interface I extends ReturnType&lt;steps_file&gt;, WithTranslation&lt;Methods&gt; {}
+"
+75385828,Using outside function in dplyr to standardize values via selected geometric mean. (Getting it via sample instead of geom mean of full column),"Good evening fellow programmers/statistians etc.
+I'm trying to standardize a set of variables dividing them by the geometric mean of a set of (same or not) variables I'm using as reference. Problem is, when trying to get it to work via dplyr, I'm getting results that I suspect are not the ones they should be if I do it case by case.
+I have here some code explaining what I have done and why it failed. But It seems that dplyr is not getting my values via sample/row-wise, and instead is taking the full column to do my geometric mean.
+I have been reviewing some questions, including some about geometric means, but for now I have not yet found how to solve it.
+# A set of functions I'm using to calculate the geom mean.
+gm_mean = function(x, na.rm=TRUE){
+  exp(sum(log(x[x &gt; 0]), na.rm=na.rm) / length(x))
+}
+gm_mean2 = function(x, na.rm=TRUE){
+  exp(mean(log(x[x &gt; 0]), na.rm=TRUE))
+}
+# And also psych::geometric.mean()
+
+# x &lt;- c(4, 8, 9, 9, 12, 14, 17)
+# gm_mean(x)  # It works as intended.
+# gm_mean2(x)  #It works as intended.
+# psych::geometric.mean(x) #Indeed it works
+
+So, using the iris dataset, I want to standardize a set of columns (coln1), dividing by the geometric mean of another set of columns (Which I would want to set as a variable, but since I'm not getting it to work as separate, I'm trying them without grouping them in a variable)
+For now I have tried this (and failed)
+library(dplyr)
+coln1 &lt;- colnames(iris)[1:2]
+coln1 &lt;- colnames(iris)[1:2]
+iris %&gt;% mutate(across( any_of(coln1),  ~ .x / psych::geometric.mean(c(Sepal.Length,Sepal.Width)) )) ## Doesn't work as intended? No. Not at all.
+
+# Let me illustrate. Value that we are getting doing it case by case its == to the output?
+iris[1,1] / psych::geometric.mean(c(iris[1,1],iris[1,2]))
+1.207 != 1.2187
+iris[1,1] / psych::geometric.mean(c(iris$Sepal.Length,iris$Sepal.Width))
+1.2817 == 1.287
+# Its doing it by taking the full column of values, all of them, and not the values corresponding to that sample (in this case 2, but we could have more or less variables changing it in the psych:geometri.c.mean.)
+
+
+# Notes.
+# The geometric mean is the nth root of n products or e to the mean log of x. Useful for describing non-normal, i.e., geometric distributions. We are usign it via psych:: because it could be negative and we should solve that.
+
+# iris %&gt;% mutate(across( any_of(coln1),  ~ .x / exp(mean(log(Sepal.Length+Sepal.Width)))   )) # No. Cause this is not using the mean since its one value instead of two.
+
+","r, dplyr, statistics",1,75387917,"I think you've done a great job setting it up, it's just 'rowwise()' that you're missing really! I've re-arranged the logic in the mutate call but it's basically just rowwise.
+coln1 &lt;- colnames(iris)[3:4]
+
+iris %&gt;% 
+  rowwise() %&gt;%
+  mutate(geo.mean = psych::geometric.mean(c(Sepal.Length,Sepal.Width)),
+         across(.cols = all_of(coln1), .fns = ~ .x / geo.mean, .names = '{.col}_{.fn}'))
+    
+# A tibble: 150 x 8
+# Rowwise: 
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species geo.mean Petal.Length_1 Petal.Width_1
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1          5.1         3.5          1.4         0.2 setosa      4.22          0.331        0.0473
+
+# prove it's correctly functioning with first entry:
+1.4 / psych::geometric.mean(c(5.1, 3.5))
+[1] 0.3313667
+
+0.2 / psych::geometric.mean(c(5.1, 3.5))
+[1] 0.04733811
+
+"
+75684758,Azure deployment slot swap - both slots use production settings,"I am using deployment slot settings to distinguish between my main (production) slot and the staging slot.
+When I perform a swap, the new production app (that was in staging before the swap) properly reads app settings.
+However, the new staging app (which was the production app before the swap) DOES NOT re-read app settings and continues to use production settings.
+(EDIT): Turns out the real problem was that the staging slot was running with production settings for a while (in parallel to the production slot), and this persisted up until the end of the swap process where the old production site was restarted with the staging settings. As well as the fact that WEBSITE_HOSTNAME remained at the staging slot setting even after the swap - and remained so until a restart (which incurs downtime).
+I am using IOptionsMonitor&lt;MyOptions&gt; as well as registering a change handler myOptionsMonitor.OnChange(...) but nothing works. The new staging app (old production app) always start and reads production settings.
+Only if I later manually restart the staging app does it get the correct settings again.
+This causes race conditions when two apps run as production and compete for the same resources.
+What am I doing wrong? How can I make this work properly?
+Clarification based on comment: The new staging (old production) app is restarted as a result of the swap, but it reads the production settings. I verify this by logging the settings in the constructor of my singleton service.
+","c#, azure, azure-deployment-slots",1,75696664,"After a day's worth of investigation, I finally figured it out.
+Before starting I should say is that the documentation for What Happens During a Swap is correct and should be read a few times over to properly understand.
+But apart from that, here is what I discovered and how I worked around the problem.
+So, the documentation says that during a swap, the first step is to apply production settings to the staging slot and warm it up. This means that there is a period of time during which both the production slot and the staging slot run the app with production settings - which is the problem I'm trying to fix - I want one and only one instance of a &quot;production&quot; app to be running at any one time.
+In order to detect whether my app is running in the staging slot with production settings I check the WEBSITE_HOSTNAME environment variable. Before the swap this has the value of xxxx.azurewebsites.net on the production slot and xxxx-staging1.azurewebsites.net on the staging slot. If I discover that I am running on the staging slot with production settings, I hold back on accessing shared resources until the swap is done.
+After the swap is complete, WEBSITE_HOSTNAME will have the value of xxxx-staging1.azurewebsite.net in both slots - so it is impossible to detect when the swap is done using this variable.
+In fact, I have not found a way to automatically detect when the swap is complete any other way, so I created an endpoint that has to be triggered manually. This endpoint manually changes the value of WEBSITE_HOSTNAME and also releases the production functionality that is waiting for the swap to complete.
+NOTE: Setting the value of WEBSITE_HOSTNAME is important because it is used for application insights telemetry to derive the cloud_RoleName property.
+To achieve that I created a singleton service called AzureSwap that facilitates all this:
+public class AzureSwap {
+    private readonly IOptions&lt;AppOptions&gt; _appOptions;
+    private readonly TaskCompletionSource _swapDoneTcs = new();
+
+    public AzureSwap(IOptions&lt;AppOptions&gt; appOptions) {
+        _appOptions = appOptions;
+        var azureWebsiteHostname =
+            Environment.GetEnvironmentVariable(&quot;WEBSITE_HOSTNAME&quot;);
+        var myEnv = appOptions.Value.DeploymentEnvironment;
+        if (azureWebsiteHostname != &quot;xxxx.azurewebsites.net&quot; &amp;&amp;
+            myEnv == &quot;Production&quot;) {
+            // Swap is in progress...
+            IsSwapping = true;
+        }
+        else {
+            // Swap has completed
+            SetSwapDone();
+        }
+    }
+
+    public bool IsSwapping { get; private set; }
+
+    // This is called by the HTTP endpoint
+    public void SetSwapDone() {
+        var myEnv = _appOptions.Value.DeploymentEnvironment;
+        var hostname = myEnv switch {
+            &quot;Production&quot; =&gt; &quot;xxxx.azurewebsites.net&quot;,
+            &quot;Staging1&quot; =&gt; &quot;xxxx-staging1.azurewebsites.net&quot;,
+            _ =&gt; throw new Exception($&quot;Unknown environment {myEnv}&quot;),
+        };
+
+        Environment.SetEnvironmentVariable(&quot;WEBSITE_HOSTNAME&quot;, hostname);
+
+        IsSwapping = false;
+        _swapDoneTcs.TrySetResult();
+    }
+
+    // This is waited upon by production services
+    public async Task WaitSwapDone() {
+        await _swapDoneTcs.Task;
+    }
+}
+
+And to use that, for example in a IHostedService I do this:
+public class MyHostedService : IHostedService {
+    public MyHostedService(AzureSwap azureSwap) {
+        _azureSwap = azureSwap;
+    }
+
+    public async Task StartAsync(CancellationToken cancellationToken) {
+        Task.Run(async () =&gt; {
+            await _azureSwap.WaitSwapDone();
+
+            // Start long running service operation
+
+        }, cancellationToken);
+    }
+}
+
+"
+75516528,How can I autowire my beans in Spring Cloud Functions in Azure?,"Is there any way I can do dependency injection in a Spring Cloud Function that will be running in Azure ?
+For example:
+package com.example;
+
+import com.example.model.Greeting;
+import com.example.model.User;
+import com.microsoft.azure.functions.*;
+import com.microsoft.azure.functions.annotation.AuthorizationLevel;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+import org.springframework.cloud.function.adapter.azure.FunctionInvoker;
+
+import java.util.Optional;
+
+public class HelloHandler extends FunctionInvoker&lt;User, Greeting&gt; {
+
+    @FunctionName(&quot;hello&quot;)
+    public HttpResponseMessage execute(
+        @HttpTrigger(name = &quot;request&quot;, methods = {HttpMethod.GET, HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage&lt;Optional&lt;User&gt;&gt; request,
+        ExecutionContext context) {
+        User user = request.getBody()
+                           .filter((u -&gt; u.getName() != null))
+                           .orElseGet(() -&gt; new User(
+                               request.getQueryParameters()
+                                      .getOrDefault(&quot;name&quot;, &quot;world&quot;)));
+        context.getLogger().info(&quot;Greeting user name: &quot; + user.getName());
+        return request
+            .createResponseBuilder(HttpStatus.OK)
+            .body(handleRequest(user, context))
+            .header(&quot;Content-Type&quot;, &quot;application/json&quot;)
+            .build();
+    }
+}
+
+How can I use the @Autowired annotation here ? Its evaluated during runtime, right.
+How can I achieve dependency injection ?
+I need DI to inject mocks in place my actual beans during testing.
+","java, spring, azure, dependency-injection, spring-cloud-function",0,75523445,"Staring with Spring Cloud Function 4.0.0 you can use dependency injections like this:
+package com.example;
+
+import java.util.Optional;
+import java.util.function.Function;
+
+import com.example.model.Greeting;
+import com.example.model.User;
+import com.microsoft.azure.functions.ExecutionContext;
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.HttpRequestMessage;
+import com.microsoft.azure.functions.HttpResponseMessage;
+import com.microsoft.azure.functions.HttpStatus;
+import com.microsoft.azure.functions.annotation.AuthorizationLevel;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.HttpTrigger;
+import reactor.core.publisher.Mono;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class HelloHandler {
+
+    @Autowired    
+    Function&lt;Mono&lt;User&gt;, Mono&lt;Greeting&gt;&gt; hello;
+    
+    @FunctionName(&quot;hello&quot;)
+    public HttpResponseMessage execute(
+            @HttpTrigger(name = &quot;request&quot;, methods = {HttpMethod.GET, HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage&lt;Optional&lt;User&gt;&gt; request,
+            ExecutionContext context) {
+        User user = request.getBody()
+                .filter((u -&gt; u.getName() != null))
+                .orElseGet(() -&gt; new User(
+                        request.getQueryParameters()
+                                .getOrDefault(&quot;name&quot;, &quot;world&quot;)));
+        
+        context.getLogger().info(&quot;DI Greeting user name: &quot; + user.getName());
+        
+        return request
+                .createResponseBuilder(HttpStatus.OK)
+                .body(hello.apply(Mono.just(user)).block())
+                .header(&quot;Content-Type&quot;, &quot;application/json&quot;)
+                .build();
+    }
+}
+
+E.g. no need to extend FunctionInvoker. Just mark the hander as @Component and inject all necessary dependencies you need to use in your functions.
+You can check this PR that updates the same example code. Note that the PR code significantly simplifies the pom configurations as well.
+Update:
+This is a new feature recently released by the Azure Java Function Runtime and supported by Spring Cloud Function 4.0.0+.
+Here are the related blog Spring Cloud Function for Azure Function, the updated ref. doc and few samples.
+The azure-functions-core-tools version 4.0.5030 or newer is required.
+"
+75973318,How could i get pandas groupby not to take indices in account but values of my dataframe,"I have a dataFrame with dates and prices, for example :
+
+
+
+
+date
+price
+
+
+
+
+2006
+500
+
+
+2007
+2000
+
+
+2007
+3400
+
+
+2006
+5000
+
+
+
+
+and i want to group my data by year so that i obtain :
+
+
+
+
+2007
+2006
+
+
+
+
+2000
+500
+
+
+3400
+5000
+
+
+
+
+This is the code i tried :
+df = my_old_df.groupby(['date'])
+my_desried_df = pd.DataFrame(data=df.groups)
+but i obtain what i desire but with the indices of the values not the value (the price inmy case) i expected.
+","python, pandas, dataframe, data-science, data-analysis",0,75974486,"With pivot :
+out = (
+        df.assign(idx= df.groupby(&quot;date&quot;).cumcount().add(1))
+            .pivot(index=&quot;idx&quot;, columns=&quot;date&quot;, values=&quot;price&quot;)
+            .rename_axis(None, axis=1).reset_index(drop=True)
+)
+
+Output :
+​
+print(out)
+
+   2006  2007
+0   500  2000
+1  5000  3400
+
+"
+75216656,what is the point of sexp_of_opaque?,"In ppxlib it says that
+
+sexp_of_opaque x converts the value x of opaque type to an S-expression. This means the user need not provide converters, but the result cannot be interpreted.
+
+Does it mean I can call this on any types? But what is the point if I cannot do anything with it?
+","ocaml, sexp",1,75220124,"The converter sexp_of_opaque matches any value of any type to &lt;opaque&gt;.
+It can be useful to represent holes in the sexp representation or when using the base or core library to have a placeholder function for sexp conversion when such function is expected in a functor argument.
+"
+75607686,I want to update the text in curley braces based on the input box,"I will explain the issue so when I type in first name it should update ${firstName} when I type in last name it should update ${lastName}.
+The issue in the code is if I update the first name and after that last name only the recent input value is there as for matching and finding the index we are using template state. There are only two variables but there can be 10 or 20 variables too. Can anyone help?
+https://codesandbox.io/s/spring-cherry-vfpwkp?file=/src/App.js
+This is my code
+","javascript, html, reactjs",0,75607790,"So one approach would be:
+
+Store the firstName and lastName as object state variables.
+Use useEffect hook to update the template string when either firstName or lastName is entered. use the object as a dependency array in useEffect so that if either of the variables change, then the template will be updated accordingly.
+
+updated code code to replace string using dynamic object key
+import &quot;./styles.css&quot;;
+import { useState, useEffect } from &quot;react&quot;;
+
+export default function App() {
+  const [data, setData] = useState({
+    firstName: &quot;${firstName}&quot;,
+    lastName: &quot;${lastName}&quot;
+  });
+  const [template, changeTemplate] = useState(
+    &quot;Hi this is some template ${firstName} ${lastName}&quot;
+  );
+
+  const [sampleText, changeSampleText] = useState(
+    &quot;Hi this is some template ${firstName} ${lastName}&quot;
+  );
+
+  const changeTemplateKey = (e) =&gt; {
+    let value = e.target.value;
+    setData((data) =&gt; ({
+      ...data,
+      [e.target.name]: value
+    }));
+  };
+
+  useEffect(() =&gt; {
+    let _template = template;
+
+    for (const key in data) {
+      console.log(data[key]);
+      _template = _template.replace(&quot;${&quot; + key + &quot;}&quot;, data[key]);
+    }
+    changeSampleText(_template);
+  }, [data]);
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;p&gt;{sampleText}&lt;/p&gt;
+
+      &lt;label&gt;First Name &lt;/label&gt;
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;firstName&quot;
+        onChange={(e) =&gt; {
+          changeTemplateKey(e);
+        }}
+      /&gt;
+
+      &lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;label&gt;Last Name &lt;/label&gt;
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;lastName&quot;
+        onChange={(e) =&gt; {
+          changeTemplateKey(e);
+        }}
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+
+"
+75454565,pytorch: Merge three datasets with predefined and custom datasets,"I am training an AI model to recognize handwritten hangul characters along with English characters and numbers. It means that I require three datasets custom korean character dataset and other datasets.
+I have three datasets and now I am merging three datasets but when I print the train_set path it shows MJSynth only which is wrong.
+긴장_1227682.jpg is in my custom korean dataset not in MJSynth
+
+Code
+custom_train_set = RecognitionDataset(
+            parts[0].joinpath(&quot;images&quot;),
+            parts[0].joinpath(&quot;labels.json&quot;),
+            img_transforms=Compose(
+                [
+                    T.Resize((args.input_size, 4 * args.input_size), preserve_aspect_ratio=True),
+                    # Augmentations
+                    T.RandomApply(T.ColorInversion(), 0.1),
+                    ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.02),
+                ]
+            ),
+        )
+        if len(parts) &gt; 1:
+            for subfolder in parts[1:]:
+                custom_train_set.merge_dataset(
+                    RecognitionDataset(subfolder.joinpath(&quot;images&quot;), subfolder.joinpath(&quot;labels.json&quot;))
+                )
+
+        train_set = MJSynth(
+            train=True,
+            img_folder='/media/cvpr/CM_22/mjsynth/mnt/ramdisk/max/90kDICT32px',
+            label_path='/media/cvpr/CM_22/mjsynth/mnt/ramdisk/max/90kDICT32px/imlist.txt',
+            img_transforms=T.Resize((args.input_size, 4 * args.input_size), preserve_aspect_ratio=True),
+        )
+
+        _train_set = SynthText(
+            train=True,
+            recognition_task=True,
+            download=True,  # NOTE: download can take really long depending on your bandwidth
+            img_transforms=T.Resize((args.input_size, 4 * args.input_size), preserve_aspect_ratio=True),
+        )
+        train_set.data.extend([(np_img, target) for np_img, target in _train_set.data])
+        train_set.data.extend([(np_img, target) for np_img, target in custom_train_set.data])
+
+Traceback
+Traceback (most recent call last):
+  File &quot;/media/cvpr/CM_22/doctr/references/recognition/train_pytorch.py&quot;, line 485, in &lt;module&gt;
+    main(args)
+  File &quot;/media/cvpr/CM_22/doctr/references/recognition/train_pytorch.py&quot;, line 396, in main
+    fit_one_epoch(model, train_loader, batch_transforms, optimizer, scheduler, mb, amp=args.amp)
+  File &quot;/media/cvpr/CM_22/doctr/references/recognition/train_pytorch.py&quot;, line 118, in fit_one_epoch
+    for images, targets in progress_bar(train_loader, parent=mb):
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/fastprogress/fastprogress.py&quot;, line 50, in __iter__
+    raise e
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/fastprogress/fastprogress.py&quot;, line 41, in __iter__
+    for i,o in enumerate(self.gen):
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/utils/data/dataloader.py&quot;, line 628, in __next__
+    data = self._next_data()
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/utils/data/dataloader.py&quot;, line 1333, in _next_data
+    return self._process_data(data)
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/utils/data/dataloader.py&quot;, line 1359, in _process_data
+    data.reraise()
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/_utils.py&quot;, line 543, in reraise
+    raise exception
+FileNotFoundError: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/utils/data/_utils/worker.py&quot;, line 302, in _worker_loop
+    data = fetcher.fetch(index)
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py&quot;, line 58, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py&quot;, line 58, in &lt;listcomp&gt;
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File &quot;/media/cvpr/CM_22/doctr/doctr/datasets/datasets/base.py&quot;, line 48, in __getitem__
+    img, target = self._read_sample(index)
+  File &quot;/media/cvpr/CM_22/doctr/doctr/datasets/datasets/pytorch.py&quot;, line 37, in _read_sample
+    else read_img_as_tensor(os.path.join(self.root, img_name), dtype=torch.float32)
+  File &quot;/media/cvpr/CM_22/doctr/doctr/io/image/pytorch.py&quot;, line 52, in read_img_as_tensor
+    pil_img = Image.open(img_path, mode=&quot;r&quot;).convert(&quot;RGB&quot;)
+  File &quot;/home/cvpr/anaconda3/envs/pytesseract/lib/python3.9/site-packages/PIL/Image.py&quot;, line 2912, in open
+    fp = builtins.open(filename, &quot;rb&quot;)
+FileNotFoundError: [Errno 2] No such file or directory: '/media/cvpr/CM_22/mjsynth/mnt/ramdisk/max/90kDICT32px/긴장_1227682.jpg'
+
+","pytorch, dataset, torch, torchvision",0,75515877,"You have to change the arrangement of your three datasets because you are using docTR library, merging datasets in this library is different compared to normal ConcatenateDataset in PyTorch.
+Print the size of the individual dataset so that you can check the actual length of a dataset and overall dataset size.
+mjsynth_train = MJSynth(
+            train=True,
+            img_folder='/media/cvpr/CM_22/mjsynth/mnt/ramdisk/max/90kDICT32px',
+            label_path='/media/cvpr/CM_22/mjsynth/mnt/ramdisk/max/90kDICT32px/imlist.txt',
+            img_transforms=T.Resize((args.input_size, 4 * args.input_size), preserve_aspect_ratio=True),
+        )
+
+        print(&quot;MJSynth dataset size is&quot;, len(mjsynth_train))
+
+        synth_train = SynthText(
+            recognition_task=True,
+            download=True,  # NOTE: download can take really long depending on your bandwidth
+            img_transforms=T.Resize((args.input_size, 4 * args.input_size), preserve_aspect_ratio=True),
+        )
+
+        print(&quot;SynthText dataset size is&quot;, len(synth_train))
+
+        train_set.data.extend([(np_img, target) for np_img, target in mjsynth_train.data])
+        train_set.data.extend([(np_img, target) for np_img, target in synth_train.data])
+
+        print(&quot;Overall dataset size is&quot;, len(train_set))
+
+"
+76006484,Is there a similar option to ImportOption.DoNotIncludeTests on a per test level in ArchUnit,"My question is if we can filter out classes from the test packages programmatically on a per test basis in ArchUnit ?
+It should be basically the same behaviour that @AnalyzeClasses(packages = &quot;....&quot;, importOptions = ImportOption.DoNotIncludeTests.class) does on a class level.
+Background is that we have some ArchTests that should run against all classes but also some which only should run against classes that are not in the test location.
+Something like that maybe?
+    Architectures.onionArchitecture()
+            ....
+            .check(classes.that(areNotTests())); ??
+
+(We can achieve the goal by creating two Classes that hold the ArchUnit tests seperately and only add the ImportOption.DoNotIncludeTests to the one of them. But we would rather have one set of classes to analyze and decide on a per test level. If there is a way to achieve that)
+",archunit,1,76009169,"ImportOptions operate on Locations, but you can try to use the following adapter:
+DescribedPredicate&lt;JavaClass&gt; notTests = DescribedPredicate.describe(&quot;not tests&quot;,
+    javaClass -&gt; javaClass.getSource()
+            .map(Source::getUri)
+            .map(Location::of)
+            .map(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS::includes)
+            .orElse(true)  // test classes should have a source;
+         //  alternatively, you could probably also use:
+         // .orElseThrow(IllegalStateException::new)
+);
+
+"
+74861298,"How to solve the errror""jinja2.exceptions.UndefinedError: 'get_count' is undefined""","I am working on small python application using flask app while clicking the local host link i am not getting internal server error and jinja2.exceptions error I don't know where i did mistake normal python my script is working and giving the result html page not able to read my id_count output how to solve this using python flask here is my script
+import numpy as np
+from flask import Flask, render_template, request
+app = Flask(__name__)
+x = np.array([0, 7, 18, 24, 26, 27, 26, 25, 26, 16, 20, 16, 23, 33, 27, 27,
+22, 26, 27, 26, 25, 24, 25, 26, 23, 25, 26, 24, 23, 12, 22, 11, 15, 24, 11,
+12, 11, 27, 19, 25, 26, 21, 23, 26, 13, 9, 22, 18, 23, 26, 26, 25, 10, 22,
+27, 25, 19, 10, 15, 20, 21, 13, 16, 16, 15, 19, 17, 20, 24, 26, 20, 23, 23,
+])
+@app.route('/')
+def main():
+    return render_template('index.html')
+@app.route('/send', methods=['POST'])
+def get_count(id_count):
+    sub_lists = np.split(x, np.where(np.diff(x) &lt;0)[0] + 1)
+    id_count=0
+    id_list = []
+    for unit in sub_lists:
+      if min(unit) ==0 and max(unit)&gt;20 and len(set(unit)) &gt; 1:
+         id_count += 1
+         id_list.append(unit)
+      return id_count
+      return render_template(&quot;index.html&quot;,get_count(x))
+
+print(&quot;Number of counts: &quot;,get_count(x))
+if __name__==&quot;__main__&quot;:
+    app.run(debug=False, port=1223)
+``` this is my app.py file 
+
+
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=""en""&gt;
+&lt;head&gt;
+    &lt;meta charset=""UTF-8""&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;form action=""/data"" method = ""POST""&gt;
+
+&lt;h2&gt; flask app for counting accelerations&lt;/h2&gt;
+    &lt;p&gt;The acceleration count is ""{{get_count(x)}}""&lt;/p&gt;
+
+&lt;/form&gt;
+&lt;/head&gt;
+&lt;/html&gt;
+
+
+
+
+how to correct my html page for getting count value 
+expected out &quot;The acceleration count is 4(some value)&quot;
+
+","python, jinja2",-1,74861500,"I think you have to name the parameter in python code :
+render_template(&quot;index.html&quot;,count_result=get_count(x))
+
+And use it in your template, not try to use the python function :
+{{ count_result }}
+
+"
+75453105,Microsoft Address Validation API,"I'm trying to implement Microsoft Azures Address Validation.
+I get it to work using the implicit OAuth v2 but I would like to implement this as a service.
+I have added Client Sercets and tried using that method but I don't get an Auth Token back.
+Am I not implementing the Auth Service correctly?
+Can this API be used with our actual user logging in each time?
+Micorsoft Azure Address Validation
+[Azure app registration](https://i.stack.imgur.com/ck9oW.png)
+[PostMan Auth](https://i.stack.imgur.com/pkERQ.png)
+[Token Response](https://i.stack.imgur.com/czeQa.png)
+
+
+
+
+Thanks for the Help.
+","azure, validation, postman",0,75455997,"I tried to reproduce the same in my environment and got the results successfully like below:
+I created Azure AD Application and added API permissions:
+
+I generated the access token by using below parameters:
+https://login.microsoftonline.com/TenantID/oauth2/v2.0/token
+
+client_id:ClientID
+client_secret:ClientSecret
+scope:https://management.azure.com/.default
+grant_type:client_credentials
+
+
+To validate the address, I used below query:
+POST https://management.azure.com/providers/Microsoft.Billing/validateAddress?api-version=2019-10-01-preview
+
+{
+  &quot;addressLine1&quot;: &quot;55 110th Ave NE&quot;,
+  &quot;city&quot;: &quot;bellevue&quot;,
+  &quot;region&quot;: &quot;wa&quot;,
+  &quot;postalCode&quot;: &quot;98004&quot;,
+  &quot;country&quot;: &quot;us&quot;
+}
+
+In Authorization tab, paste the access token like below:
+
+
+Reference:
+Address - Validate - REST API (Azure Billing)
+"
+75642583,Chromedriver gives an error when trying to run a Python script in Github's VS Code remote codespace,"I organized a Github VS Code codespace to work on a project which uses selenium package and chrome webdriver.
+I added selenium package and installed chrome webdriver via terminal by using:
+pip install selenium
+sudo apt install chromium-chromedriver
+
+When I try to run the following script:
+import time
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome('chromedriver', options=options)
+
+driver = webdriver.Chrome(&quot;/usr/bin/chromedriver&quot;, options=options)
+
+&lt;...&gt;
+
+I get the following error:
+Traceback (most recent call last):
+  File &quot;/workspaces/swordy/selenium_course/first.py&quot;, line 10, in &lt;module&gt;
+    driver = webdriver.Chrome('chromedriver', options=options)
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py&quot;, line 80, in __init__
+    super().__init__(
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py&quot;, line 101, in __init__
+    self.service.start()
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/common/service.py&quot;, line 104, in start
+    self.assert_process_still_running()
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/common/service.py&quot;, line 117, in assert_process_still_running
+    raise WebDriverException(f&quot;Service {self.path} unexpectedly exited. Status code was: {return_code}&quot;)
+selenium.common.exceptions.WebDriverException: Message: Service chromedriver unexpectedly exited. Status code was: 1
+
+I'm new to managing codespaces and don't have enough experience to fix this yet.
+I expected it to run a chrome window in which the following commands would execute.
+","visual-studio-code, selenium-webdriver, webdriver, chromium",0,75670340,"Ok, so getting a little deeper into the weeds I found out that:
+Github's remote VS Code codespace utilizes Ubuntu and has bash terminal.
+So to run a Google Chrome browser I need to download and install compatible versions of Chrome browser and chromedriver. Then by passing the path to the downloaded chromedriver to webdriver.Chrome() I can finally run an instance of Chrome browser which would utilize the Linux environment.
+The following link explains how it's done:
+https://cloudbytes.dev/snippets/run-selenium-and-chrome-on-wsl2
+BUT
+It looks like that wouldn't be enough for the remote codespace. After going through instructions in the link above, I encountered new errors:
+Traceback (most recent call last):
+  File &quot;/workspaces/swordy/selenium_course/first.py&quot;, line 21, in &lt;module&gt;
+    driver = webdriver.Chrome(service=webdriver_service, options=options)
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py&quot;, line 80, in __init__
+    super().__init__(
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py&quot;, line 104, in __init__
+    super().__init__(
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py&quot;, line 286, in __init__
+    self.start_session(capabilities, browser_profile)
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py&quot;, line 378, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py&quot;, line 440, in execute
+    self.error_handler.check_response(response)
+  File &quot;/usr/local/python/3.10.4/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py&quot;, line 245, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally.
+  (unknown error: DevToolsActivePort file doesn't exist)
+  (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+Stacktrace:
+#0 0x55e1d6f44d93 &lt;unknown&gt;
+#1 0x55e1d6d132d7 &lt;unknown&gt;
+#2 0x55e1d6d3bab0 &lt;unknown&gt;
+#3 0x55e1d6d37a3d &lt;unknown&gt;
+#4 0x55e1d6d7c4f4 &lt;unknown&gt;
+#5 0x55e1d6d73353 &lt;unknown&gt;
+#6 0x55e1d6d42e40 &lt;unknown&gt;
+#7 0x55e1d6d44038 &lt;unknown&gt;
+#8 0x55e1d6f988be &lt;unknown&gt;
+#9 0x55e1d6f9c8f0 &lt;unknown&gt;
+#10 0x55e1d6f7cf90 &lt;unknown&gt;
+#11 0x55e1d6f9db7d &lt;unknown&gt;
+#12 0x55e1d6f6e578 &lt;unknown&gt;
+#13 0x55e1d6fc2348 &lt;unknown&gt;
+#14 0x55e1d6fc24d6 &lt;unknown&gt;
+#15 0x55e1d6fdc341 &lt;unknown&gt;
+#16 0x7fae17a5a609 start_thread
+
+Ok, for some reason Chrome won't start. So I decided I would try to at least run a chrome browser from bash:
+google-chrome-stable --no-sandbox
+[5021:5021:0308/070932.768189:ERROR:ozone_platform_x11.cc(238)] Missing X server or $DISPLAY
+[5021:5021:0308/070932.768255:ERROR:env.cc(255)] The platform failed to initialize.  Exiting.
+[5021:5042:0308/070932.771735:ERROR:bus.cc(399)] Failed to connect to the bus: Failed to connect to socket /var/run/dbus/system_bus_socket: No such file or directory
+[0308/070932.794700:ERROR:nacl_helper_linux.cc(355)] NaCl helper process running without a sandbox!
+Most likely you need to configure your SUID sandbox correctly
+
+There are a bunch of questions online from people who encountered the same errors by running puppeteer, docker etc., but I couldn't find the right solution. I suspect that the reason for the new errors is the fact that remote codespace doesn't have a GPU and because of that can't launch anything that requires it. It is best demonstrated by trying to run xeyes in bash terminal (or by adding --headless argument when running chrome, but you wouldn't see anything, so what's the point?).
+So, what are the options here?
+First, I'd say that the link provided above works perfectly well for the desktop version of VS Code. You can use the windows cmd terminal and won't even need to worry about linux chrome or chromedriver, or you can install WSL and then go through the steps in that link. At least that's how I'm going to solve this problem
+Resulting code for desktop VS Code:
+import time
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+options = Options()
+options.add_argument(&quot;--no-sandbox&quot;)
+webdriver_service = Service(f&quot;/chromedriver/stable/chromedriver&quot;)
+driver = webdriver.Chrome(service=webdriver_service, options=options)
+
+Second, I guess there is a way to try and use your own PC to act as a Display/GPU for the remote codespace. But that is not something I'm capable to do atm
+I think these links would be the right direction to investigate?:
+https://www.gregbrisebois.com/posts/chromedriver-in-wsl2/
+https://manpages.ubuntu.com/manpages/xenial/man1/xvfb-run.1.html
+If anyone knows how to run gpu-dependent applications in Github's virtual VS Code codespace, please leave a comment!
+================================
+Update:
+Ok, as I thought, the last piece of puzzle would be to run the gui-dependent applications by using your PC, and to be more specific, VcXsrv. This link explains how to do this:
+https://babyprogrammer.com/blog/running-gui-code-applications-in-github-codespaces-on-windows/
+By combining all the info I found, I was able to run chrome from remote codespace. Hope all the info helps anyone with the same struggles!
+"
+75535213,Time complexity of the following two programs?,"I know that the time complexity of the following code is O(n).
+n = 10
+for x in range(0,n): 
+    print(&quot;&quot;)
+
+I also know that the time complexity of the following code is O(n^2):
+n = 10
+for x in range(0,n): 
+    for y in range(0,n):
+        print(&quot;&quot;)
+
+
+I am having trouble determining the time complexity of the following two programs.
+
+Here, we have two individual loops. Each has a time complexity of O(n). So, should the time complexity of the whole program be O(n + n)? or something else?
+
+# program 1
+ 
+n = 10
+for x in range(0,n): 
+    print(&quot;&quot;)
+
+for y in range(0,n): 
+    print(&quot;&quot;)
+
+
+Here, we have two individual loops again but the first loop has a time complexity of O(n^2) and the second loop has a time complexity of O(n^3). So, should the time complexity of the whole program be O(n^2 + n^3)? or something else?
+
+# program 2
+
+n = 10
+for x in range(0,n): 
+    for y in range(0,n): 
+        print(&quot;&quot;)
+
+for a in range(0,n): 
+    for b in range(0,n): 
+        for c in range(0,n): 
+            print(&quot;&quot;)
+
+","time-complexity, language-agnostic, big-o, conceptual",0,75535257,"yes the complexity of your 2nd program will be O(n^2) + O(n^3). You can conclude that the complexity of your program is just O(n^3) because it is the monomial term that have the biggest power.
+The complexity of your first program is O(n) + O(n) = 2.O(n) = O(n). You are reasoning well. The complexity is O(n)
+"
+75850892,Spring MVC Thymeleaf absolute view ID `/view` behaves inconsistently,"I had a simple Spring MVC application with Thymeleaf. I had a controller mapped to /foo/ and it would delegate to a view /bar/view using redirect, so its POST method would return redirect:/bar/view. This worked fine in my IDE, from a JAR file, and from a Docker container.
+I did some refactoring and remapped the controller to /view. Then I moved my view implementation from templates/foo/view.html to templates/view.html. And instead of sending back redirect:/bar/view, I sent back /view. This continued to work fine in my IDE (Eclipse EE 2023-03 on Windows) with Spring DevTools installed.
+However it would fail running from the JAR, saying that it could not find /view. I double-checked everything, and finally just discovered that it will now only work from a JAR file if I return view for the view, and not /view.
+Can someone tell me why this inconsistency exists, and point me to some documentation that covers this? Why can't I return /view as a view ID? But why does returning /view work in my IDE, but not using java -jar …? And finally, why does redirect:/bar/view work with an absolute view path, but not /view? I'm not arguing which way is better; I'm just wondering why the behavior is inconsistent, and wanting to know where this is documented.
+","spring, spring-mvc, thymeleaf",0,75851003,"It's good to start with how Spring Boot resolves the view names.
+When you return a view with a leading slash /view then Spring treats it as an absolute path and looks for the view in the root directory of your app.
+If you are using view without a leading slash view then Spring treats it as a relative path and looks for the view from the current directory.
+Why then IDE works?
+Because IDE sets the working directory to the root of your project.
+Why then JAR doesn't work?
+It's because JAR sets the working directory to the directory where the JAR file contains.
+Why does redirect:/bar/view work?
+Redirect make a new request to the server, and then resolves the view name using the same rules as before.
+It's good to use relative paths to prevent ambiguities.
+Some information you can find Spring. Views and resolving them
+"
+75061295,How to execute code after concat operator finish,"I have tasks (observables) in array and want run them sequentially and at the end I want to run some finish code
+
+
+const { concat, of, tap } = rxjs;
+const { delay  } = rxjs.operators;
+
+let tasks = [
+  of(1).pipe(delay(1000)),
+  of(2).pipe(delay(2000)),
+  of(3).pipe(delay(1000)),
+  of(4).pipe(delay(2000)),
+];
+
+// In below example, word ""Finish"" is printed 4 times 
+// but I want print it only once, at the end.
+
+concat(...tasks)
+  .pipe(tap(()=&gt; console.log('Finish')))      
+  .subscribe(n =&gt; console.log(`result for task ${n}`));
+&lt;script src=""https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.0/rxjs.umd.min.js"" integrity=""sha512-v0/YVjBcbjLN6scjmmJN+h86koeB7JhY4/2YeyA5l+rTdtKLv0VbDBNJ32rxJpsaW1QGMd1Z16lsLOSGI38Rbg=="" crossorigin=""anonymous"" referrerpolicy=""no-referrer""&gt;&lt;/script&gt;
+
+
+
+I try to use tap but without success - how to do it?
+","javascript, typescript, rxjs",1,75061365,"Tap, how you use, will run on each emited value.
+You should use finalize instead.
+
+
+const { concat, of, finalize } = rxjs;
+const { delay  } = rxjs.operators;
+
+let tasks = [
+  of(1).pipe(delay(1000)),
+  of(2).pipe(delay(2000)),
+  of(3).pipe(delay(1000)),
+  of(4).pipe(delay(2000)),
+];
+
+concat(...tasks)
+  .pipe(finalize(()=&gt; console.log('Finish')))      
+  .subscribe(n =&gt; console.log(`result for task ${n}`));
+&lt;script src=""https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.0/rxjs.umd.min.js"" integrity=""sha512-v0/YVjBcbjLN6scjmmJN+h86koeB7JhY4/2YeyA5l+rTdtKLv0VbDBNJ32rxJpsaW1QGMd1Z16lsLOSGI38Rbg=="" crossorigin=""anonymous"" referrerpolicy=""no-referrer""&gt;&lt;/script&gt;
+
+
+
+"
+75432954,Chrome/Edge Devtools not loading source maps despite its presence,"I am debugging a website where source maps are enabled but they are not visible in dev tools.
+After checking multiple SOF threads and this https://developer.chrome.com/docs/devtools/javascript/source-maps/#sourceurl_and_displayname I found the issue is probably because the .js files are missing the //# sourceURL=source.coffee comment in the end. So, I tried to right click and choose add source maps and pasted the URL of .js files and appended .map in the end. That worked for me, however this is a tedious task as there are around 30+ .js files. I was able to see webpack:// being constucted after doing this.
+Is there any hacky way to automate this? Or let dev tools know to that all source maps are just the same URLs with .map in the end? Or maybe some Chrome Extension that can do this for us?
+","webpack, google-chrome-extension, google-chrome-devtools, microsoft-edge, devtools",0,75459455,"I was able to find a solution myself after exploring. This can be done my creating a Chrome Extension on version 2 for development.
+Below is the code for Content Script.
+function loadSynchronously(url: string) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(&quot;GET&quot;, url, false);
+    xhr.send();
+    return xhr.responseText;
+}
+
+chrome.webRequest.onBeforeRequest.addListener(
+    function (details) {
+        var javascriptCode = loadSynchronously(details.url);
+
+        // modify the below rules as per your need
+        javascriptCode += &quot;\n//# sourceMappingURL=&quot; + details.url + &quot;.map&quot;;
+
+        return {
+            redirectUrl:
+                &quot;data:text/javascript,&quot; + encodeURIComponent(javascriptCode),
+        };
+    },
+    {
+        urls: [&quot;https://www.example.com/*.js&quot;],
+    },
+    [&quot;blocking&quot;]
+);
+
+Making sure to give webRequest and webRequestBlocking permission to your extension. I used this template https://github.com/abhijithvijayan/web-extension-starter. Hope this helps!
+"
+75047730,TypeError: Cannot read properties of undefined (reading '0'). in javascript,"why this error is appearing
+my code is ,
+/**
+ * @param {number[][]} points
+ * @return {number}
+ */
+var maxPoints = function(points) {
+    n=0
+    for(let i=0;i&lt;=points.length;i++){
+    let x=points[i]
+    const y=points[i+1]
+    let dx=y[0]-x[0]
+    let dy=y[1]-x[1]
+    m=dy/dx
+    b = y[1]-m*y[0]
+    newy=m*y[0]+b
+        if(newy==y[1]){
+            n++
+        }
+        console.log(y)
+    }
+    return(n)
+};
+
+Error
+Line 10 in solution.js
+    let deltax=y[0]-x[0]
+                ^
+TypeError: Cannot read properties of undefined (reading '0')
+    Line 10: Char 17 in solution.js (maxPoints)
+    Line 31: Char 19 in solution.js (Object.&lt;anonymous&gt;)
+    Line 16: Char 8 in runner.js (Object.runner)
+    Line 22: Char 26 in solution.js (Object.&lt;anonymous&gt;)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47
+
+Question is find the max number of points to draw a straight line from the given array of points
+how to solve this error
+","javascript, arrays, arraylist, graph",0,75056283,"I'm not clear on your overall goal here, or the expected structure of points, but I can see the cause of the specific error.
+Let's say the array points has 4 items. Your loop continues while i &lt;= points.length, i.e. &lt;= 4 in our example. However, arrays are zero-indexed in JavaScript, so i[4] will be undefined.
+Adding to that, you assign y to points[i+1]. In our example, when i is 3, i+1 will be 4 - so y will be undefined - when you attempt to access y[0] here, y will be undefined and not an array, so accessing [0] will fail.
+"
+75935172,VS Code reports invalid errors in ts-node shell scripts,"I read this article on how to run a typescript file on the command line, and it appears to be working, but VS Code is reporting invalid errors:
+
+You can see from the terminal (bottom half of the picture) that this file runs without issue. According to the lower right-hand corner, VS Code recognizes the file as typescript, but it doesn't recognize any libraries in its environment.
+Perhaps it thinks this is configured for web instead of node? I do have evidence for that: it auto-completes the contents of window and document. Is there some way I can tell VS Code that this is a node environment?
+It's worth noting that VS Code is running in an Ubuntu WSL terminal/environment on Windows 10. There is no tsconfig.json file involved. It's using whatever's the default. This &quot;script&quot; sits in my personal /bin directory alongside other bash shell scripts. As such, I'm trying to avoid all the boilerplate of setting up an entire TS project to get this working.
+
+Update: That error on fs suggested a &quot;Quick Fix&quot; to install node types. I ran npm i --save-dev @types/node and the error went away, but it created a &quot;node_modules&quot; directory. Since &quot;node_modules&quot; doesn't seem necessary to execute the script, and since it will be used by the next ts shell script I put in that bin/ directory, I'm hoping there is another solution.
+I'm trying to avoid creating a project / node_module dir / tsconfig.json / etc. to solve this as my intent is to write a shell script in typescript instead of bash. One of the benefits of shell scripts is you can just create a file and run it; you don't need much, if any, boilerplate.
+","node.js, typescript, visual-studio-code, windows-subsystem-for-linux, ts-node",-1,75935653,"I don't think you can avoid having to have a node_modules/ or tsconfig.json/jsconfig.json somewhere on your machine. You'll need the node_modules/ if you want to get TypeScript typings (and by extension, typings-related IntelliSense in VS Code) for the NodeJS API, and you'll need the tsconfig.json/jsconfig.json to tell VS Code to understand things like module resolution. They key to the question is how many you can go down to, and where to put it.
+For NodeJS itself, its module resolution logic can be found in the docs, and summarized in the TypeScript module resolution docs, along with the description of TypeScript's module resolution logic. Basically, if you only want to have one node_modules/ and corresponding tsconfig for all you ts-node scripts, then just install @types/node and put your tsconfig.json at the lowest directory that is an ancestor of all your scripts.
+You'll have to open that folder containing the tsconfig.json and node_modules/ as the VS Code workspace folder to get IntelliSense for the scripts within.
+This may not be very ideal depending on where your scripts are all located, but I don't personally know of a better way at the current time.
+"
+75339862,How to enforce uniqueness in postgresql per row for a specific column,"I have the following table (stripped down for demonstration)
+products
+- id
+- part_number
+- group_id
+
+I want to be able to query against products and only return a single row per group_id (whichever is noticed first in the query is fine). All rows with group_id = null return as well.
+Example:
+ID      part_number    group_id
+2314    ABB19          1
+4543    GFH54          1
+3454    GHT56          2
+3657    QWT56          2
+7689    GIT56          2
+3465    HG567          null
+5675    FG345          null
+
+I would want to query against this table and get the following results:
+ID      part_number    group_id
+2314    ABB19          1
+3454    GHT56          2
+3465    HG567          null
+5675    FG345          null
+
+I have tried using group by but wasnt able to get it working without selecting the group_id and doing a group by on it which just returned a list of unique group_id's. Given the complexity of my real products table its important that I am able to keep using select * and not naming each column I need to return.
+","sql, postgresql, aggregate-functions, greatest-n-per-group",1,75340409,"row_number() and filtering might be more efficient than distinct on and union all, which incur two table scans.
+select *
+from (
+    select p.*,
+        row_number() over(partition by group_id order by id) rn
+    from products p
+) p
+where rn = 1 or group_id is null
+
+"
