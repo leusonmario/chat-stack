@@ -29,7 +29,7 @@ class Llama(LLModel):
         return self._model_name
 
     @model_name.setter
-    def model_name_setter(self, new_model_name):
+    def _model_name_setter(self, new_model_name):
         self._model_name = new_model_name
 
     @property
@@ -37,12 +37,13 @@ class Llama(LLModel):
         return self._llm_version
 
     @llm_version.setter
-    def llm_version_setter(self, new_llm_version):
+    def _llm_version_setter(self, new_llm_version):
         self._llm_version = new_llm_version
 
     def ask_for_explanation(self, question, description, tags):
-        chats = self.format_tokens(self.get_base_message(question, description, tags))
-        print(chats)
+        messages = []
+        messages.append(super().get_base_message(question, description, tags))
+        chats = self.format_tokens(messages)
 
         with torch.no_grad():
             for idx, chat in enumerate(chats):

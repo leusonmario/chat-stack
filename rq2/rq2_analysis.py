@@ -103,13 +103,14 @@ def run_request(request, question, cosine, report_directory, time):
 
 def run_requests_for_llms(selected_questions, report_directory, time):
     chatGPT = ChatGPT("chat-gpt-3.5", "gpt-3.5-turbo")
-    llama = Llama("llama", "meta-llama/Llama-2-7b-chat-hf")
+    llama = Llama("meta-llama/Llama-2-7b-chat-hf", "llama")
+    tools = [chatGPT, llama]
     request = Request_LLM(chatGPT)
     analysis = GeneratedAnswerAnalysis('all-MiniLM-L6-v2')
     for question in selected_questions:
-        run_request(request, question, analysis, report_directory, time)
-        request.ll_model_set(llama)
-        run_request(request, question, analysis, report_directory, time)
+        for tool in tools:
+            request.ll_model_set(tool)
+            run_request(request, question, analysis, report_directory, time)
 
 def main(questions_file, answers_file, number_questions, tags_file, report_directory, time):
 
@@ -120,5 +121,5 @@ def main(questions_file, answers_file, number_questions, tags_file, report_direc
     run_requests_for_llms(selected_questions, report_directory, time)
 
 if __name__ == '__main__':
-    main("/home/leuson/Downloads/finalOutput/after/questions.csv", "/home/leuson/Downloads/finalOutput/after/answers.csv", 1,
+    main("/home/leuson/Downloads/finalOutput/after/questions.csv", "/home/leuson/Downloads/finalOutput/after/answers.csv", 384,
          "/home/leuson/Downloads/finalOutput/after/tags.csv", "/home/leuson/Downloads/finalOutput/", 'after')
