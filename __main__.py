@@ -154,7 +154,7 @@ def get_questions(target_directory_posts):
     return questions, questions_ids
 
 if __name__ == '__main__':
-    target_directory = ["/home/leuson/Downloads/attemptOne/before/", "/home/leuson/Downloads/attemptOne/after/"]
-    report_directory = "/home/leuson/Downloads/attemptOne/results/"
-    #main(report_directory, target_directory)
+    target_directory = ["/home/leuson/Downloads/dataStackBefore/", "/home/leuson/Downloads/dataStack/"]
+    report_directory = "/home/leuson/Downloads/ResultsFinal/"
+    main(report_directory, target_directory)
     post_analysis.post_analysis.main(report_directory)
