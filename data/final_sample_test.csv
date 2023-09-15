@@ -1,0 +1,396 @@
+question_id,question_title,question_description,tags,score,answer_id,accepted_answer
+74891998,Is it possibel to create a keyfile from PhpMyAdmin's console for File Key Management Encryption Plugin (MariaDB)?,"As a client of my hosting provider I can not access MySQL folder to create a keyfile for MariaDB's File Key Management Encryption Plugin. I would like to encrypt tables with free tools with this limited access. I think maybe I can use PhpMyAdmin's console for this. Is it possible?
+I'm using MariaDB's doc to install: link
+I think I could install this plugin using PhpMyAdmin's console:
+
+at least I did not get an error message when I run the command from command line, but how to create a file from this console, I have no ida. Anyone ever set up database encryption using PhpMyAdmin's console?
+
+","encryption, phpmyadmin, console",0,74895655,"The plugin_load_add = file_key_management directive goes in the configuration file, it isn't a direct query that can be sent to the server. So first you'll have to edit the configuration file directly to add that directive.
+The next step is setting up the key file that contains the encryption keys. Again, MariaDB wants that to exist on disk as a file in the computer's file system, so phpMyAdmin or any other direct SQL command can't help with that part.
+There are some system variables that can be directly edited with phpMyAdmin (such as file_key_management_encryption_algorithm for defining the algorithm used for the encryption) and once the encryption is properly configured you can issue the SQL command to create an encrypted table, but you'll have to do the first couple of steps outside of phpMyAdmin or any other SQL interface.
+In your case specifically, you would have to ask your hosting provider to handle the configurations for you or use a different encryption method.
+"
+75766948,"Why isn't ""esnext.full"" recognized as a valid ""lib"" option in VS Code?","When I'm specifying a lib option on my compilerOptions:
+    &quot;compilerOptions&quot;: {
+        &quot;lib&quot;: [&quot;esnext.full&quot;]
+    }
+
+VS Code gives a warning for esnext.full.  My understanding is that this should be valid, and should be roughly equivalent to specifying esnext along with DOM and DOM.Iterable.  How come VS Code doesn't recognize esnext.full?
+","typescript, visual-studio-code, tsconfig",0,75782069,"
+Why isn't &quot;esnext.full&quot; recognized as a valid &quot;lib&quot; option in VS Code?
+
+When searching for understanding, it's almost always more productive to seek the answer to questions when they're framed positively and skeptically (i.e. &quot;What does exist?&quot; / &quot;Why is x valid?&quot;) — so, in this case: &quot;Which values can be recognized?&quot; Answering this question will provide knowledge about a restrictive scope, and a foundation for the rest of the answer.
+The compilerOptions.lib section in the TSConfig reference enumerates the built-in library and individual component identifiers which are valid for inclusion in a TSConfig (at the string array property compilerOptions.lib).
+I won't copy the entire list here — it's very large and subject to change.
+The documentation itself recognizes the fact that the allowed values do change — by the inclusion of this footnote:
+
+This list may be out of date, you can see the full list in the TypeScript source code.
+
+Presumably, the link pointed to a valid resource at one point in time, but as I write this answer, navigating to the resource results in a 404 response (Not Found). Perhaps the repo has been restructured since the documentation was last updated — the default branch currently does not have a top-level lib directory. However, by switching to a tag branch corresponding to a release (e.g. the v5.0.2 release from a few days ago), the top-level lib directory can be viewed:
+https://github.com/microsoft/TypeScript/tree/v5.0.2/lib
+This is a directory of generated files (explained by the readme) — generated from data in the corresponding source directory src/lib.
+So, up to this point, the best source for determining valid identifiers is &quot;consult the documentation&quot; — which, as we've seen, is not guaranteed to be up-to-date/exhaustive — and that's not even close to an acceptable answer in my opinion.
+The documentation has to be derived from something, right?
+Digging deeper into the source repo, we can find a module in the compiler code: src/compiler/commandLineParser.ts which contains a const array of tuples named libEntries. Here's a partial snippet for reference:
+const libEntries: [string, string][] = [
+
+  // ---snip---
+
+  [&quot;es2023&quot;, &quot;lib.es2023.d.ts&quot;],
+  [&quot;esnext&quot;, &quot;lib.esnext.d.ts&quot;],
+  // Host only
+  [&quot;dom&quot;, &quot;lib.dom.d.ts&quot;],
+  [&quot;dom.iterable&quot;, &quot;lib.dom.iterable.d.ts&quot;],
+
+  // ---snip---
+
+];
+
+This is used as the basis for valid library identifiers, and is used to create the following exports:
+/**
+ * An array of supported &quot;lib&quot; reference file names used to determine the order for inclusion
+ * when referenced, as well as for spelling suggestions. This ensures the correct ordering for
+ * overload resolution when a type declared in one lib is extended by another.
+ *
+ * @internal
+ */
+export const libs = libEntries.map(entry =&gt; entry[0]);
+
+/**
+ * A map of lib names to lib files. This map is used both for parsing the &quot;lib&quot; command line
+ * option as well as for resolving lib reference directives.
+ *
+ * @internal
+ */
+export const libMap = new Map(libEntries);
+
+This is more satisfying. If you want an authoritative list of valid identifiers for use as lib values, that's the place to view them. Be sure to consult the tag branch corresponding to the compiler version that you're using.
+
+So now back to your question:
+
+Why isn't &quot;esnext.full&quot; recognized as a valid &quot;lib&quot; option in VS Code?
+
+The answer is now obviously simple: it's not recognized because it's not a valid identifier in the list.
+This leads to your next question:
+
+Why is there a library file with the .full suffix?
+
+As you observed in a comment, TypeScript includes some declaration files internally which cannot be used in the array of library names at compilerOptions.lib in a TSConfig.
+You linked to a JSON file in the source code which lists some strings in an array at a libs key — these represent partial, relative path names to internal declaration files (see src/lib). However, this is not a list of allowed library identifiers — it is simply a list for internal use by the compiler.
+At the end of that list is a grouping of &quot;default libraries&quot; separated by a comment:
+{
+  &quot;libs&quot;: [
+
+    // ---snip---
+
+    // Default libraries
+    &quot;es5.full&quot;,
+    &quot;es2015.full&quot;,
+    &quot;es2016.full&quot;,
+    &quot;es2017.full&quot;,
+    &quot;es2018.full&quot;,
+    &quot;es2019.full&quot;,
+    &quot;es2020.full&quot;,
+    &quot;es2021.full&quot;,
+    &quot;es2022.full&quot;,
+    &quot;es2023.full&quot;,
+    &quot;esnext.full&quot;
+  ],
+
+  // ---snip---
+}
+
+These values ending in the .full suffix refer to the internal declaration files which the compiler uses by default (in absence of a compilerOptions.lib array), according to the compilerOptions.target value:
+
+Changing target also changes the default value of lib. You may “mix and match” target and lib settings as desired, but you could just set target for convenience.
+
+Here's the utility function in the source which is used to derive the default library declaration file from the target:
+src/compiler/utilitiesPublic.ts:
+export function getDefaultLibFileName(options: CompilerOptions): string {
+    switch (getEmitScriptTarget(options)) {
+        case ScriptTarget.ESNext:
+            return &quot;lib.esnext.full.d.ts&quot;;
+
+        // ---snip---
+
+        case ScriptTarget.ES2015:
+            return &quot;lib.es6.d.ts&quot;;  // We don't use lib.es2015.full.d.ts due to breaking change.
+        default:
+            return &quot;lib.d.ts&quot;;
+    }
+}
+
+
+Now, on to your final question:
+
+What list of lib do I need to specify to get the equivalent of the default (everything pulled in by something like es2022.full), but for esnext or es2023?
+
+You listed two ECMAScript API collections — I'll use the first one you mentioned (esnext) as the example. However, note that it's not a real spec — it refers to all &quot;bleeding edge&quot; features:
+
+The special ESNext value refers to the highest version your version of TypeScript supports. This setting should be used with caution, since it doesn’t mean the same thing between different TypeScript versions and can make upgrades less predictable.
+
+If you want to include the default libraries corresponding to esnext (esnext.full) in your compilation, here are two options for your TSConfig:
+
+You can specify the libraries manually, along with your desired target:
+First, in the TypeScript repo:
+
+Navigate to the tag branch corresponding to the version of the compiler that you're using (in this example v5.0.2).
+
+Navigate to the top-level lib directory, and find the declaration file that corresponds to your target name and ends with .full.d.ts (in this case lib.esnext.full.d.ts).
+
+
+After finding the corresponding declaration file, identify all of the libraries which are referenced by triple-slash directives. I'll inline the relevant content from the file linked above:
+/// &lt;reference no-default-lib=&quot;true&quot;/&gt;
+
+/// &lt;reference lib=&quot;esnext&quot; /&gt;
+/// &lt;reference lib=&quot;dom&quot; /&gt;
+/// &lt;reference lib=&quot;webworker.importscripts&quot; /&gt;
+/// &lt;reference lib=&quot;scripthost&quot; /&gt;
+/// &lt;reference lib=&quot;dom.iterable&quot; /&gt;
+
+In your config:
+
+Set compilerOptions.target to your desired target (for example, I'll use &quot;es2020&quot;), and
+
+Set the compilerOptions.lib array to the libraries identified from the previous step above.
+
+
+This looks like:
+{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;es2020&quot;,
+    &quot;lib&quot;: [
+      &quot;esnext&quot;,
+      &quot;dom&quot;,
+      &quot;webworker.importscripts&quot;,
+      &quot;scripthost&quot;,
+      &quot;dom.iterable&quot;,
+    ],
+
+    // ---snip---
+  },
+
+  // ---snip---
+}
+
+By the way, these compiler options values are not case-sensitive.
+
+More conveniently (if you're ok with whatever the current default behavior might be), you can let the compiler use the defaults according to your compilation target by omitting the compilerOptions.lib array:
+
+Set compilerOptions.target to your target (in this case &quot;esnext&quot;), and
+
+Don't define the compilerOptions.lib property at all.
+
+
+This looks like:
+{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;esnext&quot;,
+
+    // ---snip---
+  },
+
+  // ---snip---
+}
+
+This will use the default libraries for your target (the internal esnext.full declaration file).
+
+
+
+Finally, an observation: If you're targeting a normal browser environment, you likely don't want &quot;webworker.importscripts&quot; and &quot;scripthost&quot; which aren't part of that environment, but are included in the defaults. A more appropriate choice in that case might be [&quot;esnext&quot;, &quot;dom&quot;, &quot;dom.iterable&quot;].
+This isn't an answer about compilation philosophy or best practice, but it's safer to compile to a single target environment for each compilation, and to restrict the included libraries to only what's available in that one target environment — this helps prevent using APIs that don't exist in the target environment and would cause runtime exceptions.
+
+That was a bit of a journey, but I hope you now have greater confidence and better understanding of how library inclusion is handled during compilation.
+"
+74844325,ASP.NET Core 6 application not using correct port when hosted in Azure App Service on Linux,"We have an ASP.NET Core 6 application where development was started already with ASP.NET Core 1 beta so some things might not have been migrated perfectly along the way.
+We now tried to deploy it to an App Service on Linux instance running on a P1v3 plan.
+In the docker default log I find
+
+info: Microsoft.Hosting.Lifetime[14]
+Now listening on: http://localhost:5000
+
+But the docker logs (without default in the name) I see
+
+INFO  - docker run -d -p 9463:8080 -p 7965:50050 -p 8626:50051 --name xxx -e WEBSITE_SITE_NAME=xxx -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=xxx.azurewebsites.net -e WEBSITE_INSTANCE_ID=7225caab0c70bd61c011893553915089afdc0fffc99a53623c1d7673cee3bdce -e HTTP_LOGGING_ENABLED=1 -e WEBSITE_USE_DIAGNOSTIC_SERVER=True appsvc/dotnetcore:6.0_20221116.6.tuxprod
+INFO  - Initiating warmup request to container xxx for site xxx
+INFO  - Waiting for response to warmup request for container xxx. Elapsed time = 15.088367 sec
+INFO  - Waiting for response to warmup request for container xxx. Elapsed time = 228.7440965 sec
+ERROR - Container xxx for site xxx did not start within expected time limit. Elapsed time = 230.7635573 sec
+2022-12-18T19:54:23.146Z ERROR - xxx didn't respond to HTTP pings on port: 8080, failing site start. See container logs for debugging.
+
+It seemed like the application was listening on port 5000, which is Kestrels default port, but all traffic was sent to 8080 which seems to be mapped to port 9463 in the above logs. That port is different for every restart but the application is always starting on port 5000.
+I also tried adding the setting WEBSITES_PORT with the value 5000, but that didn't have much effect.
+I assume that the site is started by executing dotnet xxx.dll but I cannot in the logs see that any other parameters are passed to the application. So the question is, how is the port (9463 in the above case) passed to the asp.net application and what code line would I need in program.cs or startup.cs to capture that setting? Or can I force the App service to bind to port 5000?
+The alternative is to create a new ASP.NET Core 6 site for the VS template and start migrating the code, but preferably I would first like to just use the existing code.
+","azure-web-app-service, azure-web-app-for-containers",0,74897148,"The startup command should've been right after appsvc/dotnetcore:6.0_20221116.6.tuxprod. Since it's not there, go to your Configuration blade under your app service, General Settings and set the Startup Command. Normally, oryx image will detected this command automatically, but it appears it didn't in your case.
+
+"
+75922360,RShiny UI checkbox for suboptions?,"I have a basic RShiny app that has a reactive checkbox which plots timeseries data based on the data (column of df) selected in the checkbox. My current code produces a UI with checkbox inputs like this:
+    # Load R packages
+library(shiny)
+library(shinyBS)
+
+##example df in similar format to the data I'm working with
+Both &lt;- data.frame(
+  Year  = c(&quot;1990&quot;, &quot;1991&quot;, &quot;1992&quot;, &quot;1993&quot;),
+  SST_anomaly_GOM = c(&quot;-1.1&quot;, &quot;0.23&quot;, &quot;0.87&quot;, &quot;-0.09&quot;),
+  SST_anomaly_GB = c(&quot;-1.1&quot;, &quot;0.23&quot;, &quot;0.87&quot;, &quot;-0.09&quot;),
+  SST_anomaly_MAB = c(&quot;-1.1&quot;, &quot;0.23&quot;, &quot;0.87&quot;, &quot;-0.09&quot;),
+  BT_anomaly_GOM = c(&quot;-2.5&quot;, &quot;0.55&quot;, &quot;1.20&quot;, &quot;-0.19&quot;),
+  BT_anomaly_GB = c(&quot;-1.1&quot;, &quot;0.05&quot;, &quot;1.24&quot;, &quot;-0.29&quot;),
+  BT_anomaly_MAB = c(&quot;-1.1&quot;, &quot;-1.08&quot;, &quot;0.67&quot;, &quot;-2.40&quot;)
+)
+
+# Define UI
+ui &lt;- fluidPage(
+  # useShinyBS
+    &quot;Visualizing Indicators&quot;, #app title
+    tabPanel(&quot;&quot;,      # tab title
+             sidebarPanel(width=6,
+                          
+                          checkboxGroupInput(&quot;variable&quot;, label = &quot;Checkbox&quot;, choiceNames  = gsub(&quot;_&quot;, &quot; &quot;, colnames(Both[2:7])), 
+                                                choiceValues = colnames(Both[2:7]), 
+                                                ),
+             ), # sidebarPanel
+    ), #tabPanel
+) # fluidPage
+
+#Define Server:
+server&lt;- function (input,output){
+   output$rendered &lt;-   renderUI({
+    })
+}
+# Create Shiny object
+shinyApp(ui = ui, server = server)
+
+This Produces an interface like this:
+
+This is fine, but a little repetitive, and with more timeseries variables I eventually want to include to this list, this can get cumbersome for the user to sift through and will take up a lot of the space on the UI to list everything in this way.
+My question is how can I adjust my code such that it produces an interface with unique variables listed, then checkboxes for each sub-region of interest? (GOM, BG, MAB, etc.)
+An example of what I have in mind is an interface that looks more like this:
+
+Is this possible? Is this possible with a df in the format as I currently have (such as my example df called &quot;Both&quot;).
+Thanks!
+","r, user-interface, shiny, shinyapps, checkboxlist",6,75924343,"To create an answer for your solution, I've implemented a checkbox group input using the DT package. The solution comes in two parts: 1. The Helper functions. 2. The App.
+Example Image
+
+Helper Functions
+The first helper function creates a data table with checkbox inputs, each with a unique id that is a combination of the rowname and column name.
+The second helper function evaluates the 'checked' status of each of the checkboxes in the constructed table, returning a matrix with TRUE/FALSE values for each of the cells in the checkbox table.
+App
+The app code is pretty straight forward.
+First, we create an example table using the first helper function.
+Then, we render the table with DT, making sure to disable escape (so the checkboxes can be rendered), sorting, paging, and selection on the table. Most importantly, we send preDrawCallback and drawCallback JS functions to make sure the checkboxes are registered with shiny.
+Lastly, any time the user interacts with the table, we call our second helper function to evaluate the checkbox statuses. You can do whatever you please with that information.
+Code
+# Checkbox Table Demo
+
+library(shiny)
+library(DT)
+
+
+#### Helper Functions ####
+#' Construct a checkbox table for an app.
+construct_checkbox_table &lt;- function(rows,
+                                     cols,
+                                     rownames,
+                                     colnames) {
+  checkbox_table &lt;- matrix(
+    character(),
+    nrow = rows,
+    ncol = cols,
+    dimnames = list(rownames, colnames)
+  )
+  
+  for (i in seq_len(rows)) {
+    for (j in seq_len(cols)) {
+      checkbox_table[i, j] &lt;-
+        sprintf(
+          '&lt;input id=&quot;%s,%s&quot; type=&quot;checkbox&quot; class=&quot;shiny-bound-input&quot; /&gt;',
+          rownames[[i]],
+          colnames[[j]]
+        )
+    }
+  }
+  
+  checkbox_table
+}
+
+#' Get the status of checkboxes in a checkbox table.
+evaluate_checkbox_table_status &lt;- function(input, input_table) {
+  table_status &lt;-
+    matrix(
+      logical(),
+      nrow = nrow(input_table),
+      ncol = ncol(input_table),
+      dimnames = list(rownames(input_table), colnames(input_table))
+    )
+  
+  table_rownames &lt;- rownames(input_table)
+  table_colnames &lt;- colnames(input_table)
+  
+  for (i in seq_len(nrow(input_table))) {
+    for (j in seq_len(ncol(input_table))) {
+      table_status[i, j] &lt;-
+        input[[sprintf(&quot;%s,%s&quot;, table_rownames[[i]], table_colnames[[j]])]]
+    }
+  }
+  
+  table_status
+}
+#### End Helper Functions ####
+
+
+#### App ####
+# Create an example checkbox input table to use for the app
+example_checkbox_table &lt;-
+  construct_checkbox_table(
+    2,
+    4,
+    rownames = c(&quot;Annual Bottom Temp Absolute&quot;, &quot;Bottom Temp Anomoly&quot;),
+    colnames = c(&quot;GOM&quot;, &quot;GB&quot;, &quot;MAB&quot;, &quot;SS&quot;)
+  )
+
+ui &lt;- fluidPage(DT::DTOutput(&quot;selection_table&quot;),
+                verbatimTextOutput(&quot;table_selections&quot;),)
+
+server &lt;- function(input, output, session) {
+  output$selection_table &lt;- DT::renderDT({
+    DT::datatable(
+      example_checkbox_table,
+      escape = FALSE,
+      selection = &quot;none&quot;,
+      options = list(
+        dom = &quot;t&quot;,
+        ordering = FALSE,
+        paging = FALSE,
+        preDrawCallback = JS(
+          'function() { Shiny.unbindAll(this.api().table().node()); }'
+        ),
+        drawCallback = JS(
+          'function() { Shiny.bindAll(this.api().table().node()); } '
+        )
+      )
+    )
+  }, server = FALSE)
+  
+  observeEvent(input$selection_table_cell_clicked, {
+    output$table_selections &lt;- renderPrint({
+      evaluate_checkbox_table_status(input, example_checkbox_table)
+    })
+  })
+}
+#### End App ####
+
+shinyApp(ui, server)
+
+
+"
+75894490,Can I restore deleted FHIR resource from _history and maintain its ID?,"Most FHIR servers won't completely remove a FHIR resource from the database when you do a DELETE.
+What I'm wondering is this: if I retreive the latest version of a deleted resource using it _history for example: GET Patient/1/_history/2 and want to &quot;restore&quot; it. What's the best way to do that?
+Is my only option to create a copy of the deleted patient by removing the ID and doing POST to /Patient or... is there some way to restore the deleted patient and keep its original ID?
+","hl7-fhir, hapi-fhir, dstu2-fhir",0,75899235,"This may depend on the FHIR server you're using
+With the HAPI FHIR server a deleted resource is still considered to be an existing record, so simply calling PUT on that resource will &quot;un-delete&quot; it and create a new version, adding it to the resource's history.
+Other FHIR servers might take a different interpretation.
+With the Google Cloud Healthcare API, this would require enabling the &quot;update as create&quot; feature, or upsert operation https://hl7.org/fhir/http.html#upsert. This feature allows you to create a resource with an ID you specify by using PUT instead of POST. The Cloud Healthcare API does not differentiate between deleted and missing records for updates, so &quot;enableUpdateCreate&quot; is required to &quot;re-create&quot; (vs &quot;un-delete&quot;) the resource. However, even though it is &quot;re-created&quot;, it will still become part of the resource's history.
+"
