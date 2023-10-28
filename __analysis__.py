@@ -6,11 +6,11 @@ from output_generation.output_generator import OutputGenerator
 
 def main():
     sample = SampleHandler()
-    report_directory = "/home/leuson/Downloads/finalOutput/"
+    report_directory = ""
     output_generation = OutputGenerator(report_directory)
 
-    aux = sample.select_sample("/home/leuson/Downloads/finalOutput/after/questions.csv",
-                               "/home/leuson/Downloads/finalOutput/after/answers.csv", 3, 1)
+    aux = sample.select_sample("",
+                               "", 3, 1)
     request = Request()
     analysis = GeneratedAnswerAnalysis('all-MiniLM-L6-v2')
     for question in aux:
