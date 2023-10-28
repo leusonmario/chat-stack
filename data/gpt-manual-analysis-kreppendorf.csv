@@ -1,0 +1,101 @@
+id,manual,gpt
+75412792-meta-llama/Llama-2-7b-chat-hf,VERY HIGH,VERY HIGH
+75052561-meta-llama/Llama-2-7b-chat-hf,VERY LOW,MEDIUM
+73185851-gpt-3.5-turbo,HIGH,MEDIUM
+73151371-gpt-3.5-turbo,HIGH,VERY HIGH
+73537413-gpt-3.5-turbo,VERY HIGH,MEDIUM
+75758831-gpt-3.5-turbo,HIGH,VERY HIGH
+74891998-gpt-3.5-turbo,VERY HIGH,MEDIUM
+75307309-gpt-3.5-turbo,LOW,HIGH
+73960832-meta-llama/Llama-2-7b-chat-hf,LOW,VERY HIGH
+74776494-gpt-3.5-turbo,LOW,VERY HIGH
+74997974-gpt-3.5-turbo,VERY HIGH,VERY LOW
+73674092-meta-llama/Llama-2-7b-chat-hf,VERY HIGH,LOW
+75948146-gpt-3.5-turbo,VERY HIGH,LOW
+73515934-meta-llama/Llama-2-7b-chat-hf,VERY HIGH,LOW
+73634127-meta-llama/Llama-2-7b-chat-hf,VERY LOW,MEDIUM
+75535945-gpt-3.5-turbo,VERY HIGH,HIGH
+73805636-meta-llama/Llama-2-7b-chat-hf,MEDIUM,LOW
+73017844-gpt-3.5-turbo,MEDIUM,MEDIUM
+74743227-gpt-3.5-turbo,LOW,MEDIUM
+75039363-meta-llama/Llama-2-7b-chat-hf,VERY LOW,LOW
+73475744-gpt-3.5-turbo,MEDIUM,MEDIUM
+75035488-meta-llama/Llama-2-7b-chat-hf,VERY LOW,VERY LOW
+74053380-gpt-3.5-turbo,VERY LOW,LOW
+75434793-meta-llama/Llama-2-7b-chat-hf,VERY HIGH,VERY HIGH
+75346823-gpt-3.5-turbo,VERY HIGH,MEDIUM
+75789993-gpt-3.5-turbo,VERY HIGH,HIGH
+72936313-meta-llama/Llama-2-7b-chat-hf,MEDIUM,MEDIUM
+73077152-meta-llama/Llama-2-7b-chat-hf,VERY LOW,MEDIUM
+74500669-gpt-3.5-turbo,LOW,LOW
+73314559-meta-llama/Llama-2-7b-chat-hf,VERY LOW,LOW
+73574161-gpt-3.5-turbo,VERY LOW,LOW
+75416375-meta-llama/Llama-2-7b-chat-hf,VERY HIGH,VERY LOW
+73114255-meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM
+74910014-gpt-3.5-turbo,VERY LOW,HIGH
+74485432-meta-llama/Llama-2-7b-chat-hf,VERY LOW,MEDIUM
+73419719-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+74484753-gpt-3.5-turbo,VERY LOW,HIGH
+74481905-meta-llama/Llama-2-7b-chat-hf,LOW,LOW
+75210719-meta-llama/Llama-2-7b-chat-hf,VERY HIGH,HIGH
+75291308-gpt-3.5-turbo,VERY HIGH,VERY HIGH
+73004413-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+74141412-gpt-3.5-turbo,LOW,MEDIUM
+74322206-meta-llama/Llama-2-7b-chat-hf,HIGH,LOW
+74721482-meta-llama/Llama-2-7b-chat-hf,HIGH,VERY HIGH
+73504314-meta-llama/Llama-2-7b-chat-hf,VERY LOW,LOW
+73102008-gpt-3.5-turbo,VERY HIGH,VERY HIGH
+73332258-gpt-3.5-turbo,VERY HIGH,VERY HIGH
+73972027-gpt-3.5-turbo,MEDIUM,MEDIUM
+75080442-gpt-3.5-turbo,VERY HIGH,VERY HIGH
+75441608-gpt-3.5-turbo,MEDIUM,HIGH
+74912847-gpt-3.5-turbo,HIGH,HIGH
+72969739-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+73314559-gpt-3.5-turbo,LOW,HIGH
+73957101-gpt-3.5-turbo,HIGH,VERY LOW
+73076798-meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM
+74189852-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+73003300-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+74407560-meta-llama/Llama-2-7b-chat-hf,LOW,LOW
+76021384-meta-llama/Llama-2-7b-chat-hf,HIGH,VERY HIGH
+74002035-meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM
+75915623-gpt-3.5-turbo,LOW,VERY LOW
+73072459-meta-llama/Llama-2-7b-chat-hf,HIGH,VERY HIGH
+76009085-gpt-3.5-turbo,LOW,MEDIUM
+75555522-gpt-3.5-turbo,HIGH,VERY LOW
+75758831-meta-llama/Llama-2-7b-chat-hf,LOW,VERY HIGH
+75980105-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+73465679-meta-llama/Llama-2-7b-chat-hf,LOW,HIGH
+73001297-gpt-3.5-turbo,HIGH,LOW
+76011691-gpt-3.5-turbo,HIGH,VERY HIGH
+75377287-meta-llama/Llama-2-7b-chat-hf,LOW,VERY LOW
+75353543-gpt-3.5-turbo,HIGH,VERY HIGH
+72954104-gpt-3.5-turbo,LOW,VERY LOW
+73583513-meta-llama/Llama-2-7b-chat-hf,LOW,VERY HIGH
+75085893-gpt-3.5-turbo,HIGH,MEDIUM
+74535758-gpt-3.5-turbo,HIGH,MEDIUM
+76037084-meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM
+72830586-gpt-3.5-turbo,HIGH,LOW
+73113554-meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM
+75666909-gpt-3.5-turbo,HIGH,VERY HIGH
+75056105-meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM
+74167747-gpt-3.5-turbo,HIGH,HIGH
+74214892-gpt-3.5-turbo,LOW,MEDIUM
+75135923-gpt-3.5-turbo,LOW,VERY LOW
+75745637-gpt-3.5-turbo,HIGH,VERY HIGH
+74214892-meta-llama/Llama-2-7b-chat-hf,LOW,LOW
+75754152-gpt-3.5-turbo,HIGH,VERY HIGH
+73977102-meta-llama/Llama-2-7b-chat-hf,HIGH,HIGH
+75650611-gpt-3.5-turbo,HIGH,VERY HIGH
+75354216-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+75920221-gpt-3.5-turbo,HIGH,VERY HIGH
+76048911-meta-llama/Llama-2-7b-chat-hf,HIGH,VERY LOW
+72901581-gpt-3.5-turbo,LOW,MEDIUM
+75344215-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+74624685-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
+74626863-meta-llama/Llama-2-7b-chat-hf,HIGH,VERY HIGH
+74110774-gpt-3.5-turbo,LOW,HIGH
+75377287-gpt-3.5-turbo,LOW,LOW
+73903529-meta-llama/Llama-2-7b-chat-hf,HIGH,LOW
+74286842-gpt-3.5-turbo,HIGH,LOW
+75999602-gpt-3.5-turbo,LOW,LOW
