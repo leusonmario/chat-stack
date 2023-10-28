@@ -180,3 +180,50 @@ class Llama(LLModel):
             use_auth_token=access_token,
         )
         return model
+
+    def ask_for_similarity_analysis(self, original_answer, generated_answer, tags):
+        messages = []
+        messages.append(self.get_similarity_message(original_answer, generated_answer, tags))
+        chats = self.format_tokens(messages)
+
+        torch.cuda.empty_cache()
+        torch.cuda.memory_summary(device=None, abbreviated=False)
+
+        with torch.no_grad():
+            for idx, chat in enumerate(chats):
+                tokens = torch.tensor(chat).long()
+                tokens = tokens.unsqueeze(0)
+                tokens = tokens.to("cuda:0")
+                outputs = self.model_llm.generate(
+                    input_ids=tokens,
+                    max_new_tokens=2048,
+                    do_sample=True,
+                    use_cache=True,
+                    top_p=1.0,
+                    temperature=1.0,
+                    top_k=50,
+                    repetition_penalty=1.0,
+                    length_penalty=1,
+                )
+
+                torch.cuda.empty_cache()
+                torch.cuda.memory_summary(device=None, abbreviated=False)
+
+                return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    def get_similarity_message(self, original_answer, generated_answer, tags):
+        base_messages = [
+            {'role': 'system',
+             'content': "You are an expert in software engineering with much experience on programming."},
+            {'role': 'user', 'content': "Please, act as you have solid experience on these topics: " + tags + " ."},
+            {'role': 'assistant', 'content': "Okay, I have a solid background on " + tags + " ."},
+            {'role': 'user',
+             'content': "This way, check the two inputs, A and B, provided below, analyze each of them, and finally, compute their similarity. For that, please consider not only the style of the inputs but also their semantics and context.\n" +
+                        "When reporting the similarity, please consider an interval between VERY LOW to VERY HIGH (VERY LOW, LOW, MEDIUM, HIGH, VERY HIGH).\n" +
+                        "Please, only report the similarity, and do it by reporting a JSON file with the property similarity, like this template: { \"similarity\": \"\" } \n" +
+                        "DO NOT provide any further information or explanation; just report the similarity, following the template informed, please.\n" +
+
+                        "A = {" + original_answer + "}\n\n" +
+                        "B = {" + generated_answer + "}"}]
+
+        return base_messages

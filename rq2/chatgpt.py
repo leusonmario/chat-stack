@@ -52,7 +52,7 @@ class ChatGPT(LLModel):
             {'role': 'assistant', 'content': "Okay, I have a solid background on " + tags + " ."},
             {'role': 'user',
              'content': "This way, check the two inputs, A and B, provided below, analyze each of them, and finally, compute their similarity. For that, please consider not only the style of the inputs but also their semantics and context.\n" +
-                        "When reporting the similarity, please consider an interval between HIGH to LOW (LOW, MEDIUM, HIGH).\n" +
+                        "When reporting the similarity, please consider an interval between VERY LOW to VERY HIGH (VERY LOW, LOW, MEDIUM, HIGH, VERY HIGH).\n" +
                         "Please, only report the similarity, and do it by reporting a JSON file with the property similarity, like this template: { \"similarity\": \"SIMILARITY\" } \n" +
                         "DO NOT provide any further information or explanation; just report the similarity, following the template informed, please.\n" +
 
