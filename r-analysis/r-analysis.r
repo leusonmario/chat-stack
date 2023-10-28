@@ -16,6 +16,7 @@ print(mean(data_after$number_questions))
 print(shapiro_test_before)
 print(shapiro_test_after)
 
+print("Difference between the number of posted questions before and after")
 wilcox_test <- wilcox.test(data_before$number_questions, data_after$number_questions)
 
 # Print the test results
@@ -39,6 +40,7 @@ print(mean(data_after$number_answers))
 print(shapiro_test_before)
 print(shapiro_test_after)
 
+print("Difference between the number of posted answers before and after")
 wilcox_test <- wilcox.test(data_before$number_answers, data_after$number_answers)
 
 # Print the test results
@@ -62,6 +64,7 @@ print(mean(data_after$number_comments))
 print(shapiro_test_before)
 print(shapiro_test_after)
 
+print("Difference between the number of posted comments before and after")
 wilcox_test <- wilcox.test(data_before$number_comments, data_after$number_comments)
 
 # Print the test results

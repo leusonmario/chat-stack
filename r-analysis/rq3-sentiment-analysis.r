@@ -90,4 +90,4 @@ wilcox.test(filtered_all_data_neutral_gpt$score, filtered_all_data_neutral_llama
 #GPT/ORIGINAL
 wilcox.test(filtered_all_data_neutral_gpt$score, filtered_all_data_neutral_original$score, alternative="greater")
 #LLAMA/ORIGINAL
-wilcox.test(filtered_all_data_neutral_llama$score, filtered_all_data_neutral_original$score, alternative="greater")
+wilcox.test(filtered_all_data_neutral_original$score, filtered_all_data_neutral_llama$score, alternative="greater")
