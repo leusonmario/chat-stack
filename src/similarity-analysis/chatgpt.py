@@ -1,7 +1,7 @@
 import openai
 from decouple import config
 
-from rq2.ll_model import LLModel
+from ll_model import LLModel
 
 
 class ChatGPT(LLModel):

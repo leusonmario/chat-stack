@@ -3,19 +3,19 @@ import json
 import os
 from time import sleep
 
-from rq2.chatgpt import ChatGPT
-from rq2.llama import Llama
+from chatgpt import ChatGPT
+from llama import Llama
 
 def create_generated_sample_file(report_path):
-    if not os.path.exists(report_path + "/similarity_analysis-HL_final_gpt.csv"):
-        with open(report_path + "/similarity_analysis-HL_final_gpt.csv", 'w') as file:
+    if not os.path.exists(report_path + "/similarity-analysis-HL_final_gpt.csv"):
+        with open(report_path + "/similarity-analysis-HL_final_gpt.csv", 'w') as file:
             csvreader = csv.writer(file)
             csvreader.writerow(['question_id', 'manual_analysis', 'similarity', 'llm', 'version'])
 
 def save_output_file(report_path, outputs):
     create_generated_sample_file(report_path)
-    if os.path.exists(report_path + "/similarity_analysis-HL_final_gpt.csv"):
-        with open(report_path + "/similarity_analysis-HL_final_gpt.csv", 'a') as file:
+    if os.path.exists(report_path + "/similarity-analysis-HL_final_gpt.csv"):
+        with open(report_path + "/similarity-analysis-HL_final_gpt.csv", 'a') as file:
             csvreader = csv.writer(file)
             for output in outputs:
                 csvreader.writerow(output)
@@ -29,7 +29,7 @@ def check_analysis_done_for_llm(llm, current_status):
 def read_previous_analysis():
     previous_analysis = {}
 
-    with open("/home/leuson/Downloads/experiment-20230927T183048Z-001/experiment/similarity_analysis/similarity_analysis-HL_final_gpt.csv", 'r') as questions_file:
+    with open("/home/leuson/Downloads/experiment-20230927T183048Z-001/experiment/similarity-analysis/similarity-analysis-HL_final_gpt.csv", 'r') as questions_file:
         csvreader = csv.reader(questions_file)
         next(csvreader)
         for row in csvreader:
@@ -60,4 +60,4 @@ def main(file_questions, report_path):
                     print("ERROR")
 
 if __name__ == '__main__':
-    main("/home/leuson/Downloads/experiment-20230927T183048Z-001/experiment/similarity_analysis/sample/similarity_analysis.csv", "/home/leuson/Downloads/experiment-20230927T183048Z-001/experiment/similarity_analysis")
+    main("/home/leuson/Downloads/experiment-20230927T183048Z-001/experiment/similarity-analysis/sample/similarity-analysis.csv", "/home/leuson/Downloads/experiment-20230927T183048Z-001/experiment/similarity-analysis")

@@ -4,9 +4,9 @@ from time import sleep
 
 from analysis.llm_answer_analysis import GeneratedAnswerAnalysis
 from input.sample_handler import SampleHandler
-from rq2.chatgpt import ChatGPT
-from rq2.llama import Llama
-from rq2.request_llm import Request_LLM
+from chatgpt import ChatGPT
+from llama import Llama
+from request_llm import Request_LLM
 
 
 def read_get_tags(file):
