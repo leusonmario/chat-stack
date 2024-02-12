@@ -1,7 +1,9 @@
-files <- list("/home/leuson/Downloads/ResultsFinal/before/", "/home/leuson/Downloads/ResultsFinal/after/")
-tags <- list("python", "javascript", "reactjs", "java", "c#")
+files <- list("/home/leuson/Downloads/teste/output-library/before/", "/home/leuson/Downloads/teste/output-library/after/")
+tags <- list("pandas", "dataframe", "arrays", "json", "jquery", "numpy", "string", "pyspark", "ggplot2", "tkinter")
+pls <- list("python", "javascript", "java", "c#", "r", "php", "typescript", "c++", "dart", "c")
+frameworks <- list("reactjs", "android", "node.js", "flutter", "django", "angular", "react-native", "spring-boot", "laravel", "vue.js")
 
-for (x in 1:5){
+for (x in 1:10){
     print(paste("Analysis for Tag: ",tags[x], sep=""))
 
     file_path_before <- paste(files[1],tags[x],"-tag.csv", sep="")

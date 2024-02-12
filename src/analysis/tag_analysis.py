@@ -62,32 +62,38 @@ class TagAnalysis:
 
     def generate_tag_usage_frequency(self):
         matplotlib.pyplot.clf()
-        sorted_tags = dict(sorted(self.tags.items(), key=lambda x: x[1], reverse=True)[:5])
+        sorted_tags = dict(sorted(self.tags.items(), key=lambda x: x[1], reverse=True))
         general_dates = []
         tags_by_date = {}
+        languages = ["python", "javascript", "java", "c#", "r", "php", "typescript", "c++", "dart", "c"]
+
+        frameworks = ["reactjs", "android", "node.js", "flutter", "django", "angular", "react-native", "spring-boot", "laravel", "vue.js"]
+
+        libraries = ["pandas", "dataframe", "arrays", "json", "jquery", "numpy", "string", "pyspark", "ggplot2", "tkinter"]
 
         for sorted_tag in sorted_tags:
-            # for each question_id associated with a specific tag (all dates a specific date was used)
-            for question_id in self.tags_by_question_id[sorted_tag]:
-                # check whether the date associated to a question is part of all general dates. If not, add it to the list.
-                if not self.questions_by_date[question_id] in general_dates:
-                    general_dates.append(self.questions_by_date[question_id])
-                try:
-                    # check whether the current selected tag is in the dict of tags associated with dates
-                    if (sorted_tag in tags_by_date):
-                        # if so, check whether the current question date is already in the dict of tags associated with dates
-                        if self.questions_by_date[question_id] in tags_by_date[sorted_tag].keys():
-                            # if so, update the number of tag usage in the related date by one
-                            value = tags_by_date[sorted_tag][self.questions_by_date[question_id]] + 1
-                            tags_by_date[sorted_tag][self.questions_by_date[question_id]] = value
+            if sorted_tag in libraries:
+                # for each question_id associated with a specific tag (all dates a specific date was used)
+                for question_id in self.tags_by_question_id[sorted_tag]:
+                    # check whether the date associated to a question is part of all general dates. If not, add it to the list.
+                    if not self.questions_by_date[question_id] in general_dates:
+                        general_dates.append(self.questions_by_date[question_id])
+                    try:
+                        # check whether the current selected tag is in the dict of tags associated with dates
+                        if (sorted_tag in tags_by_date):
+                            # if so, check whether the current question date is already in the dict of tags associated with dates
+                            if self.questions_by_date[question_id] in tags_by_date[sorted_tag].keys():
+                                # if so, update the number of tag usage in the related date by one
+                                value = tags_by_date[sorted_tag][self.questions_by_date[question_id]] + 1
+                                tags_by_date[sorted_tag][self.questions_by_date[question_id]] = value
+                            else:
+                                # if no, it means, there is no tag usage by that date. so, a new entry in the dict is required.
+                                tags_by_date[sorted_tag][self.questions_by_date[question_id]] = 1
                         else:
-                            # if no, it means, there is no tag usage by that date. so, a new entry in the dict is required.
-                            tags_by_date[sorted_tag][self.questions_by_date[question_id]] = 1
-                    else:
-                        # if not, add the sorted tag to the dict, and for the date associated with the question the value 1
-                        tags_by_date[sorted_tag] = {self.questions_by_date[question_id]: 1}
-                except:
-                    print("ERROR")
+                            # if not, add the sorted tag to the dict, and for the date associated with the question the value 1
+                            tags_by_date[sorted_tag] = {self.questions_by_date[question_id]: 1}
+                    except:
+                        print("ERROR")
 
         values = {}
         dates = []
@@ -97,7 +103,16 @@ class TagAnalysis:
 
             # Extract the values from the dictionary in the sorted order
             # values = [tags_by_date[tag_by_date][date.strftime('%Y-%m-%d')] for date in dates]
-            values[tag_by_date] = [tags_by_date[tag_by_date][date.strftime('%Y-%m-%d')] for date in dates]
+            if tag_by_date in tags_by_date is False:
+                values[tag_by_date] = []
+            else:
+                final_values_frequency = []
+                for date in dates:
+                    if date.strftime('%Y-%m-%d') in tags_by_date[tag_by_date]:
+                        final_values_frequency.append(tags_by_date[tag_by_date][date.strftime('%Y-%m-%d')])
+                    else:
+                        final_values_frequency.append(0)
+                values[tag_by_date] = final_values_frequency
 
             # Create a line chart of the data
         for value in values:
@@ -106,11 +121,11 @@ class TagAnalysis:
 
             # Add labels and title
         plt.xlabel("Date")
-        plt.ylabel("Value")
-        plt.title("Values by Date")
+        #plt.ylabel("Value")
+        plt.title("Distribution of Posted Questions on the Top 10 Most Cited Libraries")
         plt.legend()
         # Show the plot
-        plt.savefig(self.target_directory+"/figures/tag-line-chart-all.png")
+        plt.savefig(self.target_directory+"/figures/tag-line-chart-all-libraries.pdf")
 
         return dates, values
 

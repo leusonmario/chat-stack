@@ -46,21 +46,29 @@ class GeneralAnalysis:
 
     def generate_tag_usage_frequency(self, tags_dates, tags_values):
         matplotlib.pyplot.clf()
-        colors = ['black', 'orange', 'blue', 'green', 'pink']
-        legend_values = [0] * 5
+        colors = ['black', 'orange', 'blue', 'green', 'pink', 'yellow', 'purple', 'brown', 'gray', 'red']
+        legend_values = [0] * 10
 
         for i in range(2):
             j = 0
-            for value in tags_values[i]:
-                aux = tags_dates[i]
-                plt.plot(tags_dates[i], tags_values[i][value], color=colors[j], label="" + value)
-                legend_values[j] = value
+            languages = ["python", "javascript", "java", "c#", "r", "php", "typescript", "c++", "dart", "c"]
+
+            frameworks = ["reactjs", "android", "node.js", "flutter", "django", "angular", "react-native", "spring-boot", "laravel",
+                          "vue.js"]
+
+            libraries = ["pandas", "dataframe", "arrays", "json", "jquery", "numpy", "string", "pyspark", "ggplot2", "tkinter"]
+
+            #for value in tags_values[i]:
+            for language in libraries:
+                #aux = tags_dates[i]
+                plt.plot(tags_dates[i], tags_values[i][language], color=colors[j], label="" + language)
+                legend_values[j] = language
                 j += 1
 
         plt.axvline(x=datetime.strptime('2022-11-30', '%Y-%m-%d').date(), color='r')
         plt.xlabel("Date")
-        plt.ylabel("Value")
-        plt.title("Values by Date")
+        #plt.ylabel("Value")
+        plt.title("Frequency of Posted Questions on the Top 10 Most Cited Libraries")
         plt.legend(legend_values)
 
-        plt.savefig(self.target_directory+"general/tag-line-chart-all.png")
+        plt.savefig(self.target_directory+"general/tag-line-chart-all-libraries.pdf")
