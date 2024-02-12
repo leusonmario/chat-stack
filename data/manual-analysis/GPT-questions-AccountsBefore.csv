@@ -1,0 +1,93 @@
+Question ID,Open Context,,,,Question,,Closes Context,Original Answer,,,,
+,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,Domain,Tag Concordance,No Textual Content,External Reference,Illustrative Context,Asked for GPT Support,Shared GPT Answer
+76044002,Medium,,,Outcome,Explanation,Networking,,,,,Yes,No
+75935056,Medium,,,Code,Question,Programming Languages,Strong,,,,Yes,No
+76031997,Medium,,,,Question,Framework/API/Library,,,,,Yes,Yes
+76020264,Strong,External Link,Image,Code,Question,Web development,Medium,,,,Yes,No
+75868656,Medium,External Link,,,Question,Cybersecurity,Medium,,,,Yes,Yes
+75636191,Medium,,,Code,Question,Tools/IDEs,Strong,,,,Yes,Yes
+75497540,Medium,,,Code,Question,Tools/IDEs,Strong,,,,No,No
+75558305,Shalow,,,Code,Question,Framework/API/Library,Weak,,Documentation,Code,Yes,Yes
+75102715,Medium,,,Code/Error Message,Question,Framework/API/Library,,,,,No,No
+75333022,Strong,,,,Question,Programming Languages,Medium,,,,Yes,Yes
+75455878,Strong,,,Code,Question,Framework/API/Library,Strong,,,,No,No
+75854426,Medium,,,Code,Question,Framework/API/Library,Medium,,,,Yes,Yes
+75861694,Strong,,Image,Code,Question,Framework/API/Library,Medium,,,,Yes,No
+75828202,Medium,,,Code/Error Message,Question,Mobile Development,,,,,Yes,Yes
+75905725,Strong,,,Code,Question,Web development,Medium,,,,Yes,Yes
+75570792,Medium,,,Error Message,Question,Operating Systems,Medium,,,,Yes,Yes
+74879121,Strong,,,Code,Question,Programming Languages,Strong,,Documentation,Code,Yes,Yes
+75753328,Medium,,,Code/Error Message,Explanation,Web development,Medium,,,,Yes,No
+75776968,Medium,,,Code,Explanation,Framework/API/Library,Strong,,Another SO question,Code,Yes,Yes
+76055236,Medium,,,Code/Error Message,Question,Framework/API/Library,Strong,,,,Yes,Yes
+75075787,Shalow,,,Code,Explanation,ML/Data Science,,,,,Yes,No
+75744839,Medium,Documentation,,Code,Question,General Programming Concepts,Medium,,,,No,No
+76015243,Medium,,,Code,Explanation,Programming Languages,,,,,Yes,Yes
+75887168,Shalow,,,Code,Question,Programming Languages,Weak,,Documentation/SO Question,Code,No,No
+75639272,Shalow,,,Code,Question,Framework/API/Library,Weak,,,,Yes,No
+75673029,Strong,,,Code,Explanation,Programming Languages,Strong,,,Code,Yes,No
+75561094,Medium,,,Code,Explanation,Framework/API/Library,Medium,,,,Yes,No
+75715140,Strong,,Image,Code,Question,Tools/IDEs,Strong,,,,Yes,Yes
+75142628,Shalow,,,Code,Question,Programming Languages,Medium,,,,Yes,No
+75975114,Medium,External Link,,,Explanation,Mobile Development,,,,,Yes,Yes
+75963551,Medium,,,Code/Error Message,Question,Framework/API/Library,Strong,,,,Yes,Yes
+75760186,Shalow,,,Code/Error Message,Explanation,ML/Data Science,,,,,Yes,Yes
+75664531,Medium,Documentation,,Code,Explanation,Framework/API/Library,Medium,,,,No,No
+75911209,Medium,,,,Explanation,Tools/IDEs,,,,,Yes,No
+75939756,Strong,,,Code/Error Message,Explanation,Framework/API/Library,Strong,,,,Yes,No
+75445535,Shalow,,,,Question,Framework/API/Library,Weak,,,,No,No
+75924179,Medium,,,Code/Error Message,Explanation,Framework/API/Library,Medium,,,,No,No
+75257077,Medium,,Image,,Explanation,Framework/API/Library,Medium,,,,Yes,No
+74903974,Medium,,,Code/Error Message,Question,Framework/API/Library,Strong,,,,No,No
+76077766,Medium,,,Code,Question,Framework/API/Library,Medium,,,,No,No
+75995458,Medium,,,Code,Explanation,Framework/API/Library,Medium,,,,No,No
+75578655,Medium,,,Code,Question,Programming Languages,Medium,,,Code,Yes,No
+75475827,Strong,Documentation,,Code,Explanation,Framework/API/Library,Medium,,Documentation,Code,Yes,
+76008808,Strong,,Image,Code,Question,ML/Data Science,Strong,,,,Yes,No
+75839072,Medium,,,Code,Question,Framework/API/Library,Weak,,,,Yes,No
+75872457,Medium,,,,Question,Networking,,,,,Yes,Yes
+75481285,Shalow,,,,Question,Framework/API/Library,Weak,,,,No,No
+75466442,Medium,,,Error Message,Explanation,Database/SQL,Medium,,Documentation/SO Question,,Yes,Yes
+75832303,Shalow,,,Expected Outcome,Explanation,Tools/IDEs,Weak,,,,Yes,No
+75641551,Shalow,,,Code,Explanation,Framework/API/Library,Medium,,,,No,No
+75065984,Medium,,,Code/Error Message,Question,Framework/API/Library,,,Documentation/External Link,Code,Yes,No
+76017264,Medium,,,Code,Explanation,Framework/API/Library,,,,,Yes,Yes
+75979297,Strong,,,Code/Error Message,Question,ML/Data Science,Medium,,,,Yes,Yes
+75655497,Medium,Another SO question,,Code,Question,General Programming Concepts,Medium,,,Code,Yes,Yes
+75552647,Shalow,,,Code,Question,Framework/API/Library,Medium,,,,No,No
+75976154,Medium,,,Code,Question,Framework/API/Library,Strong,,,,Yes,
+75774825,Medium,External Link,,Code,Question,Framework/API/Library,Weak,,Documentation,,Yes,No
+75576739,Strong,,,Code,Question,Programming Languages,,,,,Yes,No
+75398462,Shalow,,Image,,Question,Web development,Strong,,,,Yes,Yes
+75491085,Medium,,Image,,Question,Framework/API/Library,Strong,,,,Yes,No
+76079815,Medium,Documentation/SO Question,,Code,Question,Framework/API/Library,Medium,,,,Yes,Yes
+75889163,Medium,,,Code/Error Message,Explanation,Framework/API/Library,Medium,,,,No,No
+75277674,Medium,,,Code,Question,Programming Languages,Medium,,,,Yes,Yes
+75450292,Medium,,,Code/Error Message,Question,Framework/API/Library,Medium,,,Code,Yes,Yes
+75582361,Strong,,,Code/Error Message,Question,Database/SQL,Strong,,,,Yes,No
+75994715,Shalow,,,,Explanation,Framework/API/Library,Weak,,,,Yes,No
+76028386,Shalow,,,,Question,Programming Languages,,,,,Yes,No
+75651916,Medium,,,Code,Question,Framework/API/Library,Medium,,,,Yes,No
+75907927,Medium,,,Code/ Expected Outcome,Question,Operating Systems,Medium,,,Code,Yes,No
+75029490,Medium,,,Code/Error Message,Question,Framework/API/Library,Strong,,,,Yes,No
+74862362,Shalow,,,Code,Question,Programming Languages,,,,,Yes,Yes
+75784990,Strong,,,Code/ Expected Outcome,Explanation,Framework/API/Library,Medium,,,Code,Yes,Yes
+75570744,Medium,,Image,Code,Question,Framework/API/Library,Weak,,,,Yes,No
+75488717,Strong,Another SO question,,Code/Error Message,Explanation,Database/SQL,Strong,,,,Yes,Yes
+75659583,Medium,,,Code/Error Message,Question,Database/SQL,Weak,,Documentation,Code,Yes,Yes
+76019694,Shalow,,Image,,Question,DevOps,,,,,Yes,Yes
+75408572,Shalow,,,Code/ Expected Outcome,Question,Programming Languages,Weak,,,,Yes,No
+75839431,Medium,,Image,Code,Question,Framework/API/Library,Strong,,,Code,Yes,Yes
+75555692,Strong,,,Code,Question,Framework/API/Library,Strong,,,,Yes,No
+75753600,Medium,,,,Question,Programming Languages,Weak,,,,Yes,No
+75440425,Medium,,Image,Code/Error Message,Question,Framework/API/Library,Strong,,,,Yes,No
+75116261,Strong,Documentation,,Code/Error Message,Question,Framework/API/Library,Medium,,,,Yes,Yes
+75239117,Shalow,,,,Question,Database/SQL,Weak,,,,Yes,Yes
+75842367,Medium,External Link,,,Question,Programming Languages,Strong,,,,Yes,Yes
+75701755,Medium,,,Code,Explanation,Framework/API/Library,Medium,,,,No,No
+75567839,Medium,,,Code,Question,Framework/API/Library,Weak,,,,Yes,No
+75283956,Shalow,,,,Question,Framework/API/Library,Strong,,,,Yes,Yes
+76065314,Medium,,,Code/Error Message,Explanation,Tools/IDEs,Medium,,,Code,Yes,No
+75860383,Shalow,,,Code,Question,Programming Languages,Medium,,,,Yes,Yes
+76019331,Medium,External Link,,Code,Question,Programming Languages,,,,,Yes,No
+75001460,Medium,Another SO question,,Code,Question,Programming Languages,Medium,,,,Yes,Yes
