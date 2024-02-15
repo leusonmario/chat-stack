@@ -139,7 +139,7 @@ class Llama(LLModel):
             prompt_messages: [str] = None,
             **kwargs
     ):
-        access_token = "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"
+        access_token = ""
         self.max_new_tokens = max_new_tokens,
         self.do_sample = do_sample,
         self.top_p = top_p,
