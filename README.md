@@ -1,4 +1,4 @@
-# ChatGPT vs LLaMA: Impact, Reliability, and Challenges in Stack Overflow Discussions
+# ChatGPT vs LLaMA: Reliability, Challenges, and Impact in Stack Overflow Discussions
 
 ## Overview
 
