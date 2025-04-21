@@ -297,7 +297,7 @@ Question ID,LLAMA,GPT
 74743835-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
 74776364-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
 75052561-meta-llama/Llama-2-7b-chat-hf,LOW,MEDIUM
-74930743-meta-llama/Llama-2-7b-chat-hf,HIGH ,HIGH
+74930743-meta-llama/Llama-2-7b-chat-hf,HIGH,HIGH
 75194484-gpt-3.5-turbo,LOW,MEDIUM
 75187395-meta-llama/Llama-2-7b-chat-hf,HIGH,LOW
 75699798-meta-llama/Llama-2-7b-chat-hf,MEDIUM,MEDIUM
@@ -426,7 +426,7 @@ Question ID,LLAMA,GPT
 75135923-gpt-3.5-turbo,MEDIUM,VERY LOW
 74637515-gpt-3.5-turbo,LOW,LOW
 75919061-gpt-3.5-turbo,MEDIUM,LOW
-75494817-gpt-3.5-turbo,MEDIUM,High
+75494817-gpt-3.5-turbo,MEDIUM,HIGH
 75644586-gpt-3.5-turbo,HIGH,HIGH
 75977888-gpt-3.5-turbo,HIGH,MEDIUM
 75135939-gpt-3.5-turbo,HIGH,HIGH

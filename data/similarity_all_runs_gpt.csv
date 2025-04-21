@@ -1,4 +1,4 @@
-Question ID,Model,one,two,tree
+Question ID,Model,one,two,three
 74891998,gpt-3.5-turbo,MEDIUM,VERY HIGH,MEDIUM
 74891998,meta-llama/Llama-2-7b-chat-hf,MEDIUM,MEDIUM,MEDIUM
 75766948,gpt-3.5-turbo,HIGH,HIGH,MEDIUM
@@ -722,7 +722,7 @@ Question ID,Model,one,two,tree
 75919061,meta-llama/Llama-2-7b-chat-hf,MEDIUM,LOW,VERY LOW
 75919061,gpt-3.5-turbo,LOW,VERY LOW,VERY LOW
 75494817,meta-llama/Llama-2-7b-chat-hf,HIGH,HIGH,VERY HIGH
-75494817,gpt-3.5-turbo,High,HIGH,VERY HIGH
+75494817,gpt-3.5-turbo,HIGH,HIGH,VERY HIGH
 75644586,meta-llama/Llama-2-7b-chat-hf,LOW,HIGH,MEDIUM
 75644586,gpt-3.5-turbo,HIGH,VERY HIGH,VERY HIGH
 75449604,meta-llama/Llama-2-7b-chat-hf,MEDIUM,LOW,HIGH
@@ -907,7 +907,7 @@ Question ID,Model,one,two,tree
 72828351,gpt-3.5-turbo,HIGH,HIGH,VERY HIGH
 73657033,meta-llama/Llama-2-7b-chat-hf,HIGH,VERY HIGH,VERY HIGH
 73657033,gpt-3.5-turbo,VERY HIGH,HIGH,VERY HIGH
-73925755,meta-llama/Llama-2-7b-chat-hf,VERY HIGH,LOW,VERY SIMILAR
+73925755,meta-llama/Llama-2-7b-chat-hf,VERY HIGH,LOW,VERY HIGH
 73925755,gpt-3.5-turbo,VERY HIGH,VERY LOW,VERY HIGH
 73452611,meta-llama/Llama-2-7b-chat-hf,HIGH,HIGH,MEDIUM
 73452611,gpt-3.5-turbo,LOW,MEDIUM,VERY LOW
@@ -1006,7 +1006,7 @@ Question ID,Model,one,two,tree
 73113554,meta-llama/Llama-2-7b-chat-hf,MEDIUM,VERY HIGH,MEDIUM
 73113554,gpt-3.5-turbo,HIGH,MEDIUM,HIGH
 73960832,meta-llama/Llama-2-7b-chat-hf,VERY HIGH,LOW,VERY LOW
-73960832,gpt-3.5-turbo,MEDIUM,SIMILAR,MEDIUM
+73960832,gpt-3.5-turbo,MEDIUM,HIGH,MEDIUM
 74387517,meta-llama/Llama-2-7b-chat-hf,LOW,VERY LOW,MEDIUM
 74387517,gpt-3.5-turbo,MEDIUM,LOW,LOW
 73634127,meta-llama/Llama-2-7b-chat-hf,MEDIUM,MEDIUM,LOW
@@ -1034,7 +1034,7 @@ Question ID,Model,one,two,tree
 73134275,meta-llama/Llama-2-7b-chat-hf,MEDIUM,LOW,LOW
 73134275,gpt-3.5-turbo,HIGH,VERY HIGH,HIGH
 74257296,meta-llama/Llama-2-7b-chat-hf,MEDIUM,MEDIUM,MEDIUM
-74257296,gpt-3.5-turbo,HIGH,SIMILAR,HIGH
+74257296,gpt-3.5-turbo,HIGH,HIGH,HIGH
 72966759,meta-llama/Llama-2-7b-chat-hf,VERY HIGH,LOW,MEDIUM
 72966759,gpt-3.5-turbo,VERY HIGH,MEDIUM,HIGH
 74606136,meta-llama/Llama-2-7b-chat-hf,VERY LOW,VERY LOW,VERY LOW
@@ -1470,7 +1470,7 @@ Question ID,Model,one,two,tree
 73690166,meta-llama/Llama-2-7b-chat-hf,MEDIUM,HIGH,MEDIUM
 73690166,gpt-3.5-turbo,MEDIUM,HIGH,MEDIUM
 73810279,meta-llama/Llama-2-7b-chat-hf,MEDIUM,MEDIUM,LOW
-73810279,gpt-3.5-turbo,LOW,low,VERY LOW
+73810279,gpt-3.5-turbo,LOW,LOW,VERY LOW
 73389055,meta-llama/Llama-2-7b-chat-hf,HIGH,MEDIUM,HIGH
 73389055,gpt-3.5-turbo,VERY HIGH,HIGH,MEDIUM
 74371499,meta-llama/Llama-2-7b-chat-hf,VERY HIGH,MEDIUM,VERY HIGH
@@ -1519,7 +1519,7 @@ Question ID,Model,one,two,tree
 72935457,meta-llama/Llama-2-7b-chat-hf,LOW,HIGH,MEDIUM
 74587470,gpt-3.5-turbo,MEDIUM,VERY HIGH,MEDIUM
 74587470,meta-llama/Llama-2-7b-chat-hf,MEDIUM,LOW,MEDIUM
-73541768,gpt-3.5-turbo,MEDIUM,VERY_HIGH,HIGH
+73541768,gpt-3.5-turbo,MEDIUM,VERY HIGH,HIGH
 74002035,gpt-3.5-turbo,HIGH,MEDIUM,VERY HIGH
 74002035,meta-llama/Llama-2-7b-chat-hf,MEDIUM,LOW,MEDIUM
 74343850,meta-llama/Llama-2-7b-chat-hf,MEDIUM,HIGH,VERY LOW

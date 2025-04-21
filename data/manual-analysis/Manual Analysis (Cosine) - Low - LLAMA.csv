@@ -1,52 +1,52 @@
-ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,",",Tag Concordance,No Textual Content,External Reference,Illustrative Context,
-74227793,Medium,Documentation,,Code,Question,Framework/Dependency,Strong,,,,
+ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,Domain,Tag Concordance,No Textual Content,External Reference,Illustrative Context,
+74227793,Medium,Documentation,,Code,Question,Framework/Library,Strong,,,,
 74591448,Strong,,,Code,Question,Programming Languages,Medium,,,Code,
-73556146,Strong,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code,
-75727923,Strong,,,Code,Open,Framework/Dependency,Strong,,,Code,
+73556146,Strong,,,Code,Question,Framework/Library,Medium,,Documentation,Code,
+75727923,Strong,,,Code,Open,Framework/Library,Strong,,,Code,
 75726570,Strong,,,Code/Error Message,Question,DevOps,Strong,,,,
 73760219,Medium,,Image,Code,Question,Tools/IDEs,Weak,,,,
 74405746,Strong,,,Code,Question,Mobile,Medium,,Documentation,Code,
-75449324,Shalow,,,,Open,Framework/Dependency,Medium,,Another SO question,Code,
+75449324,Shalow,,,,Open,Framework/Library,Medium,,Another SO question,Code,
 74606136,Medium,,Image,Code,Question,Database/SQL,Strong,,,Code,
 74543810,Strong,,,Code,Open,Tools/IDEs,Weak,,,,
-75258460,Medium,Documentation,,Code,Open,Framework/Dependency,Strong,,Documentation,Code,
-74746284,Strong,,Image,Code,Question,Framework/Dependency,Strong,,,,
+75258460,Medium,Documentation,,Code,Open,Framework/Library,Strong,,Documentation,Code,
+74746284,Strong,,Image,Code,Question,Framework/Library,Strong,,,,
 74652347,Medium,,Image,Code/Error Message,Question,Tools/IDEs,Strong,,Documentation,,
-74437558,Medium,,,Code,Question,Framework/Dependency,Medium,,,,
-75035488,Shalow,,,Code/Error Message,Question,Framework/Dependency,Strong,,,,
-74639660,Medium,,,,Question,Framework/Dependency,Strong,,,,
+74437558,Medium,,,Code,Question,Framework/Library,Medium,,,,
+75035488,Shalow,,,Code/Error Message,Question,Framework/Library,Strong,,,,
+74639660,Medium,,,,Question,Framework/Library,Strong,,,,
 73299474,Medium,,,Code,Open,Programming Languages,Strong,,,Code,Before
 74910981,Medium,,Image,Error message,Question,Tools/IDEs,Strong,,,,
-75621833,Strong,,,Code/Error Message,Open,Framework/Dependency,Strong,,,Code,
-75897290,Medium,,,Code/Error Message,Open,Framework/Dependency,Medium,,Documentation,,
-73354302,Strong,External Link,,Code,Open,Framework/Dependency,Strong,,,,
+75621833,Strong,,,Code/Error Message,Open,Framework/Library,Strong,,,Code,
+75897290,Medium,,,Code/Error Message,Open,Framework/Library,Medium,,Documentation,,
+73354302,Strong,External Link,,Code,Open,Framework/Library,Strong,,,,
 74086321,Strong,,Image,Code,Question,Web development,Strong,,,,
-74811238,Medium,Documentation,,Code,Question,Framework/Dependency,Medium,,Documentation,,
+74811238,Medium,Documentation,,Code,Question,Framework/Library,Medium,,Documentation,,
 75950803,Medium,,,Code/Error Message,Question,Programming Languages,Medium,,,,
-73526145,Shalow,Documentation,,,Question,Framework/Dependency,Medium,,,Code,
+73526145,Shalow,Documentation,,,Question,Framework/Library,Medium,,,Code,
 72978467,Shalow,,,,Question,Tools/IDEs,Medium,,,,
-75818472,Shalow,,Image,,Question,Framework/Dependency,Medium,,Documentation,Code,
-75698936,Strong,Documentation,,Code/Error Message,Question,Framework/Dependency,Medium,,Documentation,,
-74635523,Medium,,Image,Code,Open,Framework/Dependency,Strong,,,Code,
+75818472,Shalow,,Image,,Question,Framework/Library,Medium,,Documentation,Code,
+75698936,Strong,Documentation,,Code/Error Message,Question,Framework/Library,Medium,,Documentation,,
+74635523,Medium,,Image,Code,Open,Framework/Library,Strong,,,Code,
 73535528,Medium,,,Code/Error Message,Question,Programming Languages,Weak,,External Link,,
 72826154,Medium,,,,Open,Tools/IDEs,Medium,,,,
 73211933,Medium,,,,Question,Networking,Strong,,External Link,,
-75768912,Medium,,,Code,Question,Framework/Dependency,Strong,,,,
-74976717,Strong,,,Code,Question,Framework/Dependency,Strong,,Documentation,Code,After
-74053380,Shalow,,,,Question,Framework/Dependency,Weak,,,Code,
+75768912,Medium,,,Code,Question,Framework/Library,Strong,,,,
+74976717,Strong,,,Code,Question,Framework/Library,Strong,,Documentation,Code,After
+74053380,Shalow,,,,Question,Framework/Library,Weak,,,Code,
 73690166,Medium,,,,Question,Tools/IDEs,Weak,,Documentation,,
 72907961,Shalow,,Image,Code,Open,Web development,Weak,,Another SO question,Code,
 76030821,Shalow,,,,Question,Tools/IDEs,Weak,,Documentation,Code,
 75610201,Shalow,,,,Question,Operating Systems,Weak,,External Link,,
 74016253,Medium,,,Code,Question,Database/SQL,Medium,,Documentation,Code,
 74173571,Medium,,,Code/Error Message,Open,Tools/IDEs,Strong,,,,Before
-75392538,Medium,,,Code,Question,Framework/Dependency,Strong,,,Code,
-74753176,Medium,,,Code,Open,Framework/Dependency,,,,Code,After
+75392538,Medium,,,Code,Question,Framework/Library,Strong,,,Code,
+74753176,Medium,,,Code,Open,Framework/Library,,,,Code,After
 73972027,Medium,,,Code,Question,Programming Languages,Strong,,,Code,
-74387517,Shalow,,Image,,Open,Framework/Dependency,Weak,,,,
+74387517,Shalow,,Image,,Open,Framework/Library,Weak,,,,
 73452611,Medium,,Image,Code,Open,Web development,Strong,,,,
 74402927,Medium,,Image,,Question,Tools/IDEs,Medium,Image,,Code,
-74512385,Shalow,,,Code,Question,Framework/Dependency,Weak,,,Code,
+74512385,Shalow,,,Code,Question,Framework/Library,Weak,,,Code,
 74587419,Medium,,Image,,Open,Tools/IDEs,Strong,,,,
 76004983,Medium,,,Code,Question,Programming Languages,Medium,,,,
 75255746,Shalow,,,Code,Question,Programming Languages,Medium,,Documentation,,
@@ -55,49 +55,49 @@ ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Q
 75299402,Medium,,,Code,Question,Database/SQL,Weak,,,Code,
 73805636,Medium,External Link,Image,,Question,Tools/IDEs,Weak,Image,,Code,
 74857640,Medium,,,,Question,DevOps,Medium,,Another SO question,,
-73143311,Shalow,,,Code,Question,Framework/Dependency,Weak,,Documentation,Code,
-73253228,Medium,,,Code,Open,Framework/Dependency,Weak,,,,
+73143311,Shalow,,,Code,Question,Framework/Library,Weak,,Documentation,Code,
+73253228,Medium,,,Code,Open,Framework/Library,Weak,,,,
 75377287,Shalow,,Image,,Question,Tools/IDEs,Weak,,Documentation,,
 75089553,Strong,External Link,,Code,Open,Web development,Medium,,,Code,
 75385779,Shalow,,,Code,Question,Database/SQL,Medium,,Documentation,Code,
-75948146,Medium,,Image,Code,Question,Framework/Dependency,Medium,,Documentation,,
+75948146,Medium,,Image,Code,Question,Framework/Library,Medium,,Documentation,,
 74996056,Shalow,,Image,Error message,Open,Tools/IDEs,Strong,,,,
 75463207,Medium,Another SO question,,Code,Question,Programming Languages,Weak,,,Code,
 75388014,Shalow,,,Code,Open,Programming Languages,Medium,,Documentation,Code,
-74622976,Shalow,,,Code,Question,Framework/Dependency,Medium,,,Code,
-74506570,Shalow,External Link,Image,,Question,Framework/Dependency,Strong,Image,Documentation,,
+74622976,Shalow,,,Code,Question,Framework/Library,Medium,,,Code,
+74506570,Shalow,External Link,Image,,Question,Framework/Library,Strong,Image,Documentation,,
 74382338,Medium,,,Code,Question,Programming Languages,Medium,,,Code,Before
-73218534,Medium,,,Code,Question,Framework/Dependency,Medium,,Another SO question,Code,
+73218534,Medium,,,Code,Question,Framework/Library,Medium,,Another SO question,Code,
 74625152,Medium,Another SO question,,Code,Question,Operating Systems,Medium,,,Code,
-75715631,Medium,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code,
+75715631,Medium,,,Code,Question,Framework/Library,Medium,,Documentation,Code,
 74381155,Medium,,,Error message,Question,DevOps,Medium,,,Code,Before
-75056287,Strong,,,Code/ Expected output,Open,Framework/Dependency,Medium,,,Code,After
+75056287,Strong,,,Code/ Expected output,Open,Framework/Library,Medium,,,Code,After
 73611112,Medium,,,Code,Question,Programming Languages,Medium,,Documentation/ SO Question,Code,
 73879329,Medium,,,Code/ Error message,Question,Database/SQL,Medium,,,Code,Before
 75085893,Medium,External Link,,Code,Question,Tools/IDEs,Medium,,External Link,Code,After
-74365144,Medium,,,Code,Question,Framework/Dependency,Weak,,,Code,Before
-75689998,Medium,,,Code/Error Message,Open,Framework/Dependency,Strong,,,Code,
-76066060,Medium,,Image,Code,Question,Framework/Dependency,Strong,,,Code,After
-74214892,Medium,,,Code,Open,Framework/Dependency,Strong,,Documentation,,
+74365144,Medium,,,Code,Question,Framework/Library,Weak,,,Code,Before
+75689998,Medium,,,Code/Error Message,Open,Framework/Library,Strong,,,Code,
+76066060,Medium,,Image,Code,Question,Framework/Library,Strong,,,Code,After
+74214892,Medium,,,Code,Open,Framework/Library,Strong,,Documentation,,
 75100575,Medium,,Image,Code,Question,Web development,Strong,,,Code,
 74041404,Medium,,,Code,Question,DevOps,Strong,,,,
-75778261,Strong,,,Code/Error Message,Open,Framework/Dependency,Weak,,,Code,
+75778261,Strong,,,Code/Error Message,Open,Framework/Library,Weak,,,Code,
 73553976,Strong,,,Code,Question,Programming Languages,Medium,,,,
 74328847,Medium,,,Code,Question,Programming Languages,Weak,,Documentation,,
 75709844,Medium,,,Code,Open,Programming Languages,Medium,,Another SO question,Code,
-72971634,Shalow,,Image,Code,Question,Framework/Dependency,Weak,,,Code,
+72971634,Shalow,,Image,Code,Question,Framework/Library,Weak,,,Code,
 73675612,Medium,,,Code,Question,Tools/IDEs,Strong,Image,,,Before
-73410719,Medium,,Image,Code/Error Message,Question,Framework/Dependency,Strong,,,Code,
-76071743,Medium,,Image,,Question,Framework/Dependency,Medium,Image,,Code,After
+73410719,Medium,,Image,Code/Error Message,Question,Framework/Library,Strong,,,Code,
+76071743,Medium,,Image,,Question,Framework/Library,Medium,Image,,Code,After
 74481905,Medium,,,Code/Error Message,Open,Programming Languages,Weak,,,Code,
 73810279,Medium,External Link,,Code/Error Message,Open,Tools/IDEs,Medium,,,,
-73184914,Strong,,,Code,Question,Framework/Dependency,Strong,,Documentation,,
-75449068,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code,
+73184914,Strong,,,Code,Question,Framework/Library,Strong,,Documentation,,
+75449068,Medium,,,Code,Question,Framework/Library,Medium,,,Code,
 75555522,Medium,,,Code,Question,Database/SQL,Strong,,,Code,
 74919045,Shalow,External Link,,,Open,Tools/IDEs,Weak,,,,After
-73674092,Shalow,,Image,,Question,Framework/Dependency,Weak,,,,Before
+73674092,Shalow,,Image,,Question,Framework/Library,Weak,,,,Before
 74910014,Shalow,,,Code,Question,Programming Languages,Weak,,,Code,After
-75789993,Shalow,,,Code,Question,Framework/Dependency,Weak,,,Code,After
+75789993,Shalow,,,Code,Question,Framework/Library,Weak,,,Code,After
 73201201,Medium,,,Code,Question,Database/SQL,Medium,,,Code,
 74263069,Medium,,,Code,Open,Tools/IDEs,Medium,,,Code,Before
 72843205,Medium,,Image,Code,Question,Tools/IDEs,Weak,,Documentation,Code,
@@ -113,7 +113,7 @@ ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Q
 72954104,Shalow,,,,Question,Tools/IDEs,Medium,,,,
 74310780,Strong,,,Code/Expected Outcome,Question,Programming Languages,Strong,,,Code,
 74952536,Medium,,,Code,Open,Programming Languages,Medium,,,Code,
-75584772,Medium,,,Code,Question,Framework/Dependency,Weak,,,Code,After
+75584772,Medium,,,Code,Question,Framework/Library,Weak,,,Code,After
 74110774,Medium,,,Code,Question,Programming Languages,Weak,,,Code,
 73422387,Shalow,Documentation,,,Question,Tools/IDEs,Medium,,Another SO question,Code,Before
 73646644,Medium,,,Code,Question,Programming Languages,Weak,,Documentation,Code,Before
@@ -123,12 +123,12 @@ ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Q
 73300008,Strong,,,Code,Question,DevOps,Strong,,,,Before
 74257296,Strong,,,Code/Expected Outcome,Question,General Programming Concepts,Strong,,,Code,
 74237232,Shalow,,,Code,Question,Programming Languages,Medium,,Documentation,Code,
-74368270,Medium,Another SO question,,Code,Open,Framework/Dependency,Medium,,,,Before
-75204334,Medium,,,Code/ Error message,Open,Framework/Dependency,Weak,,,Code,After
+74368270,Medium,Another SO question,,Code,Open,Framework/Library,Medium,,,,Before
+75204334,Medium,,,Code/ Error message,Open,Framework/Library,Weak,,,Code,After
 75659998,Shalow,,,,Question,Programming Languages,Medium,,,Code,
 74717107,Shalow,,Image,,Open,Tools/IDEs,Strong,,,Code,After
 74866512,Shalow,,,,Question,Tools/IDEs,Weak,,,Code,After
-74777076,Medium,,,Code,Question,Framework/Dependency,Medium,Image,Documentation,Code,After
+74777076,Medium,,,Code,Question,Framework/Library,Medium,Image,Documentation,Code,After
 75188688,Medium,,,Code,Question,Database/SQL,Weak,,Documentation/ External Link,Code,After
 73750290,Medium,,,Code,Question,Programming Languages,Medium,,,Code,Before
 75056105,Shalow,,,,Question,Tools/IDEs,Medium,,,Code,After
@@ -138,17 +138,17 @@ ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Q
 73867414,Medium,,,,Question,DevOps,Weak,,External Link,,
 75114654,Shalow,,,Code,Open,Networking,Medium,,,,After
 75514021,Medium,,,Code,Question,Programming Languages,Medium,,,Code,After
-75491505,Medium,,,Code,Question,Framework/Dependency,Strong,,,,After
+75491505,Medium,,,Code,Question,Framework/Library,Strong,,,,After
 75517381,Medium,,,Code,Question,Operating Systems,Weak,,External Link,Code,
 74500669,Medium,,,Code,Question,Programming Languages,Weak,,,Code,Before
 74729692,Medium,,,Code,Question,Programming Languages,Medium,,,Code,After
-73464752,Medium,,,Code,Question,Framework/Dependency,Medium,,Documentation,,
-75768527,Shalow,,,Code,Question,Framework/Dependency,Medium,,,Code,
-75922766,Medium,Documentation,,Code,Question,Framework/Dependency,Medium,,,Code,
+73464752,Medium,,,Code,Question,Framework/Library,Medium,,Documentation,,
+75768527,Shalow,,,Code,Question,Framework/Library,Medium,,,Code,
+75922766,Medium,Documentation,,Code,Question,Framework/Library,Medium,,,Code,
 74603346,Medium,,,,Open,Database/SQL,Weak,,,Code,Before
-73738035,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Medium,,Documentation,Code,
+73738035,Strong,,,Code/Expected Outcome,Question,Framework/Library,Medium,,Documentation,Code,
 74691834,Shalow,,,Code,Question,ML/Data Science,Medium,,,,After
-75958646,Medium,,,Code/ Error Message,Question,Framework/Dependency,Medium,,Documentation,Code,After
+75958646,Medium,,,Code/ Error Message,Question,Framework/Library,Medium,,Documentation,Code,After
 75534461,Shalow,,,,Open,Programming Languages,Medium,,Documentation,Code,After
 74339986,Shalow,,,Code,Explanation,General Programming Concepts,Strong,,,Code,
 73077152,Medium,,Image,Code,Question,Database/SQL,Medium,,Documentation,Code,Before
@@ -158,36 +158,36 @@ ID,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Q
 75312392,Shalow,,,Code,Open,Tools/IDEs,Medium,,,,After
 75039363,Medium,,,Code,Question,Programming Languages,Medium,,,,
 75040685,Shalow,,,Code,Question,Tools/IDEs,Medium,Image,,Cide,After
-76053426,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Medium,,Documentation,Code,
+76053426,Strong,,,Code/Expected Outcome,Question,Framework/Library,Medium,,Documentation,Code,
 74637515,Medium,,,Code,Question,Tools/IDEs,Strong,,,Code,
-73316739,Medium,,Image,Code,Question,Framework/Dependency,Strong,,,Code,
+73316739,Medium,,Image,Code,Question,Framework/Library,Strong,,,Code,
 75445007,Medium,,,Code,Question,Programming Languages,Strong,,Another SO question,Code,
 73546092,Shalow,,,,Question,General Programming Concepts,Weak,,Another SO question,Code,Before
 73528506,Medium,,Image,Code,Open,Programming Languages,Medium,,,Code/ Output,Before
 75672793,Medium,,,Code,Question,Programming Languages,Weak,,,Code,After
-75377220,Shalow,,,,Question,Framework/Dependency,Medium,,Documentation,,After
-75652520,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Strong,,,Code,
+75377220,Shalow,,,,Question,Framework/Library,Medium,,Documentation,,After
+75652520,Strong,,,Code/Expected Outcome,Question,Framework/Library,Strong,,,Code,
 75827366,Medium,External Link,,,Open,Tools/IDEs,Weak,Image,Documentation,Code,
 73669427,Shalow,,,,Question,Tools/IDEs,Medium,,,,Before
-74560568,Shalow,,,Code,Question,Framework/Dependency,Weak,,External Link,Code,
+74560568,Shalow,,,Code,Question,Framework/Library,Weak,,External Link,Code,
 75198599,Shalow,,,,Questions,Programming Languages,Weak,,Documentation,,After
-75257103,Medium,,Image,Code,Question,Framework/Dependency,Medium,,,Code,
+75257103,Medium,,Image,Code,Question,Framework/Library,Medium,,,Code,
 75012061,Medium,,,Code,Question,Programming Languages,Medium,,,Code,After
 75642280,Medium,,,Code,Question,Programming Languages,Medium,,Documentation,,After
 74026877,Medium,,,Code/ Error Message,Open,DevOps,Medium,,Documentation,,Before
-75953590,Medium,,,Code,Open,Framework/Dependency,Strong,,,Code,After
+75953590,Medium,,,Code,Open,Framework/Library,Strong,,,Code,After
 75274866,Shalow,Another SO question,,Code,Open,DevOps,Medium,,Documentation,Code,After
 74189852,Shalow,Documentation,,,Open,DevOps,Weak,,,,Before
-75881502,Medium,,Image,Code,Question,Framework/Dependency,Medium,Image,,Code,After
+75881502,Medium,,Image,Code,Question,Framework/Library,Medium,Image,,Code,After
 75238728,Shalow,,,Code,Open,Web development,Medium,,,Code,After
 72966905,Shalow,,,,Open,Programming Languages,Weak,Image,,Code,Before
 74244055,Medium,,,Code,Open,Programming Languages,Weak,,Documentation/ External Link,,Before
 75644586,Shalow,,,Code,Question,Operating Systems,Medium,,,,After
-74187884,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code,
+74187884,Medium,,,Code,Question,Framework/Library,Medium,,,Code,
 74743835,Medium,,,Code,Question,Programming Languages,Weak,,,Code,
 74548191,Shalow,,Image,Code,Question,Tools/IDEs,Weak,Image,Another SO question,Code,
-72905471,Medium,,,Code,Question,Framework/Dependency,Medium,,,,Before
-75909740,Shalow,,Image,,Question,Framework/Dependency,Medium,Image,,,
+72905471,Medium,,,Code,Question,Framework/Library,Medium,,,,Before
+75909740,Shalow,,Image,,Question,Framework/Library,Medium,Image,,,
 75686934,Strong,,,Code,Question,Programming Languages,Medium,,,Code,After
-73270959,Shalow,External Link,,,Open,Framework/Dependency,Medium,,,Code,
-75132488,Strong,,,Code/ Expected Output,Open,Framework/Dependency,Medium,,Documentation,Code,After
+73270959,Shalow,External Link,,,Open,Framework/Library,Medium,,,Code,
+75132488,Strong,,,Code/ Expected Output,Open,Framework/Library,Medium,,Documentation,Code,After

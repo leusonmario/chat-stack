@@ -1,25 +1,25 @@
-Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Answer,,
-,,,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,",",Tag Concordance,No Textual Content,External Reference,Illustrative Context
+Cosine Metric,Question ID,,Open Context,,,,Question,Domain,Closes Context,Original Answer,,
+,,,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,"",Tag Concordance,No Textual Content,External Reference,Illustrative Context
 ,73687017,Before,Medium,Another SO question,,Code,Question,Programming Languages,Medium,,,Code
 ,75494817,After,Medium,,,Code,Question,Programming Languages,Medium,,,
 ,76012769,,,,,,,,,,,
 ,75355962,After,Medium,,,Code,Question,Programming Languages,Medium,,,Code
 ,73332258,Before,Medium,,,Code,Question,General Programming Concepts,Medium,,,Code
 ,73032148,Before,Shalow,,,Error message,Question,DevOps,Strong,,,Code
-,75341458,After,Medium,,,,Open,Framework/Dependency,Strong,,Documentation,Code
+,75341458,After,Medium,,,,Open,Framework/Library,Strong,,Documentation,Code
 ,73113554,Before,Shalow,,,Code,Question,Programming Languages,Medium,,,Code
-,72854554,Before,Medium,,Image,Code,Question,Framework/Dependency,Medium,,,Code
-,73131247,Before,Medium,,,Code,Question,Framework/Dependency,Strong,,Documentation,Code
+,72854554,Before,Medium,,Image,Code,Question,Framework/Library,Medium,,,Code
+,73131247,Before,Medium,,,Code,Question,Framework/Library,Strong,,Documentation,Code
 ,74960462,After,Medium,Documentation,,Code,Question,Database/SQL,Strong,,Documentation,
 ,73290373,Before,Medium,,,Code,Open,Programming Languages,Medium,,,Code
 ,74350679,Before,Medium,,,Code,Question,Programming Languages,Strong,,,Code
-,75604275,After,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
+,75604275,After,Medium,,,Code,Question,Framework/Library,Medium,,,Code
 ,74891998,After,Medium,Documentation,Image,,Question,Database/SQL,,,,
 ,74076957,Before,Medium,External Link,,Code,Question,Programming Languages,Strong,,,Code
 ,75036609,After,Shalow,,,Code,Open,Web development,Weak,,,Code
 ,75314123,After,Medium,,,Code,Question,Tools/IDEs/Environment,Strong,,Documentation,Code
-,74659206,After,Shalow,,,Code,Question,Framework/Dependency,Medium,,,Code
-,75802832,After,Medium,,,Code,Open,Framework/Dependency,Medium,,Documentation,Code
+,74659206,After,Shalow,,,Code,Question,Framework/Library,Medium,,,Code
+,75802832,After,Medium,,,Code,Open,Framework/Library,Medium,,Documentation,Code
 ,73694809,Before,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 ,75090788,After,Medium,,,Code,Question,Tools/IDEs/Environment,Medium,Image,Documentation,Code
 ,75176482,After,Shalow,,,Code,Question,Programming Languages,Weak,,Another SO question,Code
@@ -27,10 +27,10 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,73841384,Before,Medium,,,Code,Question,Programming Languages,Strong,,,Code
 ,73657033,Before,Medium,,,Output,Question,Tools/IDEs/Environment,Strong,,Documentation,Code
 ,73683516,Before,Medium,,,Code,Question,Programming Languages,Medium,,,Code
-,74929519,After,Medium,,,Error message,Open,Framework/Dependency,Medium,,Documentation,Code
+,74929519,After,Medium,,,Error message,Open,Framework/Library,Medium,,Documentation,Code
 ,75650611,After,Medium,,Image,Code,Question,Programming Languages,Strong,,,Code
-,75291308,After,Medium,,,Code/Error Message,Open,Framework/Dependency,Strong,,,Code
-,75198599,After,Shalow,,,,Questions,Framework/Dependency,Weak,,Documentation,
+,75291308,After,Medium,,,Code/Error Message,Open,Framework/Library,Strong,,,Code
+,75198599,After,Shalow,,,,Questions,Framework/Library,Weak,,Documentation,
 ,73319080,Before,Strong,,,Code/Error Message,Open,Web development,Medium,,Documentation,Code
 ,74933094,After,Shalow,,,,Question,DevOps,Medium,,Documentation,
 ,75412883,After,Shalow,,,Code,Question,Programming Languages,Medium,,,Code
@@ -39,29 +39,29 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,73746526,Before,Strong,,,Code/Output,Open,Database/SQL,,,Documentation,Code
 ,73515934,Before,Medium,,,Code/Output,Question,DevOps,Weak,,Documentation,Code
 ,73354989,Before,Medium,,,Code,Question,Programming Languages,Weak,,External Link,Code
-,73920596,Before,Strong,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code
-,75196037,After,Medium,,,Code/Error Message,Question,Framework/Dependency,Medium,,,Code
+,73920596,Before,Strong,,,Code,Question,Framework/Library,Medium,,Documentation,Code
+,75196037,After,Medium,,,Code/Error Message,Question,Framework/Library,Medium,,,Code
 ,75701352,After,Medium,,,Code,Questions,Tools/IDEs/Environment,Weak,,Documentation,Code
 ,73093527,Before,Medium,,,Code,Open,Programming Languages,Medium,,,Code
-,74400294,Before,Shalow,,,Code/Output,Question,Framework/Dependency,Medium,,,Code
+,74400294,Before,Shalow,,,Code/Output,Question,Framework/Library,Medium,,,Code
 ,74223372,Before,Medium,,,Code,Open,Programming Languages,Medium,,,Code
-,73515766,Before,Medium,,,Code,Open,Framework/Dependency,Strong,,,Code
+,73515766,Before,Medium,,,Code,Open,Framework/Library,Strong,,,Code
 ,74237043,Before,Shalow,,,Code,Question,Programming Languages,Strong,,,Code
 ,74727222,After,Medium,,,Code,Question,DevOps,Strong,,,Code
 ,76011691,After,Shalow,,,Code/Output,Question,Operating Systems,Medium,,,Code
 ,73591819,Before,Shalow,,,Code,Question,Web development,Strong,,,Code
-,75705927,After,Shalow,,,Code,Question,Framework/Dependency,Strong,,,
+,75705927,After,Shalow,,,Code,Question,Framework/Library,Strong,,,
 ,75203685,After,Medium,,,Code,Question,Programming Languages,Medium,,,Code
 ,75552848,After,Medium,,,Code,Open,Programming Languages,Medium,,,Code
-,75780030,After,Shalow,,,Code,Question,Framework/Dependency,Medium,,,Code
+,75780030,After,Shalow,,,Code,Question,Framework/Library,Medium,,,Code
 ,73072459,Before,Strong,,,Expected Outcome,Question,Programming Languages,Weak,,Documentation,Code
 ,72970327,Before,Medium,,,Code/Error Message,Question,Tools/IDEs/Environment,Medium,,External Link,Code
 ,74588596,Before,Shalow,,,,Question,DevOps,Strong,Image,,
-,73393051,Before,Strong,,,Code/ Expected Output,Open,Framework/Dependency,Medium,,,Code
+,73393051,Before,Strong,,,Code/ Expected Output,Open,Framework/Library,Medium,,,Code
 ,75681460,After,Shalow,,,Code/Error Message,Question,Tools/IDEs/Environment,Strong,,Documentation,Code
-,74485432,Before,Medium,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code
-,75779286,After,Medium,,Image,Code,Open,Framework/Dependency,Strong,,Documentation,Code
-,74678625,After,Strong,,,Code/ Expected Output,Open,Framework/Dependency,Weak,,,Code
+,74485432,Before,Medium,,,Code,Question,Framework/Library,Medium,,Documentation,Code
+,75779286,After,Medium,,Image,Code,Open,Framework/Library,Strong,,Documentation,Code
+,74678625,After,Strong,,,Code/ Expected Output,Open,Framework/Library,Weak,,,Code
 ,73283623,Before,Strong,,,Code/ Expected Output,Question,Programming Languages,Weak,,Another SO question,Code
 ,73493717,Before,Medium,,,Code,Question,Database/SQL,Medium,,,Code
 ,74912847,After,Medium,,,Code,Explanation,Programming Languages,Weak,,,Code
@@ -70,21 +70,21 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,74829371,After,Medium,Documentation,,,Question,Programming Languages,Weak,,,
 ,73206798,Before,Shalow,,,,Question,DevOps,Strong,,,
 ,75644586,After,Medium,,,Code,Questions,Programming Languages,Medium,,,
-,75754152,After,Medium,Another SO question,,Code,Question,Framework/Dependency,Medium,,,Code
+,75754152,After,Medium,Another SO question,,Code,Question,Framework/Library,Medium,,,Code
 ,74895100,After,Strong,,,Expected Outcome,Question,Database/SQL,Medium,,,Code
 ,73870058,Before,Medium,,,,Question,Operating Systems,Medium,,External Link,
 ,75792418,After,Medium,,,Code/Error Message,Question,Programming Languages,Medium,,,Code
 ,73925755,Before,Medium,,,Code/Error Message,Open,Programming Languages,Weak,,,Code
 ,74460252,Before,Medium,,,Code,Question,Programming Languages,Medium,,,Code
-,74412442,Before,Shalow,,,Code,Question,Framework/Dependency,Weak,,,Code
+,74412442,Before,Shalow,,,Code,Question,Framework/Library,Weak,,,Code
 ,74590672,Before,Medium,,,Code/Error Message,Question,Programming Languages,Strong,,,Code
 ,75233987,After,Medium,,,Code,Question,General Programming Concepts,Medium,,Documentation,Code
 ,75536237,After,Shalow,Another SO question,,Code,Question,General Programming Concepts,Medium,,,Code
-,75022490,After,Medium,,,Code/ Expected Output,Questions,Framework/Dependency,Weak,,,Code
-,74440532,Before,Medium,,,Code,Open,Framework/Dependency,Medium,,,Code
-,74985752,After,Shalow,,Image,Code,Question,Framework/Dependency,Medium,,,Code
+,75022490,After,Medium,,,Code/ Expected Output,Questions,Framework/Library,Weak,,,Code
+,74440532,Before,Medium,,,Code,Open,Framework/Library,Medium,,,Code
+,74985752,After,Shalow,,Image,Code,Question,Framework/Library,Medium,,,Code
 ,72830586,Before,Strong,,Image,Code/ Expected Output,Open,Database/SQL,Weak,,External Link,Code
-,75459074,After,Strong,,,Code/ Expected Output,Open,Framework/Dependency,Strong,,Another SO question,Code
+,75459074,After,Strong,,,Code/ Expected Output,Open,Framework/Library,Strong,,Another SO question,Code
 ,72847591,Before,Shalow,,,Code,Open,Programming Languages,Medium,,,Code
 ,75062538,After,Strong,,,Code,Question,Programming Languages,Medium,,,Code
 ,73060562,Before,Shalow,,,,Question,DevOps,Weak,,Documentation,
@@ -95,22 +95,22 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,75335522,After,Shalow,,,Code,Question,Programming Languages,Weak,,,Code
 ,75141541,After,Medium,External Link,,,Question,General Programming Concepts,Weak,,,Code
 ,74363179,Before,Medium,,,Code,Question,Programming Languages,Weak,,,Code
-,75801284,After,Shalow,,Image,,Question,Framework/Dependency,Weak,,,
+,75801284,After,Shalow,,Image,,Question,Framework/Library,Weak,,,
 ,74438621,Before,Medium,,Image,Code,Question,General Programming Concepts,Medium,Image,,Code
-,73518721,Before,Medium,,Image,Code,Question,Framework/Dependency,Strong,,,Code
-,74118094,Before,Medium,,,Code,Question,Framework/Dependency,Weak,,Documentation,Code
+,73518721,Before,Medium,,Image,Code,Question,Framework/Library,Strong,,,Code
+,74118094,Before,Medium,,,Code,Question,Framework/Library,Weak,,Documentation,Code
 ,74286842,Before,Shalow,,,Code,Question,Programming Languages,Medium,,,Code
 ,75888265,After,Shalow,,,Error message,Open,Tools/IDEs/Environment,Strong,,Documentation,
-,73277769,Before,Medium,,,Code/ Expected Output,Question,Framework/Dependency,Strong,,,Code
+,73277769,Before,Medium,,,Code/ Expected Output,Question,Framework/Library,Strong,,,Code
 ,72957907,Before,Strong,,,Code,Question,Database/SQL,Strong,,Another SO question,Code
-,74633644,After,Medium,,Image,Code,Open,Framework/Dependency,Medium,Image,,Code
+,74633644,After,Medium,,Image,Code,Open,Framework/Library,Medium,Image,,Code
 ,73299474,Before,Strong,,,Code,Open,Programming Languages,Strong,,,Code
-,73398477,Before,Shalow,,,,Question,Framework/Dependency,Medium,,External Link,Code
+,73398477,Before,Shalow,,,,Question,Framework/Library,Medium,,External Link,Code
 ,75958436,After,Strong,,,Code,Question,Programming Languages,Weak,,Documentation,Code
 ,73316485,Before,Shalow,,,Code,Question,Programming Languages,Strong,,,Code
 ,72940123,Before,Medium,,,,Question,Tools/IDEs/Environment,Medium,,Documentation,
-,74349234,Before,Strong,,,Code/ Expected Output,Question,Framework/Dependency,Strong,,,
-,72887432,Before,Shalow,,,,Open,Framework/Dependency,Medium,Image,,
+,74349234,Before,Strong,,,Code/ Expected Output,Question,Framework/Library,Strong,,,
+,72887432,Before,Shalow,,,,Open,Framework/Library,Medium,Image,,
 ,75205665,After,Medium,,,Expected Outcome,Question,Programming Languages,Weak,,,Code
 ,75926446,After,Strong,,,Code/Output,Question,Database/SQL,Weak,,,Code
 ,76024411,After,Medium,,,Code/Error Message,Question,General Programming Concepts,Medium,,,Code
@@ -120,9 +120,9 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,73693052,Before,Strong,,,Code/ Expected Output,Question,Programming Languages,Weak,,,Code
 ,75149224,After,Shalow,,,Error message,Questions,Tools/IDEs/Environment,Weak,,Documentation,
 ,73977102,Before,Strong,,,Code/Output,Open,Programming Languages,Medium,,,Code
-,75758831,After,Shalow,,,Code/Output,Open,Framework/Dependency,Medium,,,Code
+,75758831,After,Shalow,,,Code/Output,Open,Framework/Library,Medium,,,Code
 ,73611950,Before,Medium,,,Code,Question,Programming Languages,Strong,,Documentation,Code
-,72986123,Before,Medium,,,Code,Question,Framework/Dependency,Medium,,Another SO question,Code
+,72986123,Before,Medium,,,Code,Question,Framework/Library,Medium,,Another SO question,Code
 ,75259576,After,Medium,,,Code/Error Message,Question,Tools/IDEs/Environment,Medium,Image,,
 ,75210719,After,Strong,,,Code/ Expected Output,Question,Database/SQL,Medium,,Documentation,Code
 ,72921785,Before,Shalow,,,Code,Open,Programming Languages,Medium,,,Code
@@ -132,10 +132,10 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,74371499,Before,Medium,,,Code,Question,Programming Languages,Weak,,SO Question/ Documentation,
 ,73573447,Before,Medium,External Link,,Code,Open,Programming Languages,Weak,,External Link,Code
 ,73630660,Before,Medium,,,Code,Open,Programming Languages,Strong,,,Code
-,72828351,Before,Medium,,,Code/Error Message,Question,Framework/Dependency,Strong,,,Code
+,72828351,Before,Medium,,,Code/Error Message,Question,Framework/Library,Strong,,,Code
 ,75307309,After,Medium,Another SO question,,Code,Question,Programming Languages,Medium,,Documentation,Code
 ,74406469,Before,Medium,,,Code,Open,Programming Languages,Weak,,,Code
-,74976717,After,Medium,,,Code,Question,Framework/Dependency,Strong,,Documentation,Code
+,74976717,After,Medium,,,Code,Question,Framework/Library,Strong,,Documentation,Code
 ,75340300,After,Shalow,,,,Question,General Programming Concepts,Medium,,Documentation,Code
 ,73125825,Before,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 ,75439576,After,Medium,,Image,Error message,Question,DevOps,Medium,,Documentation,
@@ -153,7 +153,7 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,75193954,After,Medium,,,Output,Question,General Programming Concepts,Weak,,,Code
 ,74509701,Before,Shalow,,,Code,Question,Programming Languages,Medium,,,Code
 ,74905593,After,Medium,,Image,Code,Question,Programming Languages,Weak,,Another SO question,Code
-,74199102,Before,Medium,,,Code/Error Message,Open,Framework/Dependency,Medium,,,Code
+,74199102,Before,Medium,,,Code/Error Message,Open,Framework/Library,Medium,,,Code
 ,75095945,After,Medium,,Image,Error message,Open,Tools/IDEs/Environment,Medium,,Documentation,
 ,75517315,After,Medium,,,Code,Question,DevOps,Weak,,,Code
 ,73377019,Before,Medium,,Image,Code,Question,Tools/IDEs/Environment,Strong,,,
@@ -162,7 +162,7 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,75940783,After,Medium,,,Code/Output,Question,Programming Languages,Weak,,Documentation,Code
 ,74694970,After,Medium,,,Code,Question,Database/SQL,Medium,,Documentation,Code
 ,73874791,Before,Strong,,,Code/ Expected Output,Question,Programming Languages,Medium,,,Code
-,74941125,After,Medium,,,Code/Error Message,Question,Framework/Dependency,Medium,,Documentation,Code
+,74941125,After,Medium,,,Code/Error Message,Question,Framework/Library,Medium,,Documentation,Code
 ,74632731,After,Medium,,,Code/ Expected Output,Open,Database/SQL,Medium,,,Code
 ,72882674,Before,Medium,,,Code/Error Message,Open,Programming Languages,Medium,,,Code
 ,74844464,After,Medium,,,Code/Error Message,Open,DevOps,Strong,,,Code
@@ -173,18 +173,18 @@ Cosine Metric,Question ID,,Open Context,,,,Question,,Closes Context,Original Ans
 ,75999602,After,Medium,,,Code/Error Message,Question,Programming Languages,Strong,,Another SO question,Code
 ,74543156,Before,Medium,,,Code,Question,DevOps,Medium,,,Code
 ,73551864,Before,Shalow,,Image,,Open,Programming Languages,Medium,,External Link,Code
-,75606592,After,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
+,75606592,After,Medium,,,Code,Question,Framework/Library,Medium,,,Code
 ,74708210,After,Shalow,,,Expected Outcome,Open,General Programming Concepts,Weak,,,Code
-,75666909,After,Medium,Another SO question,,Code/Output,Question,Framework/Dependency,Strong,,,Code
+,75666909,After,Medium,Another SO question,,Code/Output,Question,Framework/Library,Strong,,,Code
 ,73809448,Before,Medium,,,Code/Output,Question,Tools/IDEs/Environment,Weak,,,Code
-,72936313,Before,Medium,,,Code,Question,Framework/Dependency,Strong,,,Code
-,75150846,After,Medium,,,Code,Question,Framework/Dependency,Strong,,,Code
-,75426952,After,Medium,,,Code/Output,Explanation,Framework/Dependency,Medium,,,
+,72936313,Before,Medium,,,Code,Question,Framework/Library,Strong,,,Code
+,75150846,After,Medium,,,Code,Question,Framework/Library,Strong,,,Code
+,75426952,After,Medium,,,Code/Output,Explanation,Framework/Library,Medium,,,
 ,74825007,After,Shalow,,,Code,Open,Programming Languages,Weak,,,Code
 ,73102008,Before,Strong,,,Code/ Expected Output,Question,Programming Languages,Medium,,Documentation,Code
 ,73946426,Before,Medium,,,Code,Question,Tools/IDEs/Environment,Medium,,,Code
 ,74109047,Before,Medium,,,Code,Question,Programming Languages,Medium,,,Code
-,76066060,After,Medium,,Image,Code,Question,Framework/Dependency,Medium,,,
+,76066060,After,Medium,,Image,Code,Question,Framework/Library,Medium,,,
 ,74768073,After,Medium,,,Code,Open,DevOps,Medium,,Documentation,Code
 ,73954718,Before,Medium,,,Code/ Expected Output,Open,Programming Languages,Medium,,,
 ,74168837,Before,Medium,,,Code/Error Message,Question,Programming Languages,Strong,,,Code

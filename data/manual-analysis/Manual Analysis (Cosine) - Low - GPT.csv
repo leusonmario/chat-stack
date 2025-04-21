@@ -1,76 +1,76 @@
-Cosine Metric,,Question ID,Open Context,,,,Question,,Closes Context,Original Answer,,
-,,,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,Domain,Tag Concordance,No Textual Content,External Reference,Illustrative Context
-"-13.968.981.802.463.500,00",,75727923,Strong,,,Code,Open,Framework/Dependency,Strong,,,Code
-"-9.558.804.333.209.990,00",,74227793,Medium,Documentation,,Code,Question,Framework/Dependency,Strong,,,
-"-42.690.977.454.185.400,00",,73556146,Strong,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code
+Cosine Metric,,Question ID,Open Context,,,,Question,Domain,Closes Context,Original Answer,,
+,,,Context Adequacy,External Reference,No Textual Content,Illustrative Context,Question Goal,"",Tag Concordance,No Textual Content,External Reference,Illustrative Context
+"-13.968.981.802.463.500,00",,75727923,Strong,,,Code,Open,Framework/Library,Strong,,,Code
+"-9.558.804.333.209.990,00",,74227793,Medium,Documentation,,Code,Question,Framework/Library,Strong,,,
+"-42.690.977.454.185.400,00",,73556146,Strong,,,Code,Question,Framework/Library,Medium,,Documentation,Code
 "-5.669.223.517.179.480,00",,74591448,Strong,,,Code,Question,Programming Languages,Medium,,,Code
 "12.179.408.222.436.900,00",,74405746,Strong,,,Code,Question,Mobile,Medium,,Documentation,Code
 "13.287.805.020.809.100,00",,74606136,Medium,,Image,Code,Question,Database/SQL,Strong,,,Code
 "22.445.114.329.457.200,00",,75726570,Strong,,,Code/Error Message,Question,DevOps,Strong,,,
 "30.099.499.970.674.500,00",,73760219,Medium,,Image,Code,Question,Tools/IDEs,Weak,,,
-"10.006.662.458.181.300,00",,74639660,Medium,,,,Question,Framework/Dependency,Strong,,,
+"10.006.662.458.181.300,00",,74639660,Medium,,,,Question,Framework/Library,Strong,,,
 "11.444.850.265.979.700,00",,74543810,Strong,,,Code,Open,Tools/IDEs,Weak,,,
-"1.552.819.311.618.800,00",,75621833,Strong,,,Code/Error Message,Open,Framework/Dependency,Strong,,,Code
-"15.756.598.114.967.300,00",,74746284,Strong,,Image,Code,Question,Framework/Dependency,Strong,,,
-"16.390.135.884.284.900,00",,75258460,Medium,Documentation,,Code,Open,Framework/Dependency,Strong,,Documentation,Code
-"18.498.072.028.160.000,00",,73354302,Strong,External Link,,Code,Open,Framework/Dependency,Strong,,,
+"1.552.819.311.618.800,00",,75621833,Strong,,,Code/Error Message,Open,Framework/Library,Strong,,,Code
+"15.756.598.114.967.300,00",,74746284,Strong,,Image,Code,Question,Framework/Library,Strong,,,
+"16.390.135.884.284.900,00",,75258460,Medium,Documentation,,Code,Open,Framework/Library,Strong,,Documentation,Code
+"18.498.072.028.160.000,00",,73354302,Strong,External Link,,Code,Open,Framework/Library,Strong,,,
 "1.974.657.028.913.490,00",,75950803,Medium,,,Code/Error Message,Question,Programming Languages,Medium,,,
 "2.062.646.746.635.430,00",,74086321,Strong,,Image,Code,Question,Web development,Strong,,,
-"21.129.603.683.948.500,00",After,75897290,Medium,,,Code/Error Message,Open,Framework/Dependency,Medium,,Documentation,
+"21.129.603.683.948.500,00",After,75897290,Medium,,,Code/Error Message,Open,Framework/Library,Medium,,Documentation,
 "21.527.326.107.025.100,00",Before,74652347,Medium,,Image,Code/Error Message,Question,Tools/IDEs,Strong,,Documentation,
 "22.271.931.171.417.200,00",Before,74910981,Medium,,Image,Error message,Question,Tools/IDEs,Strong,,,
 "22.608.831.524.848.900,00",Before,73535528,Medium,,,Code/Error Message,Question,Programming Languages,Weak,,External Link,
 "25.708.749.890.327.400,00",Before,74016253,Medium,,,Code,Question,Database/SQL,Medium,,Documentation,Code
-"2.747.443.914.413.450,00",Before,73531936,Strong,Another SO question,,Code/Error Message,Question,Framework/Dependency,Strong,,,Code
+"2.747.443.914.413.450,00",Before,73531936,Strong,Another SO question,,Code/Error Message,Question,Framework/Library,Strong,,,Code
 "28.239.282.965.660.000,00",Before,73211933,Medium,,,,Question,Networking,Strong,,External Link,
-"2.886.195.778.846.740,00",After,75698936,Strong,Documentation,,Code/Error Message,Question,Framework/Dependency,Medium,,Documentation,
-"28.959.083.557.128.900,00",After,75035488,Shalow,,,Code/Error Message,Question,Framework/Dependency,Strong,,,
+"2.886.195.778.846.740,00",After,75698936,Strong,Documentation,,Code/Error Message,Question,Framework/Library,Medium,,Documentation,
+"28.959.083.557.128.900,00",After,75035488,Shalow,,,Code/Error Message,Question,Framework/Library,Strong,,,
 "28.960.120.677.948,00",After,74844325,Medium,,,Error message,Questions,DevOps,Weak,Image,,
-"29.248.547.554.016.100,00",After,75689998,Medium,,,Code/Error Message,Open,Framework/Dependency,Strong,,,Code
-"3.058.530.390.262.600,00",Before,74387517,Shalow,,Image,,Open,Framework/Dependency,Weak,,,
-"3.068.355.321.884.150,00",Before,74512385,Shalow,,,Code,Question,Framework/Dependency,Weak,,,Code
+"29.248.547.554.016.100,00",After,75689998,Medium,,,Code/Error Message,Open,Framework/Library,Strong,,,Code
+"3.058.530.390.262.600,00",Before,74387517,Shalow,,Image,,Open,Framework/Library,Weak,,,
+"3.068.355.321.884.150,00",Before,74512385,Shalow,,,Code,Question,Framework/Library,Weak,,,Code
 "32.205.381.989.479.000,00",After,75915623,Medium,,Image,Code,Question,General Programming Concepts,Medium,,,Code
-"3.231.267.035.007.470,00",After,74811238,Medium,Documentation,,Code,Question,Framework/Dependency,Medium,,Documentation,
+"3.231.267.035.007.470,00",After,74811238,Medium,Documentation,,Code,Question,Framework/Library,Medium,,Documentation,
 "3.237.150.013.446.800,00",After,75089553,Strong,External Link,,Code,Open,Web development,Medium,,,Code
-"32.446.661.591.529.800,00",Before,73387665,Shalow,,Image,,Question,Framework/Dependency,Medium,,Documentation,Code
+"32.446.661.591.529.800,00",Before,73387665,Shalow,,Image,,Question,Framework/Library,Medium,,Documentation,Code
 "34.453.755.617.141.700,00",Before,73972027,Medium,,,Code,Question,Programming Languages,Strong,,,Code
 "34.763.050.079.345.700,00",Before,73750333,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 "34.951.063.990.592.900,00",After,75221294,Shalow,,Image,,Open,Tools/IDEs,Medium,,External Link,
 "3.528.423.011.302.940,00",Before,72978467,Shalow,,,,Question,Tools/IDEs,Medium,,,
-"3.571.908.473.968.500,00",After,75948146,Medium,,Image,Code,Question,Framework/Dependency,Medium,,Documentation,
-"3.598.736.524.581.900,00",Before,74214892,Medium,,,Code,Open,Framework/Dependency,Strong,,Documentation,
-"365.501.344.203.949,00",After,75768912,Medium,,,Code,Question,Framework/Dependency,Strong,,,
+"3.571.908.473.968.500,00",After,75948146,Medium,,Image,Code,Question,Framework/Library,Medium,,Documentation,
+"3.598.736.524.581.900,00",Before,74214892,Medium,,,Code,Open,Framework/Library,Strong,,Documentation,
+"365.501.344.203.949,00",After,75768912,Medium,,,Code,Question,Framework/Library,Strong,,,
 "3.667.609.989.643.090,00",After,75211654,Shalow,,,,Question,Tools/IDEs,Medium,,,
-"36.792.489.886.283.800,00",After,75909740,Shalow,,Image,,Question,Framework/Dependency,Medium,Image,,
-"37.009.114.027.023.300,00",After,75449324,Shalow,,,,Open,Framework/Dependency,Medium,,Another SO question,Code
+"36.792.489.886.283.800,00",After,75909740,Shalow,,Image,,Question,Framework/Library,Medium,Image,,
+"37.009.114.027.023.300,00",After,75449324,Shalow,,,,Open,Framework/Library,Medium,,Another SO question,Code
 "3.759.613.633.155.820,00",After,76004983,Medium,,,Code,Question,Programming Languages,Medium,,,
-"3.780.609.667.301.170,00",After,75818472,Shalow,,Image,,Question,Framework/Dependency,Medium,,Documentation,Code
-"3.785.000.741.481.780,00",Before,73526145,Shalow,Documentation,,,Question,Framework/Dependency,Medium,,,Code
+"3.780.609.667.301.170,00",After,75818472,Shalow,,Image,,Question,Framework/Library,Medium,,Documentation,Code
+"3.785.000.741.481.780,00",Before,73526145,Shalow,Documentation,,,Question,Framework/Library,Medium,,,Code
 "3.818.897.008.895.870,00",Before,73867414,Medium,,,,Question,DevOps,Weak,,External Link,
-"38.876.110.315.322.800,00",After,74635523,Medium,,Image,Code,Open,Framework/Dependency,Strong,,,Code
-"3.896.360.397.338.860,00",Before,74041416,Medium,,,Code,Question,Framework/Dependency,Strong,,,Code
-"39.296.993.613.243.100,00",Before,73218534,Medium,,,Code,Question,Framework/Dependency,Medium,,Another SO question,Code
-"3.946.433.961.391.440,00",After,75392538,Medium,,,Code,,Framework/Dependency,Strong,,,Code
+"38.876.110.315.322.800,00",After,74635523,Medium,,Image,Code,Open,Framework/Library,Strong,,,Code
+"3.896.360.397.338.860,00",Before,74041416,Medium,,,Code,Question,Framework/Library,Strong,,,Code
+"39.296.993.613.243.100,00",Before,73218534,Medium,,,Code,Question,Framework/Library,Medium,,Another SO question,Code
+"3.946.433.961.391.440,00",After,75392538,Medium,,,Code,,Framework/Library,Strong,,,Code
 "39.560.285.210.609.400,00",Before,73452611,Medium,,Image,Code,Open,Web development,Strong,,,
 "3.963.852.524.757.380,00",After,75299402,Medium,,,Code,Question,Database/SQL,Weak,,,Code
 "398.965.060.710.907,00",After,75377287,Shalow,,Image,,Question,Tools/IDEs,Weak,,Documentation,
-"400.029.718.875.885,00",After,75802587,Medium,,,Code,Open,Framework/Dependency,Weak,Image,,Code
+"400.029.718.875.885,00",After,75802587,Medium,,,Code,Open,Framework/Library,Weak,Image,,Code
 "40.466.344.356.536.800,00",After,75374281,Medium,,Image,Code,Question,Programming Languages,Medium,Image,,Code
-"4.100.659.191.608.420,00",After,74622976,Shalow,,,Code,Question,Framework/Dependency,Medium,,,Code
-"41.497.382.521.629.300,00",Before,74053380,Shalow,,,,Question,Framework/Dependency,Weak,,,Code
+"4.100.659.191.608.420,00",After,74622976,Shalow,,,Code,Question,Framework/Library,Medium,,,Code
+"41.497.382.521.629.300,00",Before,74053380,Shalow,,,,Question,Framework/Library,Weak,,,Code
 "41.789.889.335.632.300,00",After,76030821,Shalow,,,,Question,Tools/IDEs,Weak,,Documentation,Code
 "4.224.928.617.477.410,00",After,75255746,Shalow,,,Code,Question,Programming Languages,Medium,,Documentation,
 "4.257.221.221.923.820,00",Before,73682305,Strong,External Link,,Code,Question,Programming Languages,Strong,,,Code
 "4.257.848.858.833.310,00",Before,72954104,Shalow,,,,Question,Tools/IDEs,Medium,,,
-"42.698.198.556.900.000,00",After,75004091,Medium,,,Code,Question,Framework/Dependency,Strong,,,Code
-"42.895.370.721.817.000,00",Before,74871350,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
-"430.801.123.380.661,00",Before,72925947,Shalow,,,Code,Question,Framework/Dependency,Weak,,Another SO question,Code
-"43.134.140.968.322.700,00",Before,74437558,Medium,,,Code,Question,Framework/Dependency,Medium,,,
+"42.698.198.556.900.000,00",After,75004091,Medium,,,Code,Question,Framework/Library,Strong,,,Code
+"42.895.370.721.817.000,00",Before,74871350,Medium,,,Code,Question,Framework/Library,Medium,,,Code
+"430.801.123.380.661,00",Before,72925947,Shalow,,,Code,Question,Framework/Library,Weak,,Another SO question,Code
+"43.134.140.968.322.700,00",Before,74437558,Medium,,,Code,Question,Framework/Library,Medium,,,
 "43.284.764.885.902.400,00",After,74996056,Shalow,,Image,Error message,Open,Tools/IDEs,Strong,,,
-"4.333.226.978.778.830,00",After,75715631,Medium,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code
-"43.424.680.829.048.100,00",Before,73464752,Medium,,,Code,Question,Framework/Dependency,Medium,,Documentation,
+"4.333.226.978.778.830,00",After,75715631,Medium,,,Code,Question,Framework/Library,Medium,,Documentation,Code
+"43.424.680.829.048.100,00",Before,73464752,Medium,,,Code,Question,Framework/Library,Medium,,Documentation,
 "4.344.978.630.542.750,00",After,74625152,Medium,Another SO question,,Code,Question,Operating Systems,Medium,,,Code
-"44.057.393.074.035.600,00",After,74506570,Shalow,External Link,Image,,Question,Framework/Dependency,Strong,Image,Documentation,
+"44.057.393.074.035.600,00",After,74506570,Shalow,External Link,Image,,Question,Framework/Library,Strong,Image,Documentation,
 "4.417.904.019.355.770,00",Before,74041404,Medium,,,Code,Question,DevOps,Strong,,,
 "4.422.425.925.731.650,00",Before,73369911,Strong,,,Code/Expected Outcome,Open,Programming Languages,Weak,,,Code
 "4.437.330.961.227.410,00",After,75385779,Shalow,,,Code,Question,Database/SQL,Medium,,Documentation,Code
@@ -79,22 +79,22 @@ Cosine Metric,,Question ID,Open Context,,,,Question,,Closes Context,Original Ans
 "4.470.662.474.632.260,00",After,74999834,Strong,,,Error message,Open,Tools/IDEs,Strong,,Documentation,Code
 "44.880.810.379.981.900,00",After,74637515,Medium,,,Code,Question,Tools/IDEs,Strong,,,Code
 "4.488.104.581.832.880,00",After,75709844,Medium,,,Code,Open,Programming Languages,Medium,,Another SO question,Code
-"4.528.704.583.644.860,00",Before,74422849,Shalow,,Image,Code,Open,Framework/Dependency,Medium,,,Code
+"4.528.704.583.644.860,00",Before,74422849,Shalow,,Image,Code,Open,Framework/Library,Medium,,,Code
 "4.528.798.460.960.380,00",Before,73004413,Shalow,,,Code,Open,DevOps,Weak,,External Link,Code
-"4.531.279.504.299.160,00",After,75585439,Medium,,Image,Code,Question,Framework/Dependency,Strong,,,
+"4.531.279.504.299.160,00",After,75585439,Medium,,Image,Code,Question,Framework/Library,Strong,,,
 "4.579.702.615.737.910,00",After,75100575,Medium,,Image,Code,Question,Web development,Strong,,,Code
 "4.587.784.707.546.230,00",Before,73201201,Medium,,,Code,Question,Database/SQL,Medium,,,Code
 "46.129.703.521.728.500,00",Before,73367075,Shalow,,,Code,Open,Database/SQL,Medium,,,Code
 "4.644.317.626.953.120,00",Before,74594144,Shalow,,,Code,Open,Programming Languages,Weak,,,Code
-"46.610.766.649.246.200,00",After,75257103,Medium,,Image,Code,Question,Framework/Dependency,Medium,,,Code
-"4.664.435.386.657.710,00",After,75220574,Medium,,Image,Code,Question,Framework/Dependency,Weak,,,Code
-"46.781.402.826.309.200,00",Before,72971634,Shalow,,Image,Code,Question,Framework/Dependency,Weak,,,Code
+"46.610.766.649.246.200,00",After,75257103,Medium,,Image,Code,Question,Framework/Library,Medium,,,Code
+"4.664.435.386.657.710,00",After,75220574,Medium,,Image,Code,Question,Framework/Library,Weak,,,Code
+"46.781.402.826.309.200,00",Before,72971634,Shalow,,Image,Code,Question,Framework/Library,Weak,,,Code
 "4.682.358.503.341.670,00",Before,73076798,Shalow,,,Code,Question,General Programming Concepts,Weak,,,Code
 "4.695.955.812.931.060,00",After,74743835,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 "47.129.449.248.313.900,00",Before,74548191,Shalow,,Image,Code,Question,Tools/IDEs,Weak,Image,Another SO question,Code
 "47.288.405.895.233.100,00",Before,73805636,Medium,External Link,Image,,Question,Tools/IDEs,Weak,Image,,Code
 "47.355.788.946.151.700,00",Before,74237232,Shalow,,,Code,Question,Programming Languages,Medium,,Documentation,Code
-"4.764.977.693.557.730,00",After,75449068,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
+"4.764.977.693.557.730,00",After,75449068,Medium,,,Code,Question,Framework/Library,Medium,,,Code
 "47.877.490.520.477.200,00",After,76037084,Shalow,,,,Question,Programming Languages,Weak,,,
 "4.793.945.550.918.570,00",After,75389612,Medium,,,Code,Open,Programming Languages,Medium,,External Link,Code
 "4.812.728.762.626.640,00",Before,72843205,Medium,,Image,Code,Question,Tools/IDEs,Weak,,Documentation,Code
@@ -103,16 +103,16 @@ Cosine Metric,,Question ID,Open Context,,,,Question,,Closes Context,Original Ans
 "4.857.827.126.979.820,00",Before,74310780,Strong,,,Code/Expected Outcome,Question,Programming Languages,Strong,,,Code
 "4.888.434.112.071.990,00",Before,74587419,Medium,,Image,,Open,Tools/IDEs,Strong,,,
 "48.926.225.304.603.500,00",After,75463207,Medium,Another SO question,,Code,Question,Programming Languages,Weak,,,Code
-"49.036.771.059.036.200,00",Before,73738035,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Medium,,Documentation,Code
-"4.933.304.488.658.900,00",After,75778261,Strong,,,Code/Error Message,Open,Framework/Dependency,Weak,,,Code
-"49.479.052.424.430.800,00",After,76009718,Medium,,,Code,Question,Framework/Dependency,Medium,,Documentation,Code
-"49.722.784.757.614.100,00",Before,73253228,Medium,,,Code,Open,Framework/Dependency,Weak,,,
+"49.036.771.059.036.200,00",Before,73738035,Strong,,,Code/Expected Outcome,Question,Framework/Library,Medium,,Documentation,Code
+"4.933.304.488.658.900,00",After,75778261,Strong,,,Code/Error Message,Open,Framework/Library,Weak,,,Code
+"49.479.052.424.430.800,00",After,76009718,Medium,,,Code,Question,Framework/Library,Medium,,Documentation,Code
+"49.722.784.757.614.100,00",Before,73253228,Medium,,,Code,Open,Framework/Library,Weak,,,
 "4.989.616.870.880.120,00",After,75388014,Shalow,,,Code,Open,Programming Languages,Medium,,Documentation,Code
 "5.012.032.389.640.800,00",After,75445007,Medium,,,Code,Question,Programming Languages,Strong,,Another SO question,Code
 "5.025.424.361.228.940,00",Before,72901581,Strong,,,,Question,DevOps,Weak,,,
 "5.029.518.604.278.560,00",Before,74110774,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 "5.032.744.407.653.800,00",After,75205360,Strong,,,Code/Expected Outcome,Question,General Programming Concepts,Strong,,,Code
-"5.035.840.272.903.440,00",Before,73067624,Medium,Documentation,,Code,Question,Framework/Dependency,Strong,,Documentation,
+"5.035.840.272.903.440,00",Before,73067624,Medium,Documentation,,Code,Question,Framework/Library,Strong,,Documentation,
 "5.040.035.247.802.730,00",After,75259064,Medium,,,Code/Error Message,Open,Programming Languages,Strong,,,Code
 "5.043.357.610.702.510,00",Before,72907961,Shalow,,Image,Code,Open,Web development,Weak,,Another SO question,Code
 "5.060.762.166.976.920,00",After,75610201,Shalow,,,,Question,Operating Systems,Weak,,External Link,
@@ -121,29 +121,29 @@ Cosine Metric,,Question ID,Open Context,,,,Question,,Closes Context,Original Ans
 "5.119.128.227.233.880,00",After,75767654,Medium,,,Code/Error Message,Open,DevOps,Medium,,,Code
 "5.119.807.124.137.870,00",Before,74234235,Shalow,,,Code,Question,Database/SQL,Strong,,,Code
 "5.126.835.703.849.790,00",After,74952536,Medium,,,Code,Open,Programming Languages,Medium,,,Code
-"5.146.301.984.786.980,00",Before,73270959,Shalow,External Link,,,Open,Framework/Dependency,Medium,,,Code
-"515.081.524.848.938,00",After,75922766,Medium,Documentation,,Code,Question,Framework/Dependency,Medium,,,Code
+"5.146.301.984.786.980,00",Before,73270959,Shalow,External Link,,,Open,Framework/Library,Medium,,,Code
+"515.081.524.848.938,00",After,75922766,Medium,Documentation,,Code,Question,Framework/Library,Medium,,,Code
 "515.574.038.028.717,00",After,75659998,Shalow,,,,Question,Programming Languages,Medium,,,Code
 "517.700.731.754.303,00",After,75323021,Medium,,,Code,Question,DevOps,Strong,,,Code
 "5.177.192.091.941.830,00",Before,73690166,Medium,,,,Question,Tools/IDEs,Weak,,Documentation,
 "5.179.347.991.943.350,00",After,74731934,Medium,,,Code,Question,Programming Languages,Medium,,,Code
-"5.182.449.221.611.020,00",After,74795206,Medium,,Image,Code,Open,Framework/Dependency,Strong,,,
+"5.182.449.221.611.020,00",After,74795206,Medium,,Image,Code,Open,Framework/Library,Strong,,,
 "5.194.566.249.847.410,00",After,75039363,Medium,,,Code,Question,Programming Languages,Medium,,,
 "5.199.140.906.333.920,00",Before,74257296,Strong,,,Code/Expected Outcome,Question,General Programming Concepts,Strong,,,Code
-"5.209.543.704.986.570,00",Before,73410719,Medium,,Image,Code/Error Message,Question,Framework/Dependency,Strong,,,Code
+"5.209.543.704.986.570,00",Before,73410719,Medium,,Image,Code/Error Message,Question,Framework/Library,Strong,,,Code
 "5.240.468.978.881.830,00",After,74962116,Medium,,,Code,Question,General Programming Concepts,Medium,,Documentation,Code
 "5.247.803.926.467.890,00",After,75119837,Strong,,Image,Code,Question,Programming Languages,Strong,Image,,Code
 "5.250.146.389.007.560,00",Before,73158541,Medium,,,Code,Open,Programming Languages,Weak,,,Code
-"5.251.772.403.717.040,00",After,75915685,Medium,,Image,Code,Question,Framework/Dependency,Medium,,Documentation,Code
-"5.253.371.596.336.360,00",Before,74365692,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
-"5.279.732.942.581.170,00",After,74864399,Medium,,,Code/Expected Outcome,Question,Framework/Dependency,Medium,,Documentation,Code
-"5.287.180.542.945.860,00",After,75380288,Medium,,,Code,Question,Framework/Dependency,Strong,,,Code
-"5.317.084.789.276.120,00",Before,73717005,Shalow,,Image,Code,Question,Framework/Dependency,Medium,Image,,Code
+"5.251.772.403.717.040,00",After,75915685,Medium,,Image,Code,Question,Framework/Library,Medium,,Documentation,Code
+"5.253.371.596.336.360,00",Before,74365692,Medium,,,Code,Question,Framework/Library,Medium,,,Code
+"5.279.732.942.581.170,00",After,74864399,Medium,,,Code/Expected Outcome,Question,Framework/Library,Medium,,Documentation,Code
+"5.287.180.542.945.860,00",After,75380288,Medium,,,Code,Question,Framework/Library,Strong,,,Code
+"5.317.084.789.276.120,00",Before,73717005,Shalow,,Image,Code,Question,Framework/Library,Medium,Image,,Code
 "5.347.771.644.592.280,00",Before,74481905,Medium,,,Code/Error Message,Open,Programming Languages,Weak,,,Code
 "5.350.182.056.427.000,00",Before,72863142,Strong,,,,Question,Tools/IDEs,Medium,,Documentation,
 "5.355.614.423.751.830,00",Before,74339986,Shalow,,,Code,Explanation,General Programming Concepts,Strong,,,Code
-"5.380.882.620.811.460,00",After,75260382,Shalow,External Link,Image,,Question,Framework/Dependency,Weak,,Documentation,Code
-"5.387.897.491.455.070,00",Before,74560568,Shalow,,,Code,Question,Framework/Dependency,Weak,,External Link,Code
+"5.380.882.620.811.460,00",After,75260382,Shalow,External Link,Image,,Question,Framework/Library,Weak,,Documentation,Code
+"5.387.897.491.455.070,00",Before,74560568,Shalow,,,Code,Question,Framework/Library,Weak,,External Link,Code
 "5.405.722.856.521.600,00",Before,73354652,Medium,,,Code/Error Message,Question,Programming Languages,Strong,,Documentation,Code
 "5.415.804.982.185.360,00",After,75074930,Medium,,,Code,Question,General Programming Concepts,Strong,,,Code
 "5.418.840.050.697.320,00",After,74077744,Medium,,,Code,Open,General Programming Concepts,Medium,,,
@@ -152,21 +152,21 @@ Cosine Metric,,Question ID,Open Context,,,,Question,,Closes Context,Original Ans
 "543.394.148.349.762,00",After,75345766,Medium,,,Code,Open,Database/SQL,Medium,,,Code
 "5.443.882.942.199.700,00",After,75128735,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 "5.445.023.775.100.700,00",After,75827366,Medium,External Link,,,Open,Tools/IDEs,Weak,Image,Documentation,Code
-"5.455.957.651.138.300,00",After,74743227,Shalow,,Image,Code,Open,Framework/Dependency,Strong,,,Code
-"5.457.485.318.183.890,00",Before,73184914,Strong,,,Code,Question,Framework/Dependency,Strong,,Documentation,
+"5.455.957.651.138.300,00",After,74743227,Shalow,,Image,Code,Open,Framework/Library,Strong,,,Code
+"5.457.485.318.183.890,00",Before,73184914,Strong,,,Code,Question,Framework/Library,Strong,,Documentation,
 "546.021.044.254.303,00",Before,72826154,Medium,,,,Open,Tools/IDEs,Medium,,,
-"5.470.371.842.384.330,00",Before,73296988,Medium,,,Code,Question,Framework/Dependency,Medium,,External Link,Code
+"5.470.371.842.384.330,00",Before,73296988,Medium,,,Code,Question,Framework/Library,Medium,,External Link,Code
 "5.471.402.406.692.500,00",After,76034504,Medium,,,Code,Question,Programming Languages,Weak,,,Code
 "5.472.739.934.921.260,00",After,75185409,Medium,,Image,Code,Open,ML/Data Science,Strong,,,Code
-"5.490.797.162.055.960,00",Before,73206867,Shalow,,,,Open,Framework/Dependency,Medium,,,
+"5.490.797.162.055.960,00",Before,73206867,Shalow,,,,Open,Framework/Library,Medium,,,
 "5.498.879.551.887.510,00",Before,73979650,Strong,,,Expected Outcome,Question,Tools/IDEs,Medium,Image,Another SO question,Code
-"5.513.647.794.723.510,00",After,76053426,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Medium,,Documentation,Code
+"5.513.647.794.723.510,00",After,76053426,Strong,,,Code/Expected Outcome,Question,Framework/Library,Medium,,Documentation,Code
 "5.514.222.383.499.140,00",After,74587470,Strong,,Image,Code,Question,Programming Languages,Strong,,Documentation,Code
-"552.152.693.271.637,00",After,75768527,Shalow,,,Code,Question,Framework/Dependency,Medium,,,Code
+"552.152.693.271.637,00",After,75768527,Shalow,,,Code,Question,Framework/Library,Medium,,,Code
 "5.532.912.015.914.910,00",Before,73504314,Medium,,,Code,Question,Programming Languages,Medium,,Documentation,Code
 "5.543.678.998.947.140,00",After,74877491,Medium,,,Code,Question,General Programming Concepts,Medium,,,Code
-"5.547.575.950.622.550,00",After,75922360,Medium,,Image,Code,Question,Framework/Dependency,Strong,Image,,Code
-"5.551.750.659.942.620,00",After,75409618,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
+"5.547.575.950.622.550,00",After,75922360,Medium,,Image,Code,Question,Framework/Library,Strong,Image,,Code
+"5.551.750.659.942.620,00",After,75409618,Medium,,,Code,Question,Framework/Library,Medium,,,Code
 "5.560.951.828.956.600,00",Before,74357958,Shalow,,Image,Code,Question,Web development,Medium,,,Code
 "5.562.021.732.330.320,00",After,76048911,Shalow,,,,Question,Database/SQL,Medium,,External Link,
 "5.562.607.645.988.460,00",Before,74095245,Medium,,,Code/Error Message,Question,ML/Data Science,Strong,,,Code
@@ -175,20 +175,20 @@ Cosine Metric,,Question ID,Open Context,,,,Question,,Closes Context,Original Ans
 "5.582.853.555.679.320,00",Before,73364270,Shalow,,,Code,Open,Web development,Strong,,Documentation,Code
 "5.588.647.127.151.480,00",Before,74328847,Medium,,,Code,Question,Programming Languages,Weak,,Documentation,
 "5.598.090.887.069.700,00",After,74857640,Medium,,,,Question,DevOps,Medium,,Another SO question,
-"5.601.884.126.663.200,00",Before,73475091,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Strong,,,Code
+"5.601.884.126.663.200,00",Before,73475091,Strong,,,Code/Expected Outcome,Question,Framework/Library,Strong,,,Code
 "5.605.376.362.800.590,00",Before,73547364,Medium,,,Code,Open,Web development,Medium,,External Link,Code
-"5.605.884.194.374.080,00",Before,73410047,Strong,,,Code,Question,Framework/Dependency,Medium,,,Code
+"5.605.884.194.374.080,00",Before,73410047,Strong,,,Code,Question,Framework/Library,Medium,,,Code
 "5.615.248.084.068.290,00",Before,74284478,Medium,,Image,Code,Question,Programming Languages,Strong,,,Code
 "5.615.949.630.737.300,00",After,76028371,Strong,External Link,,Code,Question,Programming Languages,Weak,,Documentation,Code
-"5.620.145.797.729.490,00",Before,74328779,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
-"5.621.445.178.985.590,00",After,75338255,Strong,Another SO question,,Code,Question,Framework/Dependency,Medium,,,
+"5.620.145.797.729.490,00",Before,74328779,Medium,,,Code,Question,Framework/Library,Medium,,,Code
+"5.621.445.178.985.590,00",After,75338255,Strong,Another SO question,,Code,Question,Framework/Library,Medium,,,
 "5.621.693.730.354.300,00",Before,74127525,Medium,Another SO question,,Code,Question,Tools/IDEs,Strong,,Documentation,Code
-"5.622.120.499.610.900,00",After,75652520,Strong,,,Code/Expected Outcome,Question,Framework/Dependency,Strong,,,Code
-"5.628.622.770.309.440,00",After,74934504,Medium,,,,Question,Framework/Dependency,Strong,,,Code
+"5.622.120.499.610.900,00",After,75652520,Strong,,,Code/Expected Outcome,Question,Framework/Library,Strong,,,Code
+"5.628.622.770.309.440,00",After,74934504,Medium,,,,Question,Framework/Library,Strong,,,Code
 "5.630.857.944.488.520,00",Before,73616779,Shalow,,,,Question,DevOps,Medium,,Documentation,Code
-"5.631.155.371.665.950,00",Before,74187884,Medium,,,Code,Question,Framework/Dependency,Medium,,,Code
+"5.631.155.371.665.950,00",Before,74187884,Medium,,,Code,Question,Framework/Library,Medium,,,Code
 "5.631.979.703.903.190,00",Before,74083779,Strong,,,Code/Error Message,Questions,Programming Languages,Weak,,,Code
-"5.633.628.368.377.680,00",Before,73316739,Medium,,Image,Code,Question,Framework/Dependency,Strong,,,Code
+"5.633.628.368.377.680,00",Before,73316739,Medium,,Image,Code,Question,Framework/Library,Strong,,,Code
 "5.635.828.375.816.340,00",After,75980105,Shalow,,Image,,Question,Database/SQL,Strong,,,Code
 "5.642.621.517.181.390,00",After,74911648,Medium,,,,Question,Web development,Medium,,,Code
 ,Before,73611112,Medium,,,Code,Question,Programming Languages,Medium,,Documentation/ SO Question,Code
