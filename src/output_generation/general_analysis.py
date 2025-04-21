@@ -72,3 +72,61 @@ class GeneralAnalysis:
         plt.legend(legend_values)
 
         plt.savefig(self.target_directory+"general/tag-line-chart-all-libraries.pdf")
+
+    def generate_tag_usage_frequency_framework(self, tags_dates, tags_values):
+        matplotlib.pyplot.clf()
+        colors = ['black', 'orange', 'blue', 'green', 'pink', 'yellow', 'purple', 'brown', 'gray', 'red']
+        legend_values = [0] * 10
+
+        for i in range(2):
+            j = 0
+            languages = ["python", "javascript", "java", "c#", "r", "php", "typescript", "c++", "dart", "c"]
+
+            frameworks = ["reactjs", "android", "node.js", "flutter", "django", "angular", "react-native", "spring-boot", "laravel",
+                          "vue.js"]
+
+            libraries = ["pandas", "dataframe", "arrays", "json", "jquery", "numpy", "string", "pyspark", "ggplot2", "tkinter"]
+
+            #for value in tags_values[i]:
+            for language in frameworks:
+                #aux = tags_dates[i]
+                plt.plot(tags_dates[i], tags_values[i][language], color=colors[j], label="" + language)
+                legend_values[j] = language
+                j += 1
+
+        plt.axvline(x=datetime.strptime('2022-11-30', '%Y-%m-%d').date(), color='r')
+        plt.xlabel("Date")
+        #plt.ylabel("Value")
+        plt.title("Frequency of Posted Questions on the Top 10 Most Cited Libraries")
+        plt.legend(legend_values)
+
+        plt.savefig(self.target_directory+"general/tag-line-chart-all-libraries.pdf")
+
+    def generate_tag_usage_frequency_framework_language(self, tags_dates, tags_values):
+        matplotlib.pyplot.clf()
+        colors = ['black', 'orange', 'blue', 'green', 'pink', 'yellow', 'purple', 'brown', 'gray', 'red']
+        legend_values = [0] * 10
+
+        for i in range(2):
+            j = 0
+            languages = ["python", "javascript", "java", "c#", "r", "php", "typescript", "c++", "dart", "c"]
+
+            frameworks = ["reactjs", "android", "node.js", "flutter", "django", "angular", "react-native", "spring-boot", "laravel",
+                          "vue.js"]
+
+            libraries = ["pandas", "dataframe", "arrays", "json", "jquery", "numpy", "string", "pyspark", "ggplot2", "tkinter"]
+
+            #for value in tags_values[i]:
+            for language in languages:
+                #aux = tags_dates[i]
+                plt.plot(tags_dates[i], tags_values[i][language], color=colors[j], label="" + language)
+                legend_values[j] = language
+                j += 1
+
+        plt.axvline(x=datetime.strptime('2022-11-30', '%Y-%m-%d').date(), color='r')
+        plt.xlabel("Date")
+        #plt.ylabel("Value")
+        plt.title("Frequency of Posted Questions on the Top 10 Most Cited Libraries")
+        plt.legend(legend_values)
+
+        plt.savefig(self.target_directory+"general/tag-line-chart-all-libraries.pdf")
