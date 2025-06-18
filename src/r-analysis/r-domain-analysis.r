@@ -2,78 +2,68 @@
 library(ggplot2)
 library(dplyr)
 library(ggrepel)
+library(scales)
 
-# Read the CSV file (adjust the file path accordingly)
+# --- Function to read and clean data ---
 read_and_clean_data <- function(file_path) {
   data <- read.csv(file_path)
-  data_cleaned <- data %>% filter(!is.na(Domain) & Domain != "") # Remove missing or empty domains
+
+  # Normalize and merge domain labels
+  data_cleaned <- data %>%
+    filter(!is.na(Domain) & Domain != "") %>%
+    mutate(Domain = case_when(
+      Domain %in% c("Tools/IDEs", "Tools/IDEs/Environment") ~ "Tools/IDEs/Environment",
+      TRUE ~ Domain
+    ))
+
   return(data_cleaned)
 }
 
-# List of file paths for the four datasets
-file_paths <- c("/home/leusonmario/postdoctoral/projects/chat-stack/data/manual-analysis/Manual Analysis (Cosine) - High - GPT.csv",
-                "/home/leusonmario/postdoctoral/projects/chat-stack/data/manual-analysis/Manual Analysis (Cosine) - High - LLAMA.csv",
-                "/home/leusonmario/postdoctoral/projects/chat-stack/data/manual-analysis/Manual Analysis (Cosine) - Low - GPT.csv",
-                "/home/leusonmario/postdoctoral/projects/chat-stack/data/manual-analysis/Manual Analysis (Cosine) - Low - LLAMA.csv")
-name <- c("high_GPT", "high_LLAMA", "low_GPT", "low_LLAMA")
+# --- File paths and corresponding model labels ---
+file_paths <- c(
+  "../../data/manual-analysis/Manual Analysis (Cosine) - High - GPT.csv",
+  "../../data/manual-analysis/Manual Analysis (Cosine) - High - LLAMA.csv",
+  "../../data/manual-analysis/Manual Analysis (Cosine) - Low - GPT.csv",
+  "../../data/manual-analysis/Manual Analysis (Cosine) - Low - LLAMA.csv"
+)
 
-# Create an empty list to store the cleaned data
-data_list <- list()
+model_labels <- c("High Similarity (GPT)", "High Similarity (LLAMA)", "Low Similarity (GPT)", "Low Similarity (LLAMA)")
 
-# Initialize index for names
-i <- 1
+# --- Combine all domain summaries ---
+combined_summary <- data.frame()
 
-# Loop through each file, read, and clean the data
-for (file in file_paths) {
+for (i in seq_along(file_paths)) {
+  data_cleaned <- read_and_clean_data(file_paths[i])
 
-  # Clean the data
-  data_cleaned <- read_and_clean_data(file)
-
-  # Summarize the data by Domain: count the number of questions in each domain
   domain_summary <- data_cleaned %>%
     group_by(Domain) %>%
-    summarise(count = n()) %>%
-    mutate(percentage = count / sum(count) * 100)
+    summarise(count = n(), .groups = "drop") %>%
+    mutate(
+      percentage = count / sum(count) * 100,
+      Model = model_labels[i]
+    )
 
-  # Print the summary table to see the counts and percentages
-  print(domain_summary)
-
-  # --- Create a Bar Plot for Domain Distribution using percentage ---
-  ggplot(domain_summary, aes(x = Domain, y = percentage, fill = Domain)) +
-  geom_bar(stat = "identity") +
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
-  labs(
-    title = paste("Percentage of Questions by Domain - ", name[i]),
-    y = "Percentage of Questions"
-  ) +
-  theme_minimal()
-
-# Save the plot as a PNG file
-ggsave(paste("domain_distribution_barplot", name[i], ".png", sep = ""))
-
-  # --- Create a Pie Chart for Domain Distribution Without Percentages ---
-  domain_summary <- domain_summary %>%
-  arrange(desc(Domain)) %>%
-  mutate(ypos = cumsum(percentage) - (percentage / 2))  # Compute positions outside the pie
-
-# Create the pie chart with percentage labels outside
-p <- ggplot(domain_summary, aes(x = "", y = percentage, fill = Domain)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar(theta = "y") +
-  theme_void() +
-  theme(legend.position = "right") +
-  geom_text_repel(aes(y = ypos, label = paste0(round(percentage, 1), "%")),
-                  nudge_x = 1, # Push labels outside
-                  direction = "y",
-                  size = 5,
-                  box.padding = 0.5,
-                  segment.color = "gray")
-
-# Save the pie chart as a PDF file
-ggsave(paste("domain_distribution_", name[i], ".pdf", sep = ""), plot = p, device = "pdf")
-
-  # Increment the index for the next dataset
-  i <- i + 1
+  combined_summary <- bind_rows(combined_summary, domain_summary)
 }
+
+# --- Define dynamic color palette for domains ---
+all_domains <- sort(unique(combined_summary$Domain))
+color_palette <- setNames(hue_pal()(length(all_domains)), all_domains)
+
+# --- Create horizontal stacked bar plot ---
+stacked_horizontal <- ggplot(combined_summary, aes(x = percentage, y = Model, fill = Domain)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "",
+    x = "Percentage of Questions",
+    y = "Textual Similarity by Models"
+  ) +
+  scale_fill_manual(values = color_palette) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "right"
+  )
+
+# --- Save the plot ---
+ggsave("domain_distribution_stacked_horizontal_barplot.png", stacked_horizontal, width = 10, height = 6)
+ggsave("domain_distribution_stacked_horizontal_barplot.pdf", stacked_horizontal, width = 10, height = 6)
